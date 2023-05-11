@@ -2,6 +2,7 @@ package br.com.jvsmed.api.paciente;
 
 import br.com.jvsmed.api.cnh.Categoria;
 import br.com.jvsmed.api.cnh.Solicitacao;
+import br.com.jvsmed.api.endereco.DadosEndereco;
 import br.com.jvsmed.api.endereco.Endereco;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -39,7 +40,7 @@ public record DadosCadastroPaciente(
         String nomePai,
         @NotNull
         @Valid
-        Endereco endereco,
+        DadosEndereco endereco,
         @NotBlank
         String telefone
 

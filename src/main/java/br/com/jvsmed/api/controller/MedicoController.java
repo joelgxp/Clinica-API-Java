@@ -1,12 +1,14 @@
 package br.com.jvsmed.api.controller;
 
-import br.com.jvsmed.api.medico.DadosCadastroMedico;
-import br.com.jvsmed.api.medico.Medico;
-import br.com.jvsmed.api.medico.MedicoRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+import  br.com.jvsmed.api.medico.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/medicos")
@@ -16,25 +18,29 @@ public class MedicoController {
     private MedicoRepository repository;
 
     @GetMapping
-    public Iterable<Medico> listar() {
-        return repository.findAll();
+    public Page<DadosListagemMedico> listar(Pageable paginacao) {
+        return repository.findAll(paginacao).map(DadosListagemMedico::new);
     }
-
     @PostMapping
     @Transactional
     public void cadastrar(@RequestBody @Valid DadosCadastroMedico dados) {
         repository.save(new Medico(dados));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping
     @Transactional
-    public void atualiza(@PathVariable Long id, @RequestBody DadosCadastroMedico dados) {
-        repository.save(new Medico(id, dados));
+    public void atualizar(@RequestBody @Valid DadosAtualizacaoMedico dados) {
+        var medico = repository.getReferenceById(dados.id());
+        medico.atualizarInformacoes(dados);
     }
 
     @DeleteMapping("/{id}")
     @Transactional
     public void deletar(@PathVariable Long id) {
-        repository.deleteById(id);
+        var medico = repository.getReferenceById(id);
+        medico.excluir();
     }
+
+
+
 }

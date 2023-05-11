@@ -1,0 +1,25 @@
+create table pacientes(
+    id bigint not null auto_increment,
+    guia varchar(14) not null unique,
+    registro varchar(30) not null unique,
+    categoria varchar(2) not null,
+    dataCadastro varchar(10) not null,
+    dataHabilitacao varchar(10) not null,
+    nome varchar(100) not null,
+    dataNascimento varchar(10) not null,
+    sexo varchar(10) not null,
+    cpf varchar(14) not null unique,
+    nacionalidade varchar(100) not null,
+    nomeMae varchar(100) not null,
+    nomePai varchar(100) not null,
+    telefone varchar(20) not null,
+    logradouro varchar(100) not null,
+    bairro varchar(100) not null,
+    cep varchar(9) not null,
+    numero varchar(20),
+    complemento varchar(100),
+    cidade varchar(100) not null,
+    uf char(2) not null,
+
+    primary key(id)
+);
