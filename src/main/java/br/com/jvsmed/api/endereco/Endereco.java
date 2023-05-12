@@ -4,7 +4,6 @@ import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import br.com.jvsmed.api.endereco.*;
 
 @Embeddable
 @Getter
@@ -29,7 +28,7 @@ public class Endereco {
         this.uf = endereco.uf();
     }
 
-    public void atualizarInformacoes(DadosEndereco dados) {
+    public void atualizarInformacoes(DadosAtualizacaoEndereco dados) {
         if (dados.logradouro() != null) {
             this.logradouro = dados.logradouro();
         }
