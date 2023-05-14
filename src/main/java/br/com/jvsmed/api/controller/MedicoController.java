@@ -10,6 +10,7 @@ import  br.com.jvsmed.api.medico.*;
 
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/medicos")
 public class MedicoController {

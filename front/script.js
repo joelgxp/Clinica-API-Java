@@ -1,7 +1,7 @@
 const formulario = document.querySelector("form");
 const inome = document.querySelector(".nome");
 const iemail = document.querySelector(".email");
-const isenha = document.querySelector(".senha");
+const icrm = document.querySelector(".crm");
 const itelefone = document.querySelector(".telefone");
 
 function cadastrar() {
@@ -15,7 +15,29 @@ function cadastrar() {
     body: JSON.stringify({
       nome: inome.value,
       email: iemail.value,
-      crm: isenha.value,
+      crm: icrm.value,
+      telefone: itelefone.value,
+    }),
+  })
+    .then(function (res) {
+      console.log(res);
+    })
+    .catch(function (res) {
+      console.log(res);
+    });
+}
+
+function listar() {
+  fetch("http://localhost:8080/medicos", {
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+    },
+    method: "GET",
+    body: JSON.stringify({
+      nome: inome.value,
+      email: iemail.value,
+      crm: icrm.value,
       telefone: itelefone.value,
     }),
   })
@@ -30,12 +52,12 @@ function cadastrar() {
 function limpar() {
   inome.value = "";
   iemail.value = "";
-  isenha.value = "";
+  icrm.value = "";
   itelefone.value = "";
 }
 
 formulario.addEventListener("submit", function (event) {
   event.preventDefault();
   cadastrar();
-  limpar();
+  //limpar();
 });
