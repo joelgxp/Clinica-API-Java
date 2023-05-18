@@ -1,3 +1,5 @@
+create database vollmed_api;
+
 create table medicos(
 
     id bigint not null auto_increment,
