@@ -1,5 +1,6 @@
-create table pacientes(
-    id bigint not null auto_increment,
+create table pacientes (
+
+    id bigint not null auto_increment primary key,
     guia varchar(14) not null unique,
     registro varchar(30) not null unique,
     categoria varchar(2) not null,
@@ -20,7 +21,5 @@ create table pacientes(
     complemento varchar(100),
     cidade varchar(100) not null,
     uf char(2) not null,
-    ativo tinyint not null,
-
-    primary key(id)
+    ativo tinyint default 1 not null
 );
