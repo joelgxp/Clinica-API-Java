@@ -36,18 +36,17 @@ public class PacienteController {
 
     @PostMapping
     public void cadastrar(@RequestBody DadosCadastroPaciente dados) {
-
         repository.save(new Paciente(dados));
     }
 
-    @PutMapping
     @Transactional
-    public void atualizar(@RequestBody @Valid DadosAtualizacaoPaciente dados) {
+    @PutMapping("/{id}")
+    public void atualizar(@PathVariable Long id, @RequestBody DadosAtualizacaoPaciente dados) {
         var paciente = repository.getReferenceById(dados.id());
         paciente.atualizarInformacoes(dados);
     }
-    @DeleteMapping("/{id}")
     @Transactional
+    @DeleteMapping("/{id}")
     public void remover(@PathVariable Long id) {
         var paciente = repository.getReferenceById(id);
         paciente.inativar();

@@ -11,7 +11,7 @@ const idataHabilitacao = document.querySelector(".dataHabilitacao");
 const inome = document.querySelector(".nome");
 const idataNascimento = document.querySelector(".dataNascimento");
 const isexo = document.querySelector(".sexo");
-const icpf = document.querySelector(".cpf");
+const icpf = document.querySelector("#cpfpaciente");
 const inacionalidade = document.querySelector(".nacionalidade");
 const inomeMae = document.querySelector(".nomeMae");
 const inomePai = document.querySelector(".nomePai");
@@ -64,10 +64,8 @@ function excluir() {
     method: "DELETE",
   })
     .then((resposta) => {
-      return resposta.json();
-    })
-    .then((data) => {
-          
+      //return resposta.json();
+      //console.log(resposta);
     })
     .catch(function (error) {
       console.error("Ocorreu um erro:", error);
@@ -75,7 +73,7 @@ function excluir() {
 }
 
 function editar() {
-  fetch("http://localhost:8080/pacientes", 
+  fetch(`http://localhost:8080/pacientes/${iid.value}`, 
   {
     headers: {
       "Accept": "application/json",
@@ -83,6 +81,7 @@ function editar() {
     },
     method: "PUT",
     body: JSON.stringify({
+      id: iid.value,
       guia: iguia.value,
       registro: iregistro.value,
       categoria: icategoria.value,
@@ -127,7 +126,6 @@ btnEditar.addEventListener("click", function (event) {
 });
 
 bntExcluir.addEventListener("click", function (event) {
-  const icpfconsulta = document.querySelector("#cpf");
   event.preventDefault();
   excluir();
 });
