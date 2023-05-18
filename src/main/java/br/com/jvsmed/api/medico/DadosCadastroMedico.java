@@ -1,10 +1,7 @@
 package br.com.jvsmed.api.medico;
 
-import br.com.jvsmed.api.endereco.DadosEndereco;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
 public record DadosCadastroMedico(

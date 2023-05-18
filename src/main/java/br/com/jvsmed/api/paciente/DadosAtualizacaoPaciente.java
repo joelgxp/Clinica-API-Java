@@ -1,22 +1,33 @@
 package br.com.jvsmed.api.paciente;
 
 import br.com.jvsmed.api.cnh.Solicitacao;
-import br.com.jvsmed.api.endereco.DadosAtualizacaoEndereco;
-import br.com.jvsmed.api.endereco.Endereco;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
 public record DadosAtualizacaoPaciente(
         @NotNull
         Long id,
-        String nome,
         String guia,
-        Solicitacao solitacao,
+        String registro,
         String categoria,
-        String dataCadastro,
-        String nomeMae,
-        String nomePai,
+        String data_cadastro,
+        String data_habilitacao,
+        String nome,
+        String data_nascimento,
+        String sexo,
+        String cpf,
+        String nacionalidade,
+        String nome_mae,
+        String nome_pai,
         String telefone,
-        @Valid DadosAtualizacaoEndereco endereco
+        String logradouro,
+        String bairro,
+        String cep,
+        String numero,
+        String complemento,
+        String cidade,
+        String uf
+
 ) {
+
 }

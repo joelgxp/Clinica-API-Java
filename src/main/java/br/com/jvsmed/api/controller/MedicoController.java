@@ -19,7 +19,16 @@ public class MedicoController {
     private MedicoRepository repository;
 
     @GetMapping
-    public Page<DadosListagemMedico> listar(Pageable paginacao) {
+    public List<DadosListagemMedico> listar() {
+        return repository.findAll().stream().map(DadosListagemMedico::new).toList();
+    }
+
+    @GetMapping("/{id}")
+    public DadosListagemMedico listarPorId(@PathVariable Long id) {
+        return new DadosListagemMedico(repository.getReferenceById(id));
+    }
+    @GetMapping("/paginacao")
+    public Page<DadosListagemMedico> listarPaginacao(Pageable paginacao) {
         return repository.findAll(paginacao).map(DadosListagemMedico::new);
     }
 

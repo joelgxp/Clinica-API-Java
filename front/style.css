@@ -1,33 +1,33 @@
-* {
-    margin: 0;
-    padding: 0;
-}
-
-h1 {
-    color: aliceblue;
-    margin: 40px 0 40px 0;
-}
-
-.box, form {
-    gap: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
 
 body {
-    background-color: rgb(45, 14, 14);
+    margin: 0;
+    padding: 0 16px;
+    background-color: #202020;
+    color: aliceblue;
 }
 
-input {
-    width: 250px;
-    height: 25px;
-    border-radius: 5px;
-    padding: 0 15px 0 15px;
+* {
+    box-sizing: border-box;
 }
 
-button {
-    width: 150px;
-    height: 25px;
+
+label {
+    font-weight: 500;
+    color: rgb(168, 205, 247);    
+}
+
+input:not(input[type='checkbox']):not(input[type='radio']), button {
+    min-height: 40px;
+    padding: 5px 10px;
+}
+
+input[type='radio'], input[type='radio'] {
+    display: inline;
+    width: auto;
+}
+
+#cabecalho{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

@@ -1,4 +1,4 @@
-package br.com.jvsmed.api.endereco;
+package br.com.jvsmed.api.paciente;
 
 public record DadosAtualizacaoEndereco(
     String logradouro,

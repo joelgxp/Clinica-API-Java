@@ -10,6 +10,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/pacientes")
 public class PacienteController {
@@ -21,14 +24,18 @@ public class PacienteController {
         return repository.findAll();
     }
 
-    @GetMapping("/listar-ativos")
-    public Page<DadosListagemPaciente> listarAtivos(@PageableDefault(page = 0, size = 10, sort = {"nome"}) Pageable paginacao) {
-        return repository.findAllByAtivoTrue(paginacao).map(DadosListagemPaciente::new);
+    @GetMapping("/{id}")
+    public DadosListagemPaciente buscarPorID(@PathVariable Long id) {
+        return new DadosListagemPaciente(repository.getReferenceById(id));
+    }
 
+    @GetMapping("/cpf/{cpf}")
+    public DadosListagemPaciente buscarPorCPF(@PathVariable String cpf) {
+        return new DadosListagemPaciente(repository.findByCpf(cpf));
     }
 
     @PostMapping
-    public void cadastrar(@RequestBody @Valid DadosCadastroPaciente dados) {
+    public void cadastrar(@RequestBody DadosCadastroPaciente dados) {
 
         repository.save(new Paciente(dados));
     }

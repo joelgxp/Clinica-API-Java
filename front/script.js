@@ -1,63 +1,39 @@
-const formulario = document.querySelector("form");
-const inome = document.querySelector(".nome");
-const iemail = document.querySelector(".email");
-const icrm = document.querySelector(".crm");
-const itelefone = document.querySelector(".telefone");
+import { NotFound } from './scripts/pages/404.page.js'
+import { Login } from './scripts/pages/login.page.js'
 
-function cadastrar() {
-  fetch("http://localhost:8080/medicos", 
-  {
-    headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/json",
-    },
-    method: "POST",
-    body: JSON.stringify({
-      nome: inome.value,
-      email: iemail.value,
-      crm: icrm.value,
-      telefone: itelefone.value,
-    }),
-  })
-    .then(function (res) {
-      console.log(res);
-    })
-    .catch(function (res) {
-      console.log(res);
-    });
+const ROUTER = {
+    "#404": {component: NotFound, private: undefined},
+    "#login": {component: Login, private: false},
 }
 
-function listar() {
-  fetch("http://localhost:8080/medicos", {
-    headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/json",
-    },
-    method: "GET",
-    body: JSON.stringify({
-      nome: inome.value,
-      email: iemail.value,
-      crm: icrm.value,
-      telefone: itelefone.value,
-    }),
-  })
-    .then(function (res) {
-      console.log(res);
-    })
-    .catch(function (res) {
-      console.log(res);
-    });
+function redirectPage() {
+    const route = ROUTER[window.location.hash] || ROUTER["#404"]
+    
+    const root = document.querySelector('#root')
+    
+    if(route.private !== undefined) {
+        const privateNotLogged = route.private === true && !sessionStorage.getItem('@token')
+    }
+    if(privateNotLogged) {
+        window.location.href = '/#login'
+        return
+    }
+
+    const publicLogged = route.private === false && sessionStorage.getItem('@token')
+    if(publicLogged) {
+        window.location.href = '/#home'
+        return
+    }
+
+    root.innerHTML = null
+    root.appendChild(route.component())
 }
 
-function limpar() {
-  inome.value = "";
-  iemail.value = "";
-  icrm.value = "";
-  itelefone.value = "";
-}
+window.addEventListener('load', () => {
+    if(!window.location.hash) {
+     window.location.href = '/#login'
+    }
 
-formulario.addEventListener("submit", function (event) {
-  event.preventDefault();
-  cadastrar();
-  //limpar();
-});
+    redirectPage()
+    window.addEventListener('hashchange', redirectPage)
+})
