@@ -1,9 +1,11 @@
 package br.com.jvsmed.api.controller;
 
+import br.com.jvsmed.api.dto.PacienteDto;
+import br.com.jvsmed.api.paciente.DadosAtualizacaoPaciente;
 import br.com.jvsmed.api.paciente.DadosCadastroPaciente;
-import br.com.jvsmed.api.paciente.DadosListagemPaciente;
 import br.com.jvsmed.api.paciente.Paciente;
 import br.com.jvsmed.api.service.PacienteService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin("*")
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 public class PacienteController {
 
     private PacienteService pacienteService;
+
+    @Autowired
     public PacienteController(PacienteService service) {
         pacienteService = service;
     }
@@ -27,21 +31,22 @@ public class PacienteController {
 //    }
 
     @GetMapping("/{cpf}")
-    public DadosListagemPaciente buscarPorCPF(@PathVariable String cpf) {
-        return new DadosListagemPaciente(pacienteService.buscarPorCpf(cpf));
+    public PacienteDto buscarPorCPF(@PathVariable String cpf) {
+        return new PacienteDto(pacienteService.buscarPorCpf(cpf));
     }
 
     @PostMapping
-    public void cadastrar(@RequestBody DadosCadastroPaciente dados) {
-        pacienteService.criarPaciente(new Paciente(dados));
+    public void cadastrar(@RequestBody Paciente paciente) {
+        pacienteService.criarPaciente(paciente);
     }
-//
-//    @Transactional
-//    @PutMapping("/{id}")
-//    public void atualizar(@PathVariable Long id, @RequestBody DadosAtualizacaoPaciente dados) {
+
+    @PutMapping
+    public void atualizar(@RequestBody Paciente paciente) {
+        pacienteService.atualizarPaciente(paciente);
 //        var paciente = repository.getReferenceById(dados.id());
 //        paciente.atualizarInformacoes(dados);
-//    }
+    }
+
 //    @Transactional
 //    @DeleteMapping("/{id}")
 //    public void remover(@PathVariable Long id) {

@@ -2,14 +2,12 @@ package br.com.jvsmed.api.paciente;
 
 import br.com.jvsmed.api.cnh.Categoria;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Table(name = "pacientes")
 @Entity(name = "Paciente")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
@@ -19,10 +17,9 @@ public class Paciente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Boolean ativo;
+    private Boolean ativo = true;
     private String guia;
     private String registro;
-    //private String solicitacao;
     private Categoria categoria;
     private String data_cadastro;
     private String data_habilitacao;
@@ -68,12 +65,6 @@ public class Paciente {
     }
 
     public void atualizarInformacoes(DadosAtualizacaoPaciente dados) {
-        if (dados.guia() != null) {
-            this.guia = dados.guia();
-        }
-        if (dados.registro() != null) {
-            this.registro = dados.registro();
-        }
         if (dados.categoria() != null) {
             this.categoria = dados.categoria();//String.valueOf(dados.categoria());
         }

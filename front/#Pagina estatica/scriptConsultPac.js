@@ -27,7 +27,7 @@ const icidade = document.querySelector(".cidade");
 const iuf = document.querySelector(".uf");
 
 function buscaPaciente() {
-  fetch(`http://localhost:8080/pacientes/cpf/${icpfconsulta.value}`, {
+  fetch(`http://localhost:8080/pacientes/${icpfconsulta.value}`, {
     method: "GET",
   })
     .then((resposta) => {

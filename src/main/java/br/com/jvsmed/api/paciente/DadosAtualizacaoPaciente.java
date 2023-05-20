@@ -6,8 +6,6 @@ import jakarta.validation.constraints.NotNull;
 public record DadosAtualizacaoPaciente(
         @NotNull
         Long id,
-        String guia,
-        String registro,
         Categoria categoria,
         String data_cadastro,
         String data_habilitacao,
