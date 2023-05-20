@@ -1,4 +1,4 @@
-package br.com.jvsmed.api.paciente;
+package br.com.jvsmed.api.registro.paciente;
 
 import jakarta.validation.constraints.NotNull;
 

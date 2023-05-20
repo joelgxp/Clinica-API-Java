@@ -1,5 +1,7 @@
-package br.com.jvsmed.api.paciente;
+package br.com.jvsmed.api.entities;
 
+import br.com.jvsmed.api.registro.paciente.DadosAtualizacaoPaciente;
+import br.com.jvsmed.api.registro.paciente.DadosCadastroPaciente;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

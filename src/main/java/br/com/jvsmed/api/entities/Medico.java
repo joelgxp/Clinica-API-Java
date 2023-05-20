@@ -1,5 +1,7 @@
-package br.com.jvsmed.api.medico;
+package br.com.jvsmed.api.entities;
 
+import br.com.jvsmed.api.registro.medico.DadosAtualizacaoMedico;
+import br.com.jvsmed.api.registro.medico.DadosCadastroMedico;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -8,9 +10,6 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import br.com.jvsmed.api.medico.*;
-
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Table(name = "medicos")
 @Entity

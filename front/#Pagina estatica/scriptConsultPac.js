@@ -1,5 +1,6 @@
-const btnEditar = document.querySelector("#editar");
-const bntExcluir = document.querySelector("#excluir");
+const btnEditar = document.querySelector("#btneditar");
+const bntExcluir = document.querySelector("#btnexcluir");
+const btnCadastrar = document.querySelector("#btncadastrar");
 const formulario = document.querySelector("form");
 const iid = document.querySelector(".id");
 const icpfconsulta = document.querySelector("#cpf");
@@ -113,7 +114,7 @@ function editar() {
 }
   
 
-formulario.addEventListener("submit", function (event) {
+btnCadastrar.addEventListener("click", function (event) {
   const icpfconsulta = document.querySelector("#cpf");
   event.preventDefault();
   listarPorId();

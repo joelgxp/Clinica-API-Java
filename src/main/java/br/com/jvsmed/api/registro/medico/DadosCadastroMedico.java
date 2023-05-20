@@ -1,4 +1,4 @@
-package br.com.jvsmed.api.medico;
+package br.com.jvsmed.api.registro.medico;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

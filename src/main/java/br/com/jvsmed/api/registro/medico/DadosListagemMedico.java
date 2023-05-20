@@ -1,4 +1,6 @@
-package br.com.jvsmed.api.medico;
+package br.com.jvsmed.api.registro.medico;
+
+import br.com.jvsmed.api.entities.Medico;
 
 public record DadosListagemMedico(Long id, String nome, String email, String crm) {
 

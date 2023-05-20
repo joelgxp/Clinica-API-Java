@@ -1,4 +1,4 @@
-package br.com.jvsmed.api.paciente;
+package br.com.jvsmed.api.registro.paciente;
 
 import br.com.jvsmed.api.enums.ECategoria;
 import br.com.jvsmed.api.enums.ESexo;

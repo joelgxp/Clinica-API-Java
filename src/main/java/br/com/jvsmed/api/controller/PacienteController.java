@@ -1,21 +1,19 @@
 package br.com.jvsmed.api.controller;
 
-import br.com.jvsmed.api.medico.DadosAtualizacaoMedico;
-import br.com.jvsmed.api.paciente.*;
+import br.com.jvsmed.api.entities.Paciente;
+import br.com.jvsmed.api.registro.paciente.DadosAtualizacaoPaciente;
+import br.com.jvsmed.api.registro.paciente.DadosCadastroPaciente;
+import br.com.jvsmed.api.registro.paciente.DadosListagemPaciente;
+import br.com.jvsmed.api.repositories.PacienteRepository;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/pacientes")
 public class PacienteController {
+
     @Autowired
     private PacienteRepository repository;
 
@@ -34,6 +32,7 @@ public class PacienteController {
         return new DadosListagemPaciente(repository.findByCpf(cpf));
     }
 
+    @Transactional
     @PostMapping
     public void cadastrar(@RequestBody DadosCadastroPaciente dados) {
         repository.save(new Paciente(dados));
@@ -49,6 +48,5 @@ public class PacienteController {
     @DeleteMapping("/{id}")
     public void remover(@PathVariable Long id) {
         var paciente = repository.getReferenceById(id);
-        paciente.inativar();
     }
 }
