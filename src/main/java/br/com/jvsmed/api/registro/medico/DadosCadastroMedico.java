@@ -16,7 +16,7 @@ public record DadosCadastroMedico(
                                   @Pattern(regexp = "\\d{4,6}")
                                   String crm
 //                                  @NotNull
-//                                  Especialidade especialidade,
+//                                  EEspecialidade especialidade,
 //                                  @NotNull
 //                                  @Valid
 //                                  DadosEndereco endereco

@@ -1,24 +1,18 @@
 package br.com.jvsmed.api.paciente;
 
-import br.com.jvsmed.api.cnh.Categoria;
-import br.com.jvsmed.api.cnh.Solicitacao;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 
-public record DadosCadastroPaciente(
-
+public record DadosAtualizacaoPaciente(
+        @NotNull
+        Long id,
         String guia,
         String registro,
-//        @NotNull
-//        Solicitacao solicitacao,
-        Categoria categoria,
+        String categoria,
         String data_cadastro,
         String data_habilitacao,
         String nome,
         String data_nascimento,
-        Sexo sexo,
+        String sexo,
         String cpf,
         String nacionalidade,
         String nome_mae,
@@ -31,6 +25,6 @@ public record DadosCadastroPaciente(
         String complemento,
         String cidade,
         String uf
-
 ) {
+
 }
