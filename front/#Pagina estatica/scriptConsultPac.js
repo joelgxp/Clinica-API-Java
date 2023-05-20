@@ -1,5 +1,7 @@
-const btnEditar = document.querySelector("#editar");
-const bntExcluir = document.querySelector("#excluir");
+const btnEditar = document.querySelector("#btneditar");
+const bntExcluir = document.querySelector("#btnexcluir");
+const bntCadastrar = document.querySelector("#btncadastrar");
+const bntConsultar = document.querySelector("#btnconsultar");
 const formulario = document.querySelector("form");
 const iid = document.querySelector(".id");
 const icpfconsulta = document.querySelector("#cpf");
@@ -24,7 +26,7 @@ const icomplemento = document.querySelector(".complemento");
 const icidade = document.querySelector(".cidade");
 const iuf = document.querySelector(".uf");
 
-function listarPorId() {
+function buscaPaciente() {
   fetch(`http://localhost:8080/pacientes/cpf/${icpfconsulta.value}`, {
     method: "GET",
   })
@@ -59,20 +61,21 @@ function listarPorId() {
     });
 }
 
-function excluir() {
+function excluiPaciente() {
   fetch(`http://localhost:8080/pacientes/${iid.value}`, {
     method: "DELETE",
   })
     .then((resposta) => {
       //return resposta.json();
       //console.log(resposta);
+      limpaFormulario()
     })
     .catch(function (error) {
       console.error("Ocorreu um erro:", error);
     });
 }
 
-function editar() {
+function editaPaciente() {
   fetch(`http://localhost:8080/pacientes/${iid.value}`, 
   {
     headers: {
@@ -111,21 +114,77 @@ function editar() {
     console.log(res);
   });
 }
-  
 
-formulario.addEventListener("submit", function (event) {
+function cadastraPaciente() {
+  fetch("http://localhost:8080/pacientes", 
+  {
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+    body: JSON.stringify({
+      guia: iguia.value,
+      registro: iregistro.value,
+      categoria: icategoria.value,
+      data_cadastro: idataCadastro.value,
+      data_habilitacao: idataHabilitacao.value,
+      nome: inome.value,
+      data_nascimento: idataNascimento.value,
+      sexo: isexo.value,
+      cpf: icpf.value,
+      nacionalidade: inacionalidade.value,
+      nome_mae: inomeMae.value,
+      nome_pai: inomePai.value,
+      telefone: itelefone.value,
+      logradouro: ilogradouro.value,
+      bairro: ibairro.value,
+      cep: icep.value,
+      numero: inumero.value,
+      complemento: icomplemento.value,
+      cidade: icidade.value,
+      uf: iuf.value,      
+    }),
+  })
+    .then(function (res) {
+      console.log(res);
+    })
+    .catch(function (res) {
+      console.log(res);
+    });
+}
+
+function limpaFormulario() {
+  var elementos = formulario.elements;
+
+  for (var i = 0; i < elementos.length; i++) {
+    var elemento = elementos[i];
+    
+    if (elemento.type !== 'button') {
+      elemento.value = '';
+    }
+  }
+}
+
+bntConsultar.addEventListener("click", function (event) {
   const icpfconsulta = document.querySelector("#cpf");
   event.preventDefault();
-  listarPorId();
+  buscaPaciente();
+});
+
+bntCadastrar.addEventListener("click", function (event) {
+  //const icpfconsulta = document.querySelector("#cpf");
+  event.preventDefault();
+  cadastraPaciente();
 });
 
 btnEditar.addEventListener("click", function (event) {
   //const icpfconsulta = document.querySelector("#cpf");
   event.preventDefault();
- editar();
+  editaPaciente();
 });
 
 bntExcluir.addEventListener("click", function (event) {
   event.preventDefault();
-  excluir();
+  excluiPaciente();
 });

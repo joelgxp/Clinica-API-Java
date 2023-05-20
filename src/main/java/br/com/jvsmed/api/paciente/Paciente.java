@@ -12,14 +12,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-
-
 public class Paciente {
-    private Boolean ativo;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Boolean ativo;
     private String guia;
     private String registro;
     //private String solicitacao;
@@ -34,7 +33,6 @@ public class Paciente {
     private String nome_mae;
     private String nome_pai;
     private String telefone;
-
     private String logradouro;
     private String bairro;
     private String cep;
