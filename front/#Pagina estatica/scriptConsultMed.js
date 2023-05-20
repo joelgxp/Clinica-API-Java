@@ -20,7 +20,7 @@ function listarPorId() {
           iemail.value = data.email;
           icrm.value = data.crm;
           itelefone.value = data.telefone;
-
+          iespecialidade.value = data.especialidade;
     })
     .catch(function (error) {
       console.error('Ocorreu um erro:', error);
