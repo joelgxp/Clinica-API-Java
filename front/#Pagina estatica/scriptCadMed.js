@@ -3,6 +3,7 @@ const inome = document.querySelector(".nome");
 const iemail = document.querySelector(".email");
 const icrm = document.querySelector(".crm");
 const itelefone = document.querySelector(".telefone");
+const iespecialidade = document.querySelector(".especialidade");
 
 function cadastrar() {
   fetch("http://localhost:8080/medicos", 
@@ -17,6 +18,7 @@ function cadastrar() {
       email: iemail.value,
       crm: icrm.value,
       telefone: itelefone.value,
+      especialidade: iespecialidade.value
     }),
   })
   
@@ -33,6 +35,7 @@ function limpar() {
   iemail.value = "";
   icrm.value = "";
   itelefone.value = "";
+  iespecialidade.value = "";
 }
 
 formulario.addEventListener("submit", function (event) {
