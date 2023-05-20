@@ -1,11 +1,6 @@
 package br.com.jvsmed.api.paciente;
 
 import br.com.jvsmed.api.cnh.Categoria;
-import br.com.jvsmed.api.cnh.Solicitacao;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 
 public record DadosCadastroPaciente(
 
@@ -31,6 +26,5 @@ public record DadosCadastroPaciente(
         String complemento,
         String cidade,
         String uf
-
 ) {
 }

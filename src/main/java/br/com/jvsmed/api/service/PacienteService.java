@@ -2,14 +2,15 @@ package br.com.jvsmed.api.service;
 
 import br.com.jvsmed.api.paciente.Paciente;
 import br.com.jvsmed.api.paciente.PacienteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PacienteService {
 
-    @Autowired
     private PacienteRepository pacienteRepository;
+    public PacienteService(PacienteRepository repository) {
+        pacienteRepository = repository;
+    }
 
     public Paciente criarPaciente(Paciente paciente) {
         return pacienteRepository.save(paciente);
@@ -32,6 +33,10 @@ public class PacienteService {
     }
 
     public Paciente buscarPorId(String cpf) {
+        return pacienteRepository.findByCpf(cpf);
+    }
+
+    public Paciente buscarPorCpf(String cpf) {
         return pacienteRepository.findByCpf(cpf);
     }
 }

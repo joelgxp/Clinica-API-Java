@@ -1,5 +1,6 @@
 package br.com.jvsmed.api.paciente;
 
+import br.com.jvsmed.api.cnh.Categoria;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -22,7 +23,7 @@ public class Paciente {
     private String guia;
     private String registro;
     //private String solicitacao;
-    private String categoria;
+    private Categoria categoria;
     private String data_cadastro;
     private String data_habilitacao;
     private String nome;
@@ -46,7 +47,7 @@ public class Paciente {
         this.id = id;
         this.guia = dados.guia();
         this.registro = dados.registro();
-        this.categoria = String.valueOf(dados.categoria());
+        this.categoria = dados.categoria();//String.valueOf(dados.categoria());
         this.data_cadastro = dados.data_cadastro();
         this.data_habilitacao = dados.data_habilitacao();
         this.nome = dados.nome();
@@ -74,7 +75,7 @@ public class Paciente {
             this.registro = dados.registro();
         }
         if (dados.categoria() != null) {
-            this.categoria = String.valueOf(dados.categoria());
+            this.categoria = dados.categoria();//String.valueOf(dados.categoria());
         }
         if (dados.data_cadastro() != null) {
             this.data_cadastro = dados.data_cadastro();

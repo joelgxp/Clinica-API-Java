@@ -1,7 +1,6 @@
 package br.com.jvsmed.api.paciente;
 
-import br.com.jvsmed.api.cnh.Solicitacao;
-import jakarta.validation.Valid;
+import br.com.jvsmed.api.cnh.Categoria;
 import jakarta.validation.constraints.NotNull;
 
 public record DadosAtualizacaoPaciente(
@@ -9,7 +8,7 @@ public record DadosAtualizacaoPaciente(
         Long id,
         String guia,
         String registro,
-        String categoria,
+        Categoria categoria,
         String data_cadastro,
         String data_habilitacao,
         String nome,
@@ -27,7 +26,6 @@ public record DadosAtualizacaoPaciente(
         String complemento,
         String cidade,
         String uf
-
 ) {
 
 }
