@@ -3,6 +3,7 @@ package br.com.jvsmed.api.medico;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -43,6 +44,10 @@ public class Medico {
     @Column(name = "crm", length = 6, nullable = false)
     private String crm;
 
+    @NotNull(message = "Campo especialidade obrigatorio")
+    @Column(name = "especialidade", length = 100, nullable = false)
+    private Especialidade especialidade;
+
     private Boolean ativo;
 
     public Medico(DadosCadastroMedico dados) {
@@ -51,7 +56,7 @@ public class Medico {
         this.email = dados.email();
         this.telefone = dados.telefone();
         this.crm = dados.crm();
-        //this.especialidade = dados.especialidade();
+        this.especialidade = dados.especialidade();
         //this.endereco = new Endereco(dados.endereco());
     }
 
