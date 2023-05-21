@@ -1,7 +1,7 @@
 package br.com.jvsmed.api.service;
 
-import br.com.jvsmed.api.paciente.Paciente;
-import br.com.jvsmed.api.paciente.PacienteRepository;
+import br.com.jvsmed.api.entities.Paciente;
+import br.com.jvsmed.api.repositories.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +33,7 @@ public class PacienteService {
         Paciente pacienteExistente = pacienteRepository.findById(pacienteAtualizado.getId())
                 .orElseThrow(() -> new NoSuchElementException("Paciente não encontrado com o ID: "));
 
-        pacienteExistente.setNome(pacienteAtualizado.getNome()); // Atualize os campos desejados
+//        pacienteExistente.setNome(pacienteAtualizado.getNome()); // Atualize os campos desejados
         // Atualize outros campos conforme necessário
 
         return pacienteRepository.save(pacienteExistente);

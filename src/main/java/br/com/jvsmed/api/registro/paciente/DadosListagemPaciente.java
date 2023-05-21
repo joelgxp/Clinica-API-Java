@@ -1,12 +1,13 @@
 package br.com.jvsmed.api.registro.paciente;
 
 import br.com.jvsmed.api.entities.Paciente;
+import br.com.jvsmed.api.enums.ECategoria;
 
 public record DadosListagemPaciente(
         Long id,
         String guia,
         String registro,
-        String categoria,
+        ECategoria categoria,
         String data_cadastro,
         String nome,
         String data_nascimento,
@@ -21,13 +22,13 @@ public record DadosListagemPaciente(
                 paciente.getGuia(),
                 paciente.getRegistro(),
                 paciente.getCategoria(),
-                paciente.getData_cadastro(),
+                paciente.getDataCadastro(),
                 paciente.getNome(),
-                paciente.getData_nascimento(),
+                paciente.getDataNascimento(),
                 paciente.getSexo(),
                 paciente.getCpf(),
-                paciente.getNome_mae(),
-                paciente.getNome_pai(),
+                paciente.getNomeMae(),
+                paciente.getNomePai(),
                 paciente.getTelefone()
         );
     }

@@ -22,12 +22,12 @@ public class PacienteController {
         return repository.findAll();
     }
 
-    @GetMapping("/{id}")
-    public DadosListagemPaciente buscarPorID(@PathVariable Long id) {
-        return new DadosListagemPaciente(repository.getReferenceById(id));
-    }
+//    @GetMapping("/{id}")
+//    public DadosListagemPaciente buscarPorID(@PathVariable Long id) {
+//        return new DadosListagemPaciente(repository.getReferenceById(id));
+//    }
 
-    @GetMapping("/cpf/{cpf}")
+    @GetMapping("/{cpf}")
     public DadosListagemPaciente buscarPorCPF(@PathVariable String cpf) {
         return new DadosListagemPaciente(repository.findByCpf(cpf));
     }
@@ -39,9 +39,9 @@ public class PacienteController {
     }
 
     @Transactional
-    @PutMapping("/{id}")
-    public void atualizar(@PathVariable Long id, @RequestBody DadosAtualizacaoPaciente dados) {
-        var paciente = repository.getReferenceById(dados.id());
+    @PutMapping("/{atualizar}")
+    public void atualizar(@PathVariable String atualizar, @RequestBody DadosAtualizacaoPaciente dados) {
+        var paciente = repository.findByCpf(atualizar);
         paciente.atualizarInformacoes(dados);
     }
     @Transactional

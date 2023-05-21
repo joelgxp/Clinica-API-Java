@@ -54,7 +54,4 @@ public class MedicoController {
     public void inativar(@PathVariable Long id) {
         var medico = repository.getReferenceById(id);
     }
-
-
-
 }

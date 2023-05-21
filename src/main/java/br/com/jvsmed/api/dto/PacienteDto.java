@@ -1,7 +1,7 @@
 package br.com.jvsmed.api.dto;
 
-import br.com.jvsmed.api.cnh.Categoria;
-import br.com.jvsmed.api.paciente.Paciente;
+import br.com.jvsmed.api.entities.Paciente;
+import br.com.jvsmed.api.enums.ECategoria;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.BeanUtils;
@@ -29,7 +29,7 @@ public class PacienteDto {
     private String complemento;
     private String cidade;
     private String uf;
-    private Categoria categoria;
+    private ECategoria categoria;
 
     public PacienteDto(Paciente paciente) {
         BeanUtils.copyProperties(paciente, this);

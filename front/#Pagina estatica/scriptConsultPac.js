@@ -19,7 +19,7 @@ const inomePai = document.querySelector(".nomePai");
 const itelefone = document.querySelector(".telefone");
 
 function buscaPaciente() {
-  fetch(`http://localhost:8080/pacientes/cpf/${icpfconsulta.value}`, {
+  fetch(`http://localhost:8080/pacientes/${icpfconsulta.value}`, {
     method: "GET",
   })
     .then((resposta) => {
@@ -46,12 +46,11 @@ function buscaPaciente() {
 }
 
 function excluiPaciente() {
-  fetch(`http://localhost:8080/pacientes/${iid.value}`, {
+  fetch(`http://localhost:8080/pacientes/${icpfconsulta.value}`, {
     method: "DELETE",
   })
     .then((resposta) => {
-      //return resposta.json();
-      //console.log(resposta);
+
       limpaFormulario()
     })
     .catch(function (error) {
@@ -60,62 +59,63 @@ function excluiPaciente() {
 }
 
 function editaPaciente() {
-  fetch(`http://localhost:8080/pacientes/${iid.value}`, 
-  {
-    headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/json",
-    },
-    method: "PUT",
-    body: JSON.stringify({
-      id: iid.value,
-      guia: iguia.value,
-      categoria: icategoria.value,
-      data_cadastro: idataCadastro.value,
-      nome: inome.value,
-      data_nascimento: idataNascimento.value,
-      sexo: isexo.value,
-      nome_mae: inomeMae.value,
-      nome_pai: inomePai.value,
-      telefone: itelefone.value,   
-    }),
-  })    
-  .then(function (res) {
-    console.log(res);
-  })
-  .catch(function (res) {
-    console.log(res);
-  });
-}
-
-function cadastraPaciente() {
-  fetch("http://localhost:8080/pacientes", 
-  {
-    headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/json",
-    },
-    method: "POST",
-    body: JSON.stringify({
-      guia: iguia.value,
-      registro: iregistro.value,
-      categoria: icategoria.value,
-      data_cadastro: idataCadastro.value,
-      nome: inome.value,
-      data_nascimento: idataNascimento.value,
-      sexo: isexo.value,
-      cpf: icpf.value,
-      nome_mae: inomeMae.value,
-      nome_pai: inomePai.value,
-      telefone: itelefone.value    
-    }),
-  })
+  fetch(`http://localhost:8080/pacientes/${icpf.value}`,
+    {
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+      method: "PUT",
+      body: JSON.stringify({
+        guia: iguia.value,
+        categoria: icategoria.value,
+        data_cadastro: idataCadastro.value,
+        nome: inome.value,
+        data_nascimento: idataNascimento.value,
+        sexo: isexo.value,
+        nome_mae: inomeMae.value,
+        nome_pai: inomePai.value,
+        telefone: itelefone.value,
+      }),
+    })
     .then(function (res) {
       console.log(res);
     })
     .catch(function (res) {
       console.log(res);
     });
+  limpaFormulario()
+}
+
+function cadastraPaciente() {
+  fetch("http://localhost:8080/pacientes",
+    {
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      body: JSON.stringify({
+        guia: iguia.value,
+        registro: iregistro.value,
+        categoria: icategoria.value,
+        data_cadastro: idataCadastro.value,
+        nome: inome.value,
+        data_nascimento: idataNascimento.value,
+        sexo: isexo.value,
+        cpf: icpf.value,
+        nome_mae: inomeMae.value,
+        nome_pai: inomePai.value,
+        telefone: itelefone.value
+      }),
+    })
+    .then(function (res) {
+      console.log(res);
+    })
+    .catch(function (res) {
+      console.log(res);
+    });
+  limpaFormulario()
 }
 
 function limpaFormulario() {
@@ -125,7 +125,7 @@ function limpaFormulario() {
 
   for (var i = 0; i < elementos.length; i++) {
     var elemento = elementos[i];
-    
+
     if (elemento.type !== 'button') {
       elemento.value = '';
     }
@@ -139,13 +139,11 @@ bntConsultar.addEventListener("click", function (event) {
 });
 
 bntCadastrar.addEventListener("click", function (event) {
-  //const icpfconsulta = document.querySelector("#cpf");
   event.preventDefault();
   cadastraPaciente();
 });
 
 btnEditar.addEventListener("click", function (event) {
-  //const icpfconsulta = document.querySelector("#cpf");
   event.preventDefault();
   editaPaciente();
 });
