@@ -1,8 +1,7 @@
-package br.com.jvsmed.api.medico;
+package br.com.jvsmed.api.registro.medico;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
 public record DadosCadastroMedico(
@@ -15,10 +14,12 @@ public record DadosCadastroMedico(
                                   String telefone,
                                   @NotBlank
                                   @Pattern(regexp = "\\d{4,6}")
-                                  String crm,
-                                  @NotNull
-                                  Especialidade especialidade
-
+                                  String crm
+//                                  @NotNull
+//                                  EEspecialidade especialidade,
+//                                  @NotNull
+//                                  @Valid
+//                                  DadosEndereco endereco
 ) {
 
 }
