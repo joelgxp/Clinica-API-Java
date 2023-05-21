@@ -1,6 +1,6 @@
-package br.com.jvsmed.api.medico;
+package br.com.jvsmed.api.enums;
 
-public enum Especialidade {
+public enum EEspecialidade {
     ORTOPEDIA,
     CARDIOLOGIA,
     GINECOLOGIA,
