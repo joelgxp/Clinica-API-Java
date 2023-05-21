@@ -53,9 +53,6 @@ public class Paciente {
         if (dados.guia() != null) {
             this.guia = dados.guia();
         }
-        if (dados.registro() != null) {
-            this.registro = dados.registro();
-        }
         if (dados.categoria() != null) {
             this.categoria = String.valueOf(dados.categoria());
         }
@@ -70,9 +67,6 @@ public class Paciente {
         }
         if (dados.sexo() != null) {
             this.sexo = String.valueOf(dados.sexo());
-        }
-        if (dados.cpf() != null) {
-            this.cpf = dados.cpf();
         }
         if (dados.nome_mae() != null) {
             this.nome_mae = dados.nome_mae();

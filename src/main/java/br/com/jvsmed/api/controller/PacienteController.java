@@ -47,6 +47,7 @@ public class PacienteController {
     @Transactional
     @DeleteMapping("/{id}")
     public void remover(@PathVariable Long id) {
-        var paciente = repository.getReferenceById(id);
+//        var paciente = repository.getReferenceById(id);
+        repository.deleteById(id);
     }
 }

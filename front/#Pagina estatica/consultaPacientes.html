@@ -55,9 +55,9 @@
   <div class="box">
     <h1>Consulta Pacientes</h1>
     <form action="">
-      <input type="text" id="cpf" class="cpf" name="cpf" placeholder="Busque por CPF">
-      <button>Consultar</button>
-      <input type="text" class="id" name="id" placeholder="ID">
+      <input type="text" id="cpf" class="cpf" name="cpf" placeholder="Busque por CPF" maxlength="11">
+      <button id="btnconsultar">Consultar</button>
+      <!-- <input type="text" class="id" name="id" placeholder="ID"> -->
       <input type="number" class="guia" name="guia" placeholder="Guia">
       <input type="number" class="registro" name="registro" placeholder="Registro">
       <input type="text" class="categoria" name="categoria" placeholder="Categoria">
@@ -65,13 +65,14 @@
       <input type="text" class="nome" name="nome" placeholder="Nome">
       <input type="text" class="dataNascimento" name="dataNascimento" placeholder="Data Nascimento">
       <input type="text" class="sexo" name="sexo" placeholder="Sexo">
-      <input type="text" id="cpfpaciente" class="cpf" name="cpf" placeholder="CPF">
+      <input type="text" id="cpfpaciente" class="cpf" name="cpf" placeholder="CPF" maxlength="11">
       <input type="text" class="nomeMae" name="nomeMae" placeholder="Nome da Mãe">
       <input type="text" class="nomePai" name="nomePai" placeholder="Nome do Pai">
       <input type="text" class="telefone" name="telefone" placeholder="Telefone">
       <button id="btneditar">Editar</button>
       <button id="btnexcluir">Excluir</button>
       <button id="btncadastrar">Cadastrar</button>
+      <button id="btnlimpar">Limpar</button>
 
     </form>
   </div>
