@@ -1,6 +1,6 @@
 package br.com.jvsmed.api.registro.paciente;
 
-import br.com.jvsmed.api.entities.Paciente;
+import br.com.jvsmed.api.entities.PacienteEntity;
 import br.com.jvsmed.api.enums.ECategoria;
 
 public record DadosListagemPaciente(
@@ -17,19 +17,19 @@ public record DadosListagemPaciente(
         String nome_pai,
         String telefone
 ) {
-    public DadosListagemPaciente(Paciente paciente) {
-        this(paciente.getId(),
-                paciente.getGuia(),
-                paciente.getRegistro(),
-                paciente.getCategoria(),
-                paciente.getDataCadastro(),
-                paciente.getNome(),
-                paciente.getDataNascimento(),
-                paciente.getSexo(),
-                paciente.getCpf(),
-                paciente.getNomeMae(),
-                paciente.getNomePai(),
-                paciente.getTelefone()
+    public DadosListagemPaciente(PacienteEntity pacienteEntity) {
+        this(pacienteEntity.getId(),
+                pacienteEntity.getGuia(),
+                pacienteEntity.getRegistro(),
+                pacienteEntity.getCategoria(),
+                pacienteEntity.getDataCadastro(),
+                pacienteEntity.getNome(),
+                pacienteEntity.getDataNascimento(),
+                pacienteEntity.getSexo(),
+                pacienteEntity.getCpf(),
+                pacienteEntity.getNomeMae(),
+                pacienteEntity.getNomePai(),
+                pacienteEntity.getTelefone()
         );
     }
 }

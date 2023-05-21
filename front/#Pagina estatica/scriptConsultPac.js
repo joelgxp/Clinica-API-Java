@@ -4,7 +4,9 @@ const bntCadastrar = document.querySelector("#btncadastrar");
 const bntConsultar = document.querySelector("#btnconsultar");
 const btnLimpar = document.querySelector("#btnlimpar");
 const formulario = document.querySelector("form");
+
 const iid = document.querySelector(".id");
+
 const icpfconsulta = document.querySelector("#cpf");
 const iguia = document.querySelector(".guia");
 const iregistro = document.querySelector(".registro");
@@ -18,25 +20,29 @@ const inomeMae = document.querySelector(".nomeMae");
 const inomePai = document.querySelector(".nomePai");
 const itelefone = document.querySelector(".telefone");
 
+let pacienteID = null
+
 function buscaPaciente() {
   fetch(`http://localhost:8080/pacientes/${icpfconsulta.value}`, {
     method: "GET",
   })
-    .then((resposta) => {
-      return resposta.json();
+    .then(response => {
+      return response.json();
     })
-    .then((data) => {
-      iguia.value = data.guia;
-      iregistro.value = data.registro;
-      icategoria.value = data.categoria;
-      idataCadastro.value = data.data_cadastro;
-      inome.value = data.nome;
-      idataNascimento.value = data.data_nascimento;
-      isexo.value = data.sexo;
-      icpf.value = data.cpf;
-      inomeMae.value = data.nome_mae;
-      inomePai.value = data.nome_pai;
-      itelefone.value = data.telefone;
+    .then(paciente => {
+      pacienteID = paciente.id
+
+      iguia.value = paciente.guia;
+      iregistro.value = paciente.registro;
+      icategoria.value = paciente.categoria;
+      idataCadastro.value = paciente.data_cadastro;
+      inome.value = paciente.nome;
+      idataNascimento.value = paciente.data_nascimento;
+      isexo.value = paciente.sexo;
+      icpf.value = paciente.cpf;
+      inomeMae.value = paciente.nome_mae;
+      inomePai.value = paciente.nome_pai;
+      itelefone.value = paciente.telefone;
       iregistro.disabled = true;
       icpf.disabled = true;
     })
@@ -46,10 +52,10 @@ function buscaPaciente() {
 }
 
 function excluiPaciente() {
-  fetch(`http://localhost:8080/pacientes/${icpfconsulta.value}`, {
+  fetch(`http://localhost:8080/pacientes/${pacienteID}`, {
     method: "DELETE",
   })
-    .then((resposta) => {
+    .then(response => {
 
       limpaFormulario()
     })

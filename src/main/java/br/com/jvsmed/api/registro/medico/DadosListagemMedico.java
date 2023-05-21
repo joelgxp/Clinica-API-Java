@@ -1,10 +1,10 @@
 package br.com.jvsmed.api.registro.medico;
 
-import br.com.jvsmed.api.entities.Medico;
+import br.com.jvsmed.api.entities.MedicoEntity;
 
 public record DadosListagemMedico(Long id, String nome, String email, String crm, String telefone) {
 
-    public DadosListagemMedico(Medico medico) {
-        this(medico.getId(), medico.getNome(), medico.getEmail(), medico.getCrm(), medico.getTelefone());
+    public DadosListagemMedico(MedicoEntity medicoEntity) {
+        this(medicoEntity.getId(), medicoEntity.getNome(), medicoEntity.getEmail(), medicoEntity.getCrm(), medicoEntity.getTelefone());
     }
 }

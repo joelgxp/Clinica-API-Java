@@ -1,6 +1,6 @@
 package br.com.jvsmed.api.controller;
 
-import br.com.jvsmed.api.entities.Medico;
+import br.com.jvsmed.api.entities.MedicoEntity;
 import br.com.jvsmed.api.registro.medico.DadosAtualizacaoMedico;
 import br.com.jvsmed.api.registro.medico.DadosCadastroMedico;
 import br.com.jvsmed.api.registro.medico.DadosListagemMedico;
@@ -39,7 +39,7 @@ public class MedicoController {
     @PostMapping
     @Transactional
     public void cadastrar(@RequestBody @Valid DadosCadastroMedico dados) {
-        repository.save(new Medico(dados));
+        repository.save(new MedicoEntity(dados));
     }
 
     @PutMapping

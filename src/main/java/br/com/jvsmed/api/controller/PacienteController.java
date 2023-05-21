@@ -1,6 +1,6 @@
 package br.com.jvsmed.api.controller;
 
-import br.com.jvsmed.api.entities.Paciente;
+import br.com.jvsmed.api.entities.PacienteEntity;
 import br.com.jvsmed.api.registro.paciente.DadosAtualizacaoPaciente;
 import br.com.jvsmed.api.registro.paciente.DadosCadastroPaciente;
 import br.com.jvsmed.api.registro.paciente.DadosListagemPaciente;
@@ -18,7 +18,7 @@ public class PacienteController {
     private PacienteRepository repository;
 
     @GetMapping
-    public Iterable<Paciente> listar() {
+    public Iterable<PacienteEntity> listar() {
         return repository.findAll();
     }
 
@@ -35,7 +35,7 @@ public class PacienteController {
     @Transactional
     @PostMapping
     public void cadastrar(@RequestBody DadosCadastroPaciente dados) {
-        repository.save(new Paciente(dados));
+        repository.save(new PacienteEntity(dados));
     }
 
     @Transactional
@@ -47,7 +47,6 @@ public class PacienteController {
     @Transactional
     @DeleteMapping("/{id}")
     public void remover(@PathVariable Long id) {
-//        var paciente = repository.getReferenceById(id);
         repository.deleteById(id);
     }
 }

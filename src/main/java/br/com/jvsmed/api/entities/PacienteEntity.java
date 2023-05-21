@@ -8,15 +8,14 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.BeanUtils;
 
 @Table(name = "pacientes")
-@Entity(name = "Paciente")
+@Entity(name = "PacienteEntity")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Paciente {
+public class PacienteEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +36,7 @@ public class Paciente {
     private String nomePai;
     private String telefone;
 
-    public Paciente(DadosCadastroPaciente dados) {
+    public PacienteEntity(DadosCadastroPaciente dados) {
 //        BeanUtils.copyProperties(dados, this);
         this.id = id;
         this.guia = dados.guia();

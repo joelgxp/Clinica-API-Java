@@ -1,6 +1,6 @@
 package br.com.jvsmed.api.dto;
 
-import br.com.jvsmed.api.entities.Paciente;
+import br.com.jvsmed.api.entities.PacienteEntity;
 import br.com.jvsmed.api.enums.ECategoria;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,8 +31,8 @@ public class PacienteDto {
     private String uf;
     private ECategoria categoria;
 
-    public PacienteDto(Paciente paciente) {
-        BeanUtils.copyProperties(paciente, this);
+    public PacienteDto(PacienteEntity pacienteEntity) {
+        BeanUtils.copyProperties(pacienteEntity, this);
     }
 
 }

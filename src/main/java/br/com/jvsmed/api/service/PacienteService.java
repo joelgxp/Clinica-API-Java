@@ -1,6 +1,6 @@
 package br.com.jvsmed.api.service;
 
-import br.com.jvsmed.api.entities.Paciente;
+import br.com.jvsmed.api.entities.PacienteEntity;
 import br.com.jvsmed.api.repositories.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,41 +17,41 @@ public class PacienteService {
         pacienteRepository = repository;
     }
 
-    public Paciente criarPaciente(Paciente paciente) {
-        return pacienteRepository.save(paciente);
+    public PacienteEntity criarPaciente(PacienteEntity pacienteEntity) {
+        return pacienteRepository.save(pacienteEntity);
     }
 
-    public Paciente buscarPaciente(String cpf) {
+    public PacienteEntity buscarPaciente(String cpf) {
         return pacienteRepository.findByCpf(cpf);
     }
 
-    public Paciente editarPaciente(Paciente paciente) {
-        return pacienteRepository.save(paciente);
+    public PacienteEntity editarPaciente(PacienteEntity pacienteEntity) {
+        return pacienteRepository.save(pacienteEntity);
     }
 
-    public Paciente atualizarPaciente(Paciente pacienteAtualizado) {
-        Paciente pacienteExistente = pacienteRepository.findById(pacienteAtualizado.getId())
-                .orElseThrow(() -> new NoSuchElementException("Paciente não encontrado com o ID: "));
+    public PacienteEntity atualizarPaciente(PacienteEntity pacienteEntityAtualizado) {
+        PacienteEntity pacienteEntityExistente = pacienteRepository.findById(pacienteEntityAtualizado.getId())
+                .orElseThrow(() -> new NoSuchElementException("PacienteEntity não encontrado com o ID: "));
 
-//        pacienteExistente.setNome(pacienteAtualizado.getNome()); // Atualize os campos desejados
+//        pacienteEntityExistente.setNome(pacienteEntityAtualizado.getNome()); // Atualize os campos desejados
         // Atualize outros campos conforme necessário
 
-        return pacienteRepository.save(pacienteExistente);
+        return pacienteRepository.save(pacienteEntityExistente);
     }
 
     public void excluirPaciente(Long id) {
         pacienteRepository.deleteById(id);
     }
 
-    public Iterable<Paciente> findAll() {
+    public Iterable<PacienteEntity> findAll() {
         return pacienteRepository.findAll();
     }
 
-    public Paciente buscarPorId(String cpf) {
+    public PacienteEntity buscarPorId(String cpf) {
         return pacienteRepository.findByCpf(cpf);
     }
 
-    public Paciente buscarPorCpf(String cpf) {
+    public PacienteEntity buscarPorCpf(String cpf) {
         return pacienteRepository.findByCpf(cpf);
     }
 }
