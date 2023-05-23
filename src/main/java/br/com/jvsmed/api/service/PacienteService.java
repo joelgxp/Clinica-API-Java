@@ -10,48 +10,34 @@ import java.util.NoSuchElementException;
 @Service
 public class PacienteService {
 
-    private PacienteRepository pacienteRepository;
+    private PacienteRepository repository;
 
     @Autowired
     public PacienteService(PacienteRepository repository) {
-        pacienteRepository = repository;
+        this.repository = repository;
     }
 
     public PacienteEntity criarPaciente(PacienteEntity pacienteEntity) {
-        return pacienteRepository.save(pacienteEntity);
+        return repository.save(pacienteEntity);
     }
 
-    public PacienteEntity buscarPaciente(String cpf) {
-        return pacienteRepository.findByCpf(cpf);
-    }
+    public PacienteEntity atualizarPaciente(PacienteEntity paciente) {
 
-    public PacienteEntity editarPaciente(PacienteEntity pacienteEntity) {
-        return pacienteRepository.save(pacienteEntity);
-    }
-
-    public PacienteEntity atualizarPaciente(PacienteEntity pacienteEntityAtualizado) {
-        PacienteEntity pacienteEntityExistente = pacienteRepository.findById(pacienteEntityAtualizado.getId())
-                .orElseThrow(() -> new NoSuchElementException("PacienteEntity não encontrado com o ID: "));
-
-//        pacienteEntityExistente.setNome(pacienteEntityAtualizado.getNome()); // Atualize os campos desejados
-        // Atualize outros campos conforme necessário
-
-        return pacienteRepository.save(pacienteEntityExistente);
+        return repository.save(paciente);
     }
 
     public void excluirPaciente(Long id) {
-        pacienteRepository.deleteById(id);
+        PacienteEntity paciente = repository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Paciente não encontrado com o ID: " + id));
+
+        repository.delete(paciente);
     }
 
     public Iterable<PacienteEntity> findAll() {
-        return pacienteRepository.findAll();
+        return repository.findAll();
     }
 
-    public PacienteEntity buscarPorId(String cpf) {
-        return pacienteRepository.findByCpf(cpf);
-    }
-
-    public PacienteEntity buscarPorCpf(String cpf) {
-        return pacienteRepository.findByCpf(cpf);
+    public PacienteEntity findByCpf(String cpf) {
+        return repository.findByCpf(cpf);
     }
 }
