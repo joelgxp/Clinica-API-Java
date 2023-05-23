@@ -1,13 +1,10 @@
 package br.com.jvsmed.api.entities;
 
 import br.com.jvsmed.api.enums.ECategoria;
-import br.com.jvsmed.api.registro.paciente.DadosAtualizacaoPaciente;
 import br.com.jvsmed.api.registro.paciente.DadosCadastroPaciente;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.NotBlank;
+import lombok.*;
 
 @Table(name = "pacientes")
 @Entity(name = "PacienteEntity")
@@ -25,6 +22,7 @@ public class PacienteEntity {
     private ECategoria categoria;
     @Column(name = "data_cadastro")
     private String dataCadastro;
+    @NotBlank
     private String nome;
     @Column(name = "data_nascimento")
     private String dataNascimento;
@@ -42,43 +40,43 @@ public class PacienteEntity {
         this.guia = dados.guia();
         this.registro = dados.registro();
         this.categoria = dados.categoria();
-        this.dataCadastro = dados.data_cadastro();
+        this.dataCadastro = dados.dataCadastro();
         this.nome = dados.nome();
-        this.dataNascimento = dados.data_nascimento();
+        this.dataNascimento = dados.dataNascimento();
         this.sexo = String.valueOf(dados.sexo());
         this.cpf = dados.cpf();
-        this.nomeMae = dados.nome_mae();
-        this.nomePai = dados.nome_pai();
+        this.nomeMae = dados.nomeMae();
+        this.nomePai = dados.nomePai();
         this.telefone = dados.telefone();
     }
 
-    public void atualizarInformacoes(DadosAtualizacaoPaciente dados) {
-        if (dados.guia() != null) {
-            this.guia = dados.guia();
-        }
-        if (dados.categoria() != null) {
-            this.categoria = dados.categoria();
-        }
-        if (dados.data_cadastro() != null) {
-            this.dataCadastro = dados.data_cadastro();
-        }
-        if (dados.nome() != null) {
-            this.nome = dados.nome();
-        }
-        if (dados.data_nascimento() != null) {
-            this.dataNascimento = dados.data_nascimento();
-        }
-        if (dados.sexo() != null) {
-            this.sexo = String.valueOf(dados.sexo());
-        }
-        if (dados.nome_mae() != null) {
-            this.nomeMae = dados.nome_mae();
-        }
-        if (dados.nome_pai() != null) {
-            this.nomePai = dados.nome_pai();
-        }
-        if (dados.telefone() != null) {
-            this.telefone = dados.telefone();
-        }
-    }
+//    public void atualizarInformacoes(DadosAtualizacaoPaciente dados) {
+//        if (dados.guia() != null) {
+//            this.guia = dados.guia();
+//        }
+//        if (dados.categoria() != null) {
+//            this.categoria = dados.categoria();
+//        }
+//        if (dados.dataCadastro() != null) {
+//            this.dataCadastro = dados.dataCadastro();
+//        }
+//        if (dados.nome() != null) {
+//            this.nome = dados.nome();
+//        }
+//        if (dados.dataNascimento() != null) {
+//            this.dataNascimento = dados.dataNascimento();
+//        }
+//        if (dados.sexo() != null) {
+//            this.sexo = String.valueOf(dados.sexo());
+//        }
+//        if (dados.nomeMae() != null) {
+//            this.nomeMae = dados.nomeMae();
+//        }
+//        if (dados.nomePai() != null) {
+//            this.nomePai = dados.nomePai();
+//        }
+//        if (dados.telefone() != null) {
+//            this.telefone = dados.telefone();
+//        }
+//    }
 }

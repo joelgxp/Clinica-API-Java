@@ -8,12 +8,12 @@ public record DadosAtualizacaoPaciente(
         Long id,
         String guia,
         ECategoria categoria,
-        String data_cadastro,
+        String dataCadastro,
         String nome,
-        String data_nascimento,
+        String dataNascimento,
         String sexo,
-        String nome_mae,
-        String nome_pai,
+        String nomeMae,
+        String nomePai,
         String telefone
 ) {
 

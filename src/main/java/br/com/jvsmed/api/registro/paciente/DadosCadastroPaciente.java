@@ -8,13 +8,13 @@ public record DadosCadastroPaciente(
         String guia,
         String registro,
         ECategoria categoria,
-        String data_cadastro,
+        String dataCadastro,
         String nome,
-        String data_nascimento,
+        String dataNascimento,
         ESexo sexo,
         String cpf,
-        String nome_mae,
-        String nome_pai,
+        String nomeMae,
+        String nomePai,
         String telefone
 ) {
 }
