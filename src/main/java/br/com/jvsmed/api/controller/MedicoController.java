@@ -1,12 +1,16 @@
 package br.com.jvsmed.api.controller;
 
+import br.com.jvsmed.api.entities.MedicoEntity;
+import br.com.jvsmed.api.registro.medico.DadosAtualizacaoMedico;
+import br.com.jvsmed.api.registro.medico.DadosCadastroMedico;
+import br.com.jvsmed.api.registro.medico.DadosListagemMedico;
+import br.com.jvsmed.api.repositories.MedicoRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
-import  br.com.jvsmed.api.medico.*;
 
 import java.util.List;
 
@@ -32,14 +36,10 @@ public class MedicoController {
         return repository.findAll(paginacao).map(DadosListagemMedico::new);
     }
 
-    @GetMapping("/ativo")
-    public Page<DadosListagemMedico> listarAtivo(Pageable paginacao) {
-        return repository.findAllByAtivoTrue(paginacao).map(DadosListagemMedico::new);
-    }
     @PostMapping
     @Transactional
     public void cadastrar(@RequestBody @Valid DadosCadastroMedico dados) {
-        repository.save(new Medico(dados));
+        repository.save(new MedicoEntity(dados));
     }
 
     @PutMapping
@@ -53,9 +53,5 @@ public class MedicoController {
     @Transactional
     public void inativar(@PathVariable Long id) {
         var medico = repository.getReferenceById(id);
-        medico.inativar();
     }
-
-
-
 }

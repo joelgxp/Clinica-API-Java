@@ -1,17 +1,15 @@
-package br.com.jvsmed.api.medico;
+package br.com.jvsmed.api.entities;
 
+import br.com.jvsmed.api.registro.medico.DadosAtualizacaoMedico;
+import br.com.jvsmed.api.registro.medico.DadosCadastroMedico;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import br.com.jvsmed.api.medico.*;
-
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Table(name = "medicos")
 @Entity
@@ -19,7 +17,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Medico {
+public class MedicoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,20 +42,11 @@ public class Medico {
     @Column(name = "crm", length = 6, nullable = false)
     private String crm;
 
-    @NotNull(message = "Campo especialidade obrigatorio")
-    @Column(name = "especialidade", length = 100, nullable = false)
-    private Especialidade especialidade;
-
-    private Boolean ativo;
-
-    public Medico(DadosCadastroMedico dados) {
-        this.ativo = true;
+    public MedicoEntity(DadosCadastroMedico dados) {
         this.nome = dados.nome();
         this.email = dados.email();
         this.telefone = dados.telefone();
         this.crm = dados.crm();
-        this.especialidade = dados.especialidade();
-        //this.endereco = new Endereco(dados.endereco());
     }
 
     public void atualizarInformacoes(DadosAtualizacaoMedico dados) {
@@ -67,10 +56,8 @@ public class Medico {
         if (dados.telefone() != null) {
             this.telefone = dados.telefone();
         }
-
-    }
-
-    public void inativar() {
-        this.ativo = false;
+        if (dados.email() != null) {
+            this.email = dados.email();
+        }
     }
 }
