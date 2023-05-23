@@ -30,6 +30,7 @@ function buscaPaciente() {
       return response.json();
     })
     .then(paciente => {
+      window.alert("Busca efetuada!")
       pacienteResultado = paciente
 
       iguia.value = paciente.guia;
@@ -47,6 +48,7 @@ function buscaPaciente() {
       icpf.disabled = true;
     })
     .catch(function (error) {
+      window.alert("Busca não encontrou CPF informado!")
       console.error("Ocorreu um erro:", error);
     });
 }
@@ -65,7 +67,12 @@ function excluiPaciente() {
 }
 
 function editaPaciente() {
+  console.log(pacienteResultado)
+  const ide = pacienteResultado.id
   pacienteResultado = capturarValoresFormulario()
+  console.log(pacienteResultado)
+  pacienteResultado.id = ide
+  console.log(pacienteResultado)
 
   fetch(`http://localhost:8080/pacientes`, {
     headers: {

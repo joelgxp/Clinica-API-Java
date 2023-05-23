@@ -3,10 +3,8 @@ package br.com.jvsmed.api.entities;
 import br.com.jvsmed.api.enums.ECategoria;
 import br.com.jvsmed.api.registro.paciente.DadosCadastroPaciente;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.NotBlank;
+import lombok.*;
 
 @Table(name = "pacientes")
 @Entity(name = "PacienteEntity")
@@ -24,6 +22,7 @@ public class PacienteEntity {
     private ECategoria categoria;
     @Column(name = "data_cadastro")
     private String dataCadastro;
+    @NotBlank
     private String nome;
     @Column(name = "data_nascimento")
     private String dataNascimento;

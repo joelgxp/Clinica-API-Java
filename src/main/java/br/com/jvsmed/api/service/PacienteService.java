@@ -22,8 +22,9 @@ public class PacienteService {
     }
 
     public PacienteEntity atualizarPaciente(PacienteEntity paciente) {
-
-        return repository.save(paciente);
+//        PacienteEntity p = repository.findByCpf(paciente.getCpf());
+//        paciente = p;
+        return repository.save(repository.findByCpf(paciente.getCpf()));
     }
 
     public void excluirPaciente(Long id) {
