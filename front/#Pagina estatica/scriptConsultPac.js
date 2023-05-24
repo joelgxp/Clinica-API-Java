@@ -4,6 +4,9 @@ const bntCadastrar = document.querySelector("#btncadastrar");
 const bntConsultar = document.querySelector("#btnconsultar");
 const btnLimpar = document.querySelector("#btnlimpar");
 
+btnEditar.disabled = true
+bntExcluir.disabled = true
+
 const formulario = document.querySelector("form");
 
 const icpfconsulta = document.querySelector("#cpf");
@@ -27,11 +30,17 @@ function buscaPaciente() {
     method: "GET",
   })
     .then(response => {
-      return response.json();
+      if (response.ok) {
+        return response.json()
+      } else {
+        throw new Error("Recurso não encontrado")
+      }
     })
     .then(paciente => {
-      window.alert("Busca efetuada!")
       pacienteResultado = paciente
+
+      btnEditar.disabled = false
+      bntExcluir.disabled = false
 
       iguia.value = paciente.guia;
       iregistro.value = paciente.registro;
@@ -48,8 +57,13 @@ function buscaPaciente() {
       icpf.disabled = true;
     })
     .catch(function (error) {
-      window.alert("Busca não encontrou CPF informado!")
-      console.error("Ocorreu um erro:", error);
+      if (error.message === "Recurso não encontrado") {
+        // Informe ao usuário que o recurso solicitado não foi encontrado
+        alert("O paciente não foi encontrado");
+      } else {
+        // Tratamento genérico de erros
+        alert("Ocorreu um erro ao obter os dados do paciente");
+      }
     });
 }
 
@@ -67,20 +81,17 @@ function excluiPaciente() {
 }
 
 function editaPaciente() {
-  console.log(pacienteResultado)
-  const ide = pacienteResultado.id
-  pacienteResultado = capturarValoresFormulario()
-  console.log(pacienteResultado)
-  pacienteResultado.id = ide
-  console.log(pacienteResultado)
+  const identificador = pacienteResultado.id
+  const dadosAtualizados = capturarValoresFormulario()
+  dadosAtualizados.id = identificador
 
-  fetch(`http://localhost:8080/pacientes`, {
+  fetch(`http://localhost:8080/pacientes/${identificador}`, {
     headers: {
       "Accept": "application/json",
       "Content-Type": "application/json",
     },
     method: "PUT",
-    body: JSON.stringify(pacienteResultado),
+    body: JSON.stringify(dadosAtualizados),
   })
     .then(function (res) {
       if (res.ok) {
@@ -104,13 +115,16 @@ function cadastraPaciente() {
       method: "POST",
       body: JSON.stringify(valoresFormulario),
     })
-    .then(function (res) {
-      console.log(res);
+    .then(function (response) {
+      if (response.ok) {
+        limpaFormulario()
+      } else {
+        throw new Error("Erro ao cadastrar paciente")
+      }
     })
-    .catch(function (res) {
-      console.log(res);
+    .catch(function (error) {
+      alert("Ocorreu um erro ao cadastrar o paciente")
     });
-  limpaFormulario()
 }
 
 function capturarValoresFormulario() {
@@ -131,6 +145,8 @@ function limpaFormulario() {
   var elementos = formulario.elements;
   iregistro.disabled = false
   icpf.disabled = false
+  btnEditar.disabled = true
+  bntExcluir.disabled = true
 
   for (var i = 0; i < elementos.length; i++) {
     var elemento = elementos[i];

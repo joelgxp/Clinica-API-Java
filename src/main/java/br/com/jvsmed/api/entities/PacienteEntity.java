@@ -4,7 +4,12 @@ import br.com.jvsmed.api.enums.ECategoria;
 import br.com.jvsmed.api.registro.paciente.DadosCadastroPaciente;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import lombok.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Table(name = "pacientes")
 @Entity(name = "PacienteEntity")
@@ -17,26 +22,40 @@ public class PacienteEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank
     private String guia;
+
     private String registro;
+
     private ECategoria categoria;
+
     @Column(name = "data_cadastro")
+    @NotBlank
     private String dataCadastro;
+
     @NotBlank
     private String nome;
+
     @Column(name = "data_nascimento")
     private String dataNascimento;
+
     private String sexo;
+
+    @NotBlank
+    @Size(min = 11, max = 11, message = "CPF deve ter exatamente 11 dígitos")
     private String cpf;
+
     @Column(name = "nome_mae")
     private String nomeMae;
+
     @Column(name = "nome_pai")
     private String nomePai;
+
     private String telefone;
 
     public PacienteEntity(DadosCadastroPaciente dados) {
 //        BeanUtils.copyProperties(dados, this);
-        this.id = id;
         this.guia = dados.guia();
         this.registro = dados.registro();
         this.categoria = dados.categoria();
