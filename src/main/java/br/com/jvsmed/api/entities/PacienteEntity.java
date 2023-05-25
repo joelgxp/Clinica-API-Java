@@ -32,7 +32,7 @@ public class PacienteEntity {
 
     @Column(name = "data_cadastro")
     @NotBlank
-    private String dataCadastro;
+        private String dataCadastro;
 
     @NotBlank
     private String nome;
