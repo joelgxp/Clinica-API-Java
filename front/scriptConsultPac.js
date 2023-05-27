@@ -11,17 +11,33 @@ const formulario = document.querySelector("form");
 
 const icpfconsulta = document.querySelector("#cpf");
 
-const iguia = document.querySelector(".guia");
-const iregistro = document.querySelector(".registro");
-const icategoria = document.querySelector(".categoria");
-const idataCadastro = document.querySelector(".dataCadastro");
-const inome = document.querySelector(".nome");
-const idataNascimento = document.querySelector(".dataNascimento");
-const isexo = document.querySelector(".sexo");
-const icpf = document.querySelector("#cpfpaciente");
-const inomeMae = document.querySelector(".nomeMae");
-const inomePai = document.querySelector(".nomePai");
-const itelefone = document.querySelector(".telefone");
+const iguia = document.querySelector("#inputGuia");
+const iregistro = document.querySelector("#inputRegistro");
+const isolicitacao = document.querySelector("#inputSolicitacao");
+const icategoria = document.querySelector("#inputCategoria");
+const idataCadastro = document.querySelector("#inputDataCadastro");
+const idataHabilitacao = document.querySelector("#inputDataHabilitacao");
+const inome = document.querySelector("#inputNomeCandidato");
+const idataNascimento = document.querySelector("#inputNascimento");
+const isexo = document.querySelector("#inputSexo");
+const iidentidade = document.querySelector("#inputIdentidade");
+const iorgao = document.querySelector("#inputOrgao");
+const iorgaouf = document.querySelector("#inputRgOrgaoUF");
+const inaturalidade = document.querySelector("#inputNaturalidade");
+const inaturalidadeuf = document.querySelector("#inputNaturalidadeUF");
+const inacionalidade = document.querySelector("#inputNacionalidade");
+const inomeMae = document.querySelector("#inputNomeMae");
+const inomePai = document.querySelector("#inputNomePai");
+
+const ilogradouro = document.querySelector("#inputLogradouro");
+const inumero = document.querySelector("#inputNumero");
+const ibairro = document.querySelector("#inputBairro");
+const icidade = document.querySelector("#inputCidade");
+const ilogradourouf = document.querySelector("#inputLogradouroUF");
+const icep = document.querySelector("#inputCEP");
+const icomplemento = document.querySelector("#inputComplemento");
+const icpf = document.querySelector("#inputCPF");
+const itelefone = document.querySelector("#inputTelefon#");
 
 let pacienteResultado = null
 
@@ -44,14 +60,29 @@ function buscaPaciente() {
 
       iguia.value = paciente.guia;
       iregistro.value = paciente.registro;
+      isolicitacao.value = paciente.solicitacao;
       icategoria.value = paciente.categoria;
       idataCadastro.value = paciente.dataCadastro;
+      idataHabilitacao.value = paciente.dataHabilitacao;
       inome.value = paciente.nome;
       idataNascimento.value = paciente.dataNascimento;
       isexo.value = paciente.sexo;
-      icpf.value = paciente.cpf;
+      iidentidade.value = paciente.identidade;
+      iorgao.value = paciente.orgao;
+      iorgaouf.value = paciente.rgOrgaoUF;
+      inaturalidade.value = paciente.naturalidade;
+      inaturalidadeuf.value = paciente.naturalidadeUF;
+      inacionalidade.value = paciente.nacionalidade;
       inomeMae.value = paciente.nomeMae;
       inomePai.value = paciente.nomePai;
+      ilogradouro.value = paciente.logradouro;
+      inumero.value = paciente.numero;
+      ibairro.value = paciente.bairro;
+      icidade.value = paciente.cidade;
+      ilogradourouf.value = paciente.logradouroUF;
+      icep.value = paciente.cep;
+      icomplemento.value = paciente.complemento;
+      icpf.value = paciente.cpf;
       itelefone.value = paciente.telefone;
       iregistro.disabled = true;
       icpf.disabled = true;
@@ -117,7 +148,7 @@ function cadastraPaciente() {
     })
     .then(function (response) {
       if (response.ok) {
-        limpaFormulario()
+        //limpaFormulario()
       } else {
         throw new Error("Erro ao cadastrar paciente")
       }
