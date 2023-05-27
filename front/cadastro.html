@@ -4,8 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./scriptConsultPac.js" defer></script>
     <title>Minha Página</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css">
+    <style>
+        * {
+            box-shadow: none !important
+        }
+      </style>
 </head>
 
 <body>
@@ -20,13 +26,13 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="#cadastro-candidato">Cadastro de Candidato</a>
+                            <a class="nav-link" href="cadastro.html">Cadastro de Candidato</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#ficha-candidato">Ficha do Candidato</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#fila-atendimento">Fila de Atendimento Médico</a>
+                            <a class="nav-link" href="fila-atendimento.html">Fila de Atendimento Médico</a>
                         </li>
                     </ul>
                 </div>
@@ -95,22 +101,29 @@
                                 </div>
                                 <div class="col">
                                     <label for="inputProntuario" class="form-label">Prontuário</label>
-                                    <input type="text" class="form-control" id="inputProntuario1">
+                                    <input type="text" class="form-control" id="inputProntuario">
                                 </div>
                                 <div class="col">
                                     <label for="inputSolicitacao" class="form-label">Solicitação</label>
                                     <select class="form-select" id="inputSolicitacao">
-                                        <option value="opcao1">Opção 1</option>
-                                        <option value="opcao2">Opção 2</option>
-                                        <option value="opcao3">Opção 3</option>
+                                        <option value="opcao1">Primeira habilitação</option>
+                                        <option value="opcao2">Renovação de exame</option>
+                                        <option value="opcao3">Adição de categoria</option>
+                                        <option value="opcao4">Mudança de categoria</option>
                                     </select>
                                 </div>
                                 <div class="col">
                                     <label for="inputCategoria" class="form-label">Categoria</label>
                                     <select class="form-select" id="inputCategoria">
-                                        <option value="categoria1">Categoria 1</option>
-                                        <option value="categoria2">Categoria 2</option>
-                                        <option value="categoria3">Categoria 3</option>
+                                        <option value="categoriaA">A</option>
+                                        <option value="categoriaB">B</option>
+                                        <option value="categoriaC">C</option>
+                                        <option value="categoriaD">D</option>
+                                        <option value="categoriaE">E</option>
+                                        <option value="categoriaAB">AB</option>
+                                        <option value="categoriaAC">AC</option>
+                                        <option value="categoriaAD">AD</option>
+                                        <option value="categoriaAE">AE</option>
                                     </select>
                                 </div>
                                 <div class="col">
@@ -125,7 +138,7 @@
                             <div class="row mb-3">
                                 <div class="col">
                                     <label for="inputNomeCandidato" class="form-label">Nome do Candidato</label>
-                                    <input type="text" class="form-control" id="inputNomeCandidato1">
+                                    <input type="text" class="form-control" id="inputNomeCandidato">
                                 </div>
                                 <div class="col">
                                     <label for="inputNascimento" class="form-label">Nascimento</label>
@@ -139,11 +152,33 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label for="inputRgIdentidade" class="form-label">Identidade</label>
+                                    <input type="text" class="form-control" id="inputRgIdentidade">
+                                </div>
+                                <div class="col">
+                                    <label for="inputRgOrgao" class="form-label">Orgão</label>
+                                    <input type="text" class="form-control" id="inputRgOrgao">
+                                </div>
+                                <div class="col">
+                                    <label for="inputNascimento" class="form-label">UF</label>
+                                    <input type="text" class="form-control" id="inputNascimento">
+                                </div>
+                                <div class="col">
+                                    <label for="inputSexo" class="form-label">Sexo</label>
+                                    <select class="form-select" id="inputSexo">
+                                        <option value="masculino">Masculino</option>
+                                        <option value="feminino">Feminino</option>
+                                    </select>
+                                </div>
+                            </div>
+
                             <button type="submit" class="btn btn-primary">Salvar</button>
                         </form>
                     </div>
                     <div class="col-md-3 col-lg-2">
-                        <section>
+                        <section class="card p-2">
                             <div class="d-grid gap-2">
                                 <button class="btn btn-primary" type="button">Prontuário</button>
                                 <button class="btn btn-primary" type="button">Ficha</button>
@@ -154,6 +189,20 @@
                                 <button class="btn btn-primary" type="button">Cobrar</button>
                             </div>
                         </section>
+                        <br>
+                        <section class="card p-2">
+                            <div class="d-grid gap-2">
+                              <button class="btn btn-primary" type="button">Encaminhar</button>
+                              <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="checkboxLembrete">
+                                <label class="form-check-label" for="checkboxLembrete">
+                                  Lembrete
+                                </label>
+                              </div>
+                              <button class="btn btn-primary" type="button">Novo</button>
+                              <button class="btn btn-primary" type="button">Sair</button>
+                            </div>
+                          </section>
                     </div>
                 </div>
             </div>
