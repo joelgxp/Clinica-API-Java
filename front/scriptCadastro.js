@@ -226,10 +226,10 @@ bntCadastrar.addEventListener("click", function (event) {
 //   excluiPaciente();
 // });
 
-// btnLimpar.addEventListener("click", function (event) {
-//   event.preventDefault();
-//   limpaFormulario();
-// });
+btnLimpar.addEventListener("click", function (event) {
+  event.preventDefault();
+  limpaFormulario();
+});
 
 const urlUF = 'https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome'
 
