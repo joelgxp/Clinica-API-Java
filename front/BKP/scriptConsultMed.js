@@ -4,6 +4,7 @@ const inome = document.querySelector(".nome");
 const iemail = document.querySelector(".email");
 const icrm = document.querySelector(".crm");
 const itelefone = document.querySelector(".telefone");
+const iespecialidade = document.querySelector(".especialidade");
 
 
 function listarPorId() {

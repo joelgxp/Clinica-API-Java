@@ -28,11 +28,12 @@ public class PacienteEntity {
 
     private String registro;
 
+    @Enumerated(EnumType.STRING)
     private ECategoria categoria;
 
     @Column(name = "data_cadastro")
     @NotBlank
-        private String dataCadastro;
+    private String dataCadastro;
 
     @NotBlank
     private String nome;

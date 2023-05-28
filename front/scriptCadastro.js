@@ -4,12 +4,9 @@ const bntCadastrar = document.querySelector("#btncadastrar");
 const bntConsultar = document.querySelector("#btnconsultar");
 const btnLimpar = document.querySelector("#btnlimpar");
 
-// btnEditar.disabled = true
-// bntExcluir.disabled = true
+const formulario = document.querySelector("#formMedico");
 
-const formulario = document.querySelector("form");
-
-const icpfconsulta = document.querySelector("#cpf");
+const icpfconsulta = document.querySelector("#inputCPFBusca");
 
 const iguia = document.querySelector("#inputGuia");
 const iregistro = document.querySelector("#inputRegistro");
@@ -41,23 +38,6 @@ const itelefone = document.querySelector("#inputTelefone");
 
 let pacienteResultado = null
 
-const urlUF = 'https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome'
-
-iorgaouf.addEventListener('click', async (e) => {
-  e.preventDefault()
-
-  const request = await fetch(urlUF)
-  const response = await request.json()
-  
-  response.forEach(uf => {
-    // const option = document.createElement('option')
-    // option.setAttribute('value', uf.sigla)
-    // option.textContent = uf.sigla
-    // iorgaouf.appendChild(option)
-    iorgaouf.innerHTML += '<option>'+uf.sigla+'</option>'
-  });
-})
-
 function buscaPaciente() {
   fetch(`http://localhost:8080/pacientes/${icpfconsulta.value}`, {
     method: "GET",
@@ -70,10 +50,10 @@ function buscaPaciente() {
       }
     })
     .then(paciente => {
-      pacienteResultado = paciente
+      //pacienteResultado = paciente
 
-      btnEditar.disabled = false
-      bntExcluir.disabled = false
+      // btnEditar.disabled = false
+      // bntExcluir.disabled = false
 
       iguia.value = paciente.guia;
       iregistro.value = paciente.registro;
@@ -101,6 +81,7 @@ function buscaPaciente() {
       icomplemento.value = paciente.complemento;
       icpf.value = paciente.cpf;
       itelefone.value = paciente.telefone;
+      
       iregistro.disabled = true;
       icpf.disabled = true;
     })
@@ -152,8 +133,8 @@ function editaPaciente() {
 }
 
 function cadastraPaciente() {
-  const valoresFormulario = capturarValoresFormulario()
-
+  //const valoresFormulario = capturarValoresFormulario()
+  // console.log(valoresFormulario),
   fetch("http://localhost:8080/pacientes",
     {
       headers: {
@@ -161,7 +142,27 @@ function cadastraPaciente() {
         "Content-Type": "application/json",
       },
       method: "POST",
-      body: JSON.stringify(valoresFormulario),
+      body: JSON.stringify({
+        guia: iguia.value,
+        registro: iregistro.value,
+        categoria: icategoria.value,
+        dataCadastro: idataCadastro.value,
+        dataHabilitacao: idataHabilitacao.value,
+        nome: inome.value,
+        dataNascimento: idataNascimento.value,
+        sexo: isexo.value,
+        cpf: icpf.value,
+        nacionalidade: inacionalidade.value,
+        nomeMae: inomeMae.value,
+        nomePai: inomePai.value,
+        telefone: itelefone.value,
+        logradouro: ilogradouro.value,
+        bairro: ibairro.value,
+        cep: icep.value,
+        numero: inumero.value,
+        complemento: icomplemento.value,
+        cidade: icidade.value,
+      })
     })
     .then(function (response) {
       if (response.ok) {
@@ -181,11 +182,11 @@ function capturarValoresFormulario() {
   const valores = {};
   for (let i = 0; i < inputs.length; i++) {
     const input = inputs[i];
-    if (input.name) {
-      valores[input.name] = input.value;
+    if (input.id) {
+      valores[input.id] = input.value;
     }
   }
-
+  console.log(valores)
   return valores;
 }
 
@@ -215,17 +216,34 @@ bntCadastrar.addEventListener("click", function (event) {
   cadastraPaciente();
 });
 
-btnEditar.addEventListener("click", function (event) {
-  event.preventDefault();
-  editaPaciente();
-});
+// btnEditar.addEventListener("click", function (event) {
+//   event.preventDefault();
+//   editaPaciente();
+// });
 
-bntExcluir.addEventListener("click", function (event) {
-  event.preventDefault();
-  excluiPaciente();
-});
+// bntExcluir.addEventListener("click", function (event) {
+//   event.preventDefault();
+//   excluiPaciente();
+// });
 
 btnLimpar.addEventListener("click", function (event) {
   event.preventDefault();
   limpaFormulario();
 });
+
+const urlUF = 'https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome'
+
+iorgaouf.addEventListener('click', async (e) => {
+  e.preventDefault()
+
+  const request = await fetch(urlUF)
+  const response = await request.json()
+  
+  response.forEach(uf => {
+    // const option = document.createElement('option')
+    // option.setAttribute('value', uf.sigla)
+    // option.textContent = uf.sigla
+    // iorgaouf.appendChild(option)
+    iorgaouf.innerHTML += '<option>'+uf.sigla+'</option>'
+  });
+})
