@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./scriptConsultPac.js" defer></script>
-    <title>Minha Página</title>
+    <title>Clínica Médica</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css">
     <style>
         * {
             box-shadow: none !important
         }
-      </style>
+    </style>
 </head>
 
 <body>
@@ -48,7 +48,7 @@
                     <div class="col-md-9 col-lg-10">
                         <form>
                             <div class="row mb-3">
-                                <div class="col">
+                                <div class="col-3">
                                     <div class="input-group">
                                         <input type="text" class="form-control" placeholder="Pesquisa Prontuário"
                                             id="inputProntuario">
@@ -57,10 +57,10 @@
                                         </button>
                                     </div>
                                 </div>
-                                <div class="col">
+                                <div class="col-5">
                                     <div class="input-group">
                                         <input type="text" class="form-control" placeholder="Pesquisa Nome do Candidato"
-                                            id="inputNomeCandidato">
+                                            id="inputNomeCandidatoBusca">
                                         <button class="btn btn-primary" type="button">
                                             <i class="bi bi-search"></i>
                                         </button>
@@ -95,48 +95,51 @@
                             </div>
 
                             <div class="row mb-3">
-                                <div class="col">
+                                <div class="col-2">
                                     <label for="inputGuia" class="form-label">Guia</label>
                                     <input type="text" class="form-control" id="inputGuia">
                                 </div>
-                                <div class="col">
-                                    <label for="inputProntuario" class="form-label">Prontuário</label>
-                                    <input type="text" class="form-control" id="inputProntuario">
+                                <div class="col-2">
+                                    <label for="inputRegistro" class="form-label">Registro</label>
+                                    <input type="text" class="form-control" id="inputRegistro">
                                 </div>
-                                <div class="col">
+                                <div class="col-2">
                                     <label for="inputSolicitacao" class="form-label">Solicitação</label>
                                     <select class="form-select" id="inputSolicitacao">
-                                        <option value="opcao1">Primeira habilitação</option>
-                                        <option value="opcao2">Renovação de exame</option>
-                                        <option value="opcao3">Adição de categoria</option>
-                                        <option value="opcao4">Mudança de categoria</option>
+                                        <option value="default" disabled selected hidden></option>
+                                        <option value="CADASTRO_CNH">Primeira habilitação</option>
+                                        <option value="RENOVACAO_CNH">Renovação de exame</option>
+                                        <option value="ADICAO_CATEGORIA">Adição de categoria</option>
+                                        <option value="MUDANCA_CATEGORIA">Mudança de categoria</option>
                                     </select>
                                 </div>
-                                <div class="col">
+                                <div class="col-2">
                                     <label for="inputCategoria" class="form-label">Categoria</label>
                                     <select class="form-select" id="inputCategoria">
-                                        <option value="categoriaA">A</option>
-                                        <option value="categoriaB">B</option>
-                                        <option value="categoriaC">C</option>
-                                        <option value="categoriaD">D</option>
-                                        <option value="categoriaE">E</option>
-                                        <option value="categoriaAB">AB</option>
-                                        <option value="categoriaAC">AC</option>
-                                        <option value="categoriaAD">AD</option>
-                                        <option value="categoriaAE">AE</option>
+                                        <option value="default" disabled selected hidden></option>
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                        <option value="C">C</option>
+                                        <option value="D">D</option>
+                                        <option value="E">E</option>
+                                        <option value="AB">AB</option>
+                                        <option value="AC">AC</option>
+                                        <option value="AD">AD</option>
+                                        <option value="AE">AE</option>
                                     </select>
                                 </div>
-                                <div class="col">
+                                <div class="col-2">
                                     <label for="inputDataCadastro" class="form-label">Data Cadastro</label>
                                     <input type="date" class="form-control" id="inputDataCadastro">
                                 </div>
-                                <div class="col">
+                                <div class="col-2">
                                     <label for="inputDataHabilitacao" class="form-label">Data Habilitação</label>
                                     <input type="date" class="form-control" id="inputDataHabilitacao">
                                 </div>
                             </div>
+
                             <div class="row mb-3">
-                                <div class="col">
+                                <div class="col-6">
                                     <label for="inputNomeCandidato" class="form-label">Nome do Candidato</label>
                                     <input type="text" class="form-control" id="inputNomeCandidato">
                                 </div>
@@ -147,6 +150,7 @@
                                 <div class="col">
                                     <label for="inputSexo" class="form-label">Sexo</label>
                                     <select class="form-select" id="inputSexo">
+                                        <option value="default" disabled selected hidden></option>
                                         <option value="masculino">Masculino</option>
                                         <option value="feminino">Feminino</option>
                                     </select>
@@ -157,22 +161,95 @@
                                     <label for="inputRgIdentidade" class="form-label">Identidade</label>
                                     <input type="text" class="form-control" id="inputRgIdentidade">
                                 </div>
-                                <div class="col">
+                                <div class="col-1">
                                     <label for="inputRgOrgao" class="form-label">Orgão</label>
                                     <input type="text" class="form-control" id="inputRgOrgao">
                                 </div>
-                                <div class="col">
-                                    <label for="inputNascimento" class="form-label">UF</label>
-                                    <input type="text" class="form-control" id="inputNascimento">
-                                </div>
-                                <div class="col">
-                                    <label for="inputSexo" class="form-label">Sexo</label>
-                                    <select class="form-select" id="inputSexo">
-                                        <option value="masculino">Masculino</option>
-                                        <option value="feminino">Feminino</option>
+                                <!-- <div class="col-1">
+                                    <label for="inputRgOrgaoUF" class="form-label">UF</label>
+                                    <input type="text" class="form-control" id="inputRgOrgaoUF">
+                                </div> -->
+
+                                <div class="col-2">
+                                    <label for="inputRgOrgao" class="form-label">UF</label>
+                                    <select class="form-select" id="inputRgOrgaoUF">
+                                        <option value="default" disabled selected hidden></option>
                                     </select>
                                 </div>
+
+
+                                <div class="col">
+                                    <label for="inputNaturalidade" class="form-label">Naturalidade</label>
+                                    <input type="text" class="form-control" id="inputNaturalidade">
+                                </div>
+                                <div class="col-1">
+                                    <label for="inputNaturalidadeUF" class="form-label">UF</label>
+                                    <input type="text" class="form-control" id="inputNaturalidadeUF">
+                                </div>
+                                <div class="col">
+                                    <label for="inputNacionalidade" class="form-label">Nacionalidade</label>
+                                    <input type="text" class="form-control" id="inputNacionalidade">
+                                </div>
                             </div>
+
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label for="inputNomeMae" class="form-label">Nome da mãe</label>
+                                    <input type="text" class="form-control" id="inputNomeMae">
+                                </div>
+                                <div class="col">
+                                    <label for="inputNomePai" class="form-label">Nome do pai</label>
+                                    <input type="text" class="form-control" id="inputNomePai">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-7">
+                                    <label for="inputLogradouro" class="form-label">Logradouro</label>
+                                    <input type="text" class="form-control" id="inputLogradouro">
+                                </div>
+                                <div class="col-2">
+                                    <label for="inputNumero" class="form-label">Número</label>
+                                    <input type="text" class="form-control" id="inputNumero">
+                                </div>
+                                <div class="col">
+                                    <label for="inputBairro" class="form-label">Bairro</label>
+                                    <input type="text" class="form-control" id="inputBairro">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label for="inputCidade" class="form-label">Cidade</label>
+                                    <input type="text" class="form-control" id="inputCidade">
+                                </div>
+                                <div class="col-1">
+                                    <label for="inputLogradouroUF" class="form-label">UF</label>
+                                    <input type="text" class="form-control" id="inputLogradouroUF">
+                                </div>
+                                <div class="col-3">
+                                    <label for="inputCEP" class="form-label">CEP</label>
+                                    <input type="text" class="form-control" id="inputCEP">
+                                </div>
+                                <div class="col-3">
+                                    <label for="inputRgComplemento" class="form-label">Complemento</label>
+                                    <input type="text" class="form-control" id="inputRgComplemento">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-3">
+                                    <label for="inputCPF" class="form-label">CPF</label>
+                                    <input type="text" class="form-control" id="inputCPF">
+                                </div>
+                                <div class="col-3">
+                                    <label for="inputTelefone" class="form-label">Telefone</label>
+                                    <input type="text" class="form-control" id="inputTelefone">
+                                </div>
+                                
+                            </div>
+
+
 
                             <button type="submit" class="btn btn-primary">Salvar</button>
                         </form>
@@ -192,17 +269,17 @@
                         <br>
                         <section class="card p-2">
                             <div class="d-grid gap-2">
-                              <button class="btn btn-primary" type="button">Encaminhar</button>
-                              <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="checkboxLembrete">
-                                <label class="form-check-label" for="checkboxLembrete">
-                                  Lembrete
-                                </label>
-                              </div>
-                              <button class="btn btn-primary" type="button">Novo</button>
-                              <button class="btn btn-primary" type="button">Sair</button>
+                                <button class="btn btn-primary" type="button">Encaminhar</button>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="checkboxLembrete">
+                                    <label class="form-check-label" for="checkboxLembrete">
+                                        Lembrete
+                                    </label>
+                                </div>
+                                <button class="btn btn-primary" type="button">Novo</button>
+                                <button class="btn btn-primary" type="button">Sair</button>
                             </div>
-                          </section>
+                        </section>
                     </div>
                 </div>
             </div>
