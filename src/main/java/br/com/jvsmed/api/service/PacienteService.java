@@ -1,5 +1,6 @@
 package br.com.jvsmed.api.service;
 
+
 import br.com.jvsmed.api.entities.PacienteEntity;
 import br.com.jvsmed.api.registro.paciente.DadosCadastroPaciente;
 import br.com.jvsmed.api.repositories.PacienteRepository;

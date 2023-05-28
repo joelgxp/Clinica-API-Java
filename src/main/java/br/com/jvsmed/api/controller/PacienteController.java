@@ -4,6 +4,7 @@ import br.com.jvsmed.api.entities.PacienteEntity;
 import br.com.jvsmed.api.exceptions.InvalidRequestException;
 import br.com.jvsmed.api.registro.paciente.DadosCadastroPaciente;
 import br.com.jvsmed.api.registro.paciente.DadosListagemPaciente;
+
 import br.com.jvsmed.api.service.PacienteService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
