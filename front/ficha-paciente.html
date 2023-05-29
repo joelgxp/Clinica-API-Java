@@ -38,12 +38,19 @@
     <main>
         <div class="container d-flex justify-content-center align-items-center">
             <form action="">
-
                 <div class="row">
-                    <div class="col-12">
+                    <div class="text-center-row">
+                        <br>
                         <h2>Acuidade Visual</h2>
                     </div>
                     <div class="col-6 card-header">
+                        <div class="mb-4">
+                            <br>
+                            <div class="col-4">
+                                <label for="data" class="form-label">Data</label>
+                                <input type="date" class="form-control" id="data" disabled>
+                            </div>
+                        </div>
                         <h4>Com correção</h4>
                         <div class="row">
                             <div class="col-4">
@@ -57,19 +64,20 @@
                             </div>
                         </div>
 
-                        <div class="mb-4">
-                            <br>
-                            <div class="col-4">
-                                <label for="data" class="form-label">Data</label>
-                                <input type="date" class="form-control" id="data" disabled>
-                            </div>
-                        </div>
                         <div class="row-mb-3">
+                            <br>
                             <button type="submit" class="btn btn-primary">Salvar</button>
+                            <br>
                         </div>
                     </div>
 
                     <div class="col-6 card-header">
+                        <div class="col-8">
+                            <br>
+                            <label for="nome" class="form-label">Nome</label>
+                            <input type="text" class="form-control" id="nome" disabled>
+                        </div>
+                        <br>
                         <h4>Sem correção</h4>
                         <div class="row">
                             <div class="col-4">
@@ -82,11 +90,6 @@
                                     Direito</label>
                                 <input type="text" class="form-control" id="acuidadeDireitoSemCorrecao">
                             </div>
-                        </div>
-                        <div class="col-4">
-                            <br
-                            <label for="nome" class="form-label">Nome</label>
-                            <input type="text" class="form-control" id="nome" disabled>
                         </div>
                     </div>
                 </div>
