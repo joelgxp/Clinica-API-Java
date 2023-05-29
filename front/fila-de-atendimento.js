@@ -64,6 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("Nome:", nome);
         console.log("Hora:", hora);
         console.log("Exame:", exame);
+        
       });
     }
   }
