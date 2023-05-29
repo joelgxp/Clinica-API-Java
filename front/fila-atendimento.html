@@ -13,7 +13,8 @@
         }
 
         .btn-custom {
-            width: 100px; /* Altere o valor conforme necessário */
+            width: 100px;
+            /* Altere o valor conforme necessário */
         }
     </style>
 </head>
@@ -47,11 +48,9 @@
     <main>
         <div class="container d-flex justify-content-center align-items-center py-3">
             <div class="text-center row">
+                <h2>Atendimento</h2>
                 <section class="card p-2">
-                    <p>Fila de espera: <span id="quantidadeFilas"></span></p>
-                    <div class="col text-end">
-                        <p>Em atendimento: <span id="atendimento"></span></p>
-                    </div>
+                    <h3>Fila de espera: </h3>
                     <div class="row">
                         <div class="col">
                             <div style="max-height: 200px; overflow-y: auto;">
@@ -73,7 +72,7 @@
                 </section>
 
                 <section class="card p-2">
-                    <p>Candidatos atendidos:</p>
+                    <h3>Candidatos atendidos:</h3>
                     <div style="max-height: 200px; overflow-y: auto;">
                         <table class="table table-bordered border-dark table-sm">
                             <thead>
@@ -105,13 +104,13 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="d-flex justify-content-between">
                             <button class="btn btn-primary btn-custom">Visualizar</button>
                             <button class="btn btn-primary btn-custom">Chamar</button>
                             <button class="btn btn-primary btn-custom">Sair</button>
                         </div>
-                    </div>
+                    </div> -->
                 </section>
             </div>
         </div>
