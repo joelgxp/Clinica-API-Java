@@ -231,6 +231,21 @@ btnLimpar.addEventListener("click", function (event) {
   limpaFormulario();
 });
 
+
+window.addEventListener('load', async () => {
+  const request = await fetch(`http://localhost:8080/estados`)
+  const response = await request.json()
+
+  const options = document.createElement('optgroup')
+  options.setAttribute('label', 'UFs')
+  response.forEach((uf) => {
+    options.innerHTML += '<option>' + uf.sigla + '</option>'
+  });
+  iorgaouf.append(options)
+  // inaturalidadeuf.append(options)
+})
+
+
 // const urlUF = 'https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome'
 
 // iorgaouf.addEventListener('click', async (e) => {
@@ -245,25 +260,25 @@ btnLimpar.addEventListener("click", function (event) {
 // })
 
 
-window.addEventListener('load', async (e) => {
-  const municipiosURL = 'https://servicodados.ibge.gov.br/api/v1/localidades/municipios'
-  const request = await fetch(municipiosURL)
-  const response = await request.json()
+// window.addEventListener('load', async (e) => {
+//   const municipiosURL = 'https://servicodados.ibge.gov.br/api/v1/localidades/municipios'
+//   const request = await fetch(municipiosURL)
+//   const response = await request.json()
 
-  const novoJSON = response.map(municipio => {
-    return {
-      id_municipio: municipio.id,
-      nome_municipio: municipio.nome,
-      id_uf: municipio.microrregiao.mesorregiao.UF.id
-    };
-  });
+//   const novoJSON = response.map(municipio => {
+//     return {
+//       id_municipio: municipio.id,
+//       nome_municipio: municipio.nome,
+//       id_uf: municipio.microrregiao.mesorregiao.UF.id
+//     };
+//   });
 
-  const insertStatements = novoJSON.map(municipio => {
-    return `INSERT INTO municipios (id, nome, estado_id) VALUES (${municipio.id_municipio}, '${municipio.nome_municipio}', ${municipio.id_uf});`;
-  });
+//   const insertStatements = novoJSON.map(municipio => {
+//     return `INSERT INTO municipios (id, nome, estado_id) VALUES (${municipio.id_municipio}, '${municipio.nome_municipio}', ${municipio.id_uf});`;
+//   });
   
-  // console.log(insertStatements.join('\n'));
-  // console.log(JSON.stringify(novoJSON, null, 2));
-})
+//   // console.log(insertStatements.join('\n'));
+//   // console.log(JSON.stringify(novoJSON, null, 2));
+// })
 
 
