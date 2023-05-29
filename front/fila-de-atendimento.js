@@ -65,6 +65,14 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("Hora:", hora);
         console.log("Exame:", exame);
         
+        var url = "ficha-paciente.html";
+        var encodedId = encodeURIComponent(rowId);
+        var encodedNome = encodeURIComponent(nome);
+        var encodedHora = encodeURIComponent(hora);
+        var encodedExame = encodeURIComponent(exame);
+        //window.location.href = url + "?id=" + rowId + "&nome=" + nome + "&hora=" + hora + "&exame=" + exame;
+        window.location.href = url + "?id=" + encodedId + "&nome=" + encodedNome + "&hora=" + encodedHora + "&exame=" + encodedExame;
+        
       });
     }
   }
