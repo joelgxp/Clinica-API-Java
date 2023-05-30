@@ -23,7 +23,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
-                <a class="navbar-brand" href="#">Meu Site</a>
+                <a class="navbar-brand" href="#">Clínica</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -46,75 +46,52 @@
     </header>
 
     <main>
-        <div class="container d-flex justify-content-center align-items-center">
-            <div class="text-center row">
+        <section id="fila-atendimento" class="py-5">
+            <div class="container">
                 <h2>Atendimento</h2>
-                <section class="card p-2">
-                    <h3>Fila de espera: </h3>
-                    <div class="row">
-                        <div class="col">
-                            <div style="max-height: 200px; overflow-y: auto;">
-                                <table class="table table-bordered border-dark table-sm" id="tabela-espera">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Nome</th>
-                                            <th scope="col">Hora</th>
-                                            <th scope="col">Exame</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <!-- Conteúdo da tabela de espera -->
-                                    </tbody>
-                                </table>
+                <div class="text-center row">
+                    <section class="card p-2">
+                        <h4>Fila de espera: </h4>
+                        <div class="row">
+                            <div class="col">
+                                <div style="max-height: 200px; overflow-y: auto;">
+                                    <table class="table table-bordered border-dark table-sm" id="tabela-espera">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Nome</th>
+                                                <th scope="col">Hora</th>
+                                                <th scope="col">Exame</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Conteúdo da tabela de espera -->
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
 
-                <section class="card p-2">
-                    <h3>Candidatos atendidos:</h3>
-                    <div style="max-height: 200px; overflow-y: auto;">
-                        <table class="table table-bordered border-dark table-sm">
-                            <thead>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th>Hora</th>
-                                    <th>Conclusão</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Conteúdo da tabela de candidatos atendidos -->
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-                <section class="card p-2">
-                    <div class="row">
-                        <div class="col">
-                            <h4><strong>Manhã</strong></h4>
-                            <p>Aguardando: <span id="aguardandoManha"></span></p>
-                            <p>Atendidos: <span id="atendidosManha"></span></p>
-                            <p>Total: <span id="totalManha"></span></p>
+                    <section class="card p-2">
+                        <h4>Candidatos atendidos:</h4>
+                        <div style="max-height: 200px; overflow-y: auto;">
+                            <table class="table table-bordered border-dark table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Hora</th>
+                                        <th>Conclusão</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Conteúdo da tabela de candidatos atendidos -->
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="col">
-                            <h4><strong>Tarde</strong></h4>
-                            <p>Aguardando: <span id="aguardandoTarde"></span></p>
-                            <p>Atendidos: <span id="atendidosTarde"></span></p>
-                            <p>Total: <span id="totalTarde"></span></p>
-                        </div>
-                    </div>
-
-                    <!-- <div class="row">
-                        <div class="d-flex justify-content-between">
-                            <button class="btn btn-primary btn-custom">Visualizar</button>
-                            <button class="btn btn-primary btn-custom">Chamar</button>
-                            <button class="btn btn-primary btn-custom">Sair</button>
-                        </div>
-                    </div> -->
-                </section>
+                    </section>                    
+                </div>
             </div>
-        </div>
-
+        </section>
     </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
