@@ -81,7 +81,7 @@ function buscaPaciente() {
       icomplemento.value = paciente.complemento;
       icpf.value = paciente.cpf;
       itelefone.value = paciente.telefone;
-      
+
       iregistro.disabled = true;
       icpf.disabled = true;
     })
@@ -231,54 +231,58 @@ btnLimpar.addEventListener("click", function (event) {
   limpaFormulario();
 });
 
-
-window.addEventListener('load', async () => {
-  const request = await fetch(`http://localhost:8080/estados`)
-  const response = await request.json()
-
-  const options = document.createElement('optgroup')
-  options.setAttribute('label', 'UFs')
-  response.forEach((uf) => {
-    options.innerHTML += '<option>' + uf.sigla + '</option>'
-  });
-  iorgaouf.append(options)
-  // inaturalidadeuf.append(options)
+iorgaouf.addEventListener('focus', () => {
+  buscaEstados()
+    .then((options) => {
+      iorgaouf.append(options)
+    })
+    .catch((error) => {
+      console.error('Erro ao buscar os estados:', error)
+    })
 })
 
+inaturalidadeuf.addEventListener('focus', () => {
+  buscaEstados()
+    .then((options) => {
+      inaturalidadeuf.append(options)
+    })
+    .catch((error) => {
+      console.error('Erro ao buscar os estados:', error)
+    })
+})
 
-// const urlUF = 'https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome'
+ilogradourouf.addEventListener('focus', () => {
+  buscaEstados()
+    .then((options) => {
+      ilogradourouf.append(options)
+    })
+    .catch((error) => {
+      console.error('Erro ao buscar os estados:', error)
+    })
+})
 
-// iorgaouf.addEventListener('click', async (e) => {
-//   e.preventDefault()
+ilogradourouf.addEventListener('change', async () => {
+  const request = await fetch(`http://localhost:8080/estados/${ilogradourouf.value}`)
+  const response = await request.json()
+  console.log(response)
+  // icidade.appendChild
+})
 
-//   const request = await fetch(urlUF)
-//   const response = await request.json()
-  
-//   response.forEach(uf => {
-//     iorgaouf.innerHTML += '<option>'+uf.sigla+'</option>'
-//   });
-// })
+async function buscaEstados() {
+  try {
+    const request = await fetch('http://localhost:8080/estados');
+    const response = await request.json();
+    const options = document.createElement('optgroup');
+    options.setAttribute('label', 'UFs');
 
+    response.forEach((uf) => {
+      const option = document.createElement('option');
+      option.textContent = uf.sigla;
+      options.appendChild(option);
+    });
 
-// window.addEventListener('load', async (e) => {
-//   const municipiosURL = 'https://servicodados.ibge.gov.br/api/v1/localidades/municipios'
-//   const request = await fetch(municipiosURL)
-//   const response = await request.json()
-
-//   const novoJSON = response.map(municipio => {
-//     return {
-//       id_municipio: municipio.id,
-//       nome_municipio: municipio.nome,
-//       id_uf: municipio.microrregiao.mesorregiao.UF.id
-//     };
-//   });
-
-//   const insertStatements = novoJSON.map(municipio => {
-//     return `INSERT INTO municipios (id, nome, estado_id) VALUES (${municipio.id_municipio}, '${municipio.nome_municipio}', ${municipio.id_uf});`;
-//   });
-  
-//   // console.log(insertStatements.join('\n'));
-//   // console.log(JSON.stringify(novoJSON, null, 2));
-// })
-
-
+    return options;
+  } catch (error) {
+    throw new Error('Erro ao buscar os estados');
+  }
+}
