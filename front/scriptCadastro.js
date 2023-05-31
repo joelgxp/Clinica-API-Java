@@ -196,6 +196,8 @@ function limpaFormulario() {
   icpf.disabled = false
   btnEditar.disabled = true
   bntExcluir.disabled = true
+  inaturalidade.innerHTML = ''
+  icidade.innerHTML = ''
 
   for (var i = 0; i < elementos.length; i++) {
     var elemento = elementos[i];
@@ -261,23 +263,58 @@ ilogradourouf.addEventListener('focus', () => {
     })
 })
 
-ilogradourouf.addEventListener('change', async () => {
-  const request = await fetch(`http://localhost:8080/estados/${ilogradourouf.value}`)
+inaturalidadeuf.addEventListener('change', async () => {
+
+  let selectedOption = inaturalidadeuf.options[inaturalidadeuf.selectedIndex];
+  let selectedOptionId = selectedOption.getAttribute("id");
+
+  const request = await fetch(`http://localhost:8080/municipios/${selectedOptionId}`)
   const response = await request.json()
-  console.log(response)
-  // icidade.appendChild
+
+  const options = document.createElement('optgroup');
+  options.setAttribute('label', 'Cidades');
+
+  response.forEach((municipio) => {
+    const option = document.createElement('option');
+    option.textContent = municipio.nome;
+    options.appendChild(option);
+  })
+  inaturalidade.innerHTML = ''
+  inaturalidade.append(options)
+})
+
+ilogradourouf.addEventListener('change', async () => {
+
+  let selectedOption = ilogradourouf.options[ilogradourouf.selectedIndex];
+  let selectedOptionId = selectedOption.getAttribute("id");
+
+  const request = await fetch(`http://localhost:8080/municipios/${selectedOptionId}`)
+  const response = await request.json()
+
+  const options = document.createElement('optgroup');
+  options.setAttribute('label', 'Cidades');
+
+  response.forEach((municipio) => {
+    const option = document.createElement('option');
+    option.textContent = municipio.nome;
+    options.appendChild(option);
+  })
+  icidade.innerHTML = ''
+  icidade.append(options)
 })
 
 async function buscaEstados() {
   try {
     const request = await fetch('http://localhost:8080/estados');
     const response = await request.json();
+
     const options = document.createElement('optgroup');
     options.setAttribute('label', 'UFs');
 
     response.forEach((uf) => {
       const option = document.createElement('option');
       option.textContent = uf.sigla;
+      option.id = uf.id
       options.appendChild(option);
     });
 

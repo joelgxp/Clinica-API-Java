@@ -1,12 +1,11 @@
 package br.com.jvsmed.api.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 @Entity
 @Table(name = "municipios")
 public class MunicipioEntity {
@@ -14,7 +13,9 @@ public class MunicipioEntity {
     @Id
     private Integer id;
     private String nome;
-    @Column(name = "estado_id")
-    private Integer estadoId;
+
+    @ManyToOne
+    @JoinColumn(name = "estado_id")
+    private EstadoEntity estadoId;
 
 }

@@ -1,6 +1,7 @@
 package br.com.jvsmed.api.entities;
 
 import br.com.jvsmed.api.enums.ECategoria;
+import br.com.jvsmed.api.enums.ESolicitacao;
 import br.com.jvsmed.api.registro.paciente.DadosCadastroPaciente;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -31,6 +32,9 @@ public class PacienteEntity {
     @Enumerated(EnumType.STRING)
     private ECategoria categoria;
 
+    @Enumerated(EnumType.STRING)
+    private ESolicitacao solicitacao;
+
     @Column(name = "data_cadastro")
     @NotBlank
     private String dataCadastro;
@@ -60,6 +64,7 @@ public class PacienteEntity {
         this.guia = dados.guia();
         this.registro = dados.registro();
         this.categoria = dados.categoria();
+        this.solicitacao = dados.solicitacao();
         this.dataCadastro = dados.dataCadastro();
         this.nome = dados.nome();
         this.dataNascimento = dados.dataNascimento();

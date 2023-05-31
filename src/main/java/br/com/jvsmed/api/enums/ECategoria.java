@@ -12,7 +12,4 @@ public enum ECategoria {
         return categoria;
     }
 
-//    public void setCategoria(String categoria) {
-//        this.categoria = categoria;
-//    }
 }
