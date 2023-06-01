@@ -3,10 +3,7 @@ package br.com.jvsmed.api.controller;
 import br.com.jvsmed.api.entities.EstadoEntity;
 import br.com.jvsmed.api.repositories.EstadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,5 +18,10 @@ public class EstadoController {
     @GetMapping
     public List<EstadoEntity> getAllEstados() {
         return estadoRepository.findAll();
+    }
+
+    @GetMapping("/{sigla}")
+    public EstadoEntity getEstadoId(@PathVariable String sigla) {
+        return estadoRepository.findBySigla(sigla);
     }
 }

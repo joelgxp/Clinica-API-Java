@@ -4,6 +4,7 @@ create table pacientes (
     guia int not null,
     registro varchar(30) not null unique,
     categoria varchar(2) not null,
+    solicitacao varchar(50) not null,
     data_cadastro varchar(10) not null,
     data_nascimento varchar(10) not null,
     nome varchar(100) not null,

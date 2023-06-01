@@ -81,7 +81,7 @@ function buscaPaciente() {
       icomplemento.value = paciente.complemento;
       icpf.value = paciente.cpf;
       itelefone.value = paciente.telefone;
-      
+
       iregistro.disabled = true;
       icpf.disabled = true;
     })
@@ -196,6 +196,8 @@ function limpaFormulario() {
   icpf.disabled = false
   btnEditar.disabled = true
   bntExcluir.disabled = true
+  inaturalidade.innerHTML = ''
+  icidade.innerHTML = ''
 
   for (var i = 0; i < elementos.length; i++) {
     var elemento = elementos[i];
@@ -231,54 +233,93 @@ btnLimpar.addEventListener("click", function (event) {
   limpaFormulario();
 });
 
-
-window.addEventListener('load', async () => {
-  const request = await fetch(`http://localhost:8080/estados`)
-  const response = await request.json()
-
-  const options = document.createElement('optgroup')
-  options.setAttribute('label', 'UFs')
-  response.forEach((uf) => {
-    options.innerHTML += '<option>' + uf.sigla + '</option>'
-  });
-  iorgaouf.append(options)
-  // inaturalidadeuf.append(options)
+iorgaouf.addEventListener('focus', () => {
+  buscaEstados()
+    .then((options) => {
+      iorgaouf.append(options)
+    })
+    .catch((error) => {
+      console.error('Erro ao buscar os estados:', error)
+    })
 })
 
+inaturalidadeuf.addEventListener('focus', () => {
+  buscaEstados()
+    .then((options) => {
+      inaturalidadeuf.append(options)
+    })
+    .catch((error) => {
+      console.error('Erro ao buscar os estados:', error)
+    })
+})
 
-// const urlUF = 'https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome'
+ilogradourouf.addEventListener('focus', () => {
+  buscaEstados()
+    .then((options) => {
+      ilogradourouf.append(options)
+    })
+    .catch((error) => {
+      console.error('Erro ao buscar os estados:', error)
+    })
+})
 
-// iorgaouf.addEventListener('click', async (e) => {
-//   e.preventDefault()
+inaturalidadeuf.addEventListener('change', async () => {
 
-//   const request = await fetch(urlUF)
-//   const response = await request.json()
-  
-//   response.forEach(uf => {
-//     iorgaouf.innerHTML += '<option>'+uf.sigla+'</option>'
-//   });
-// })
+  let selectedOption = inaturalidadeuf.options[inaturalidadeuf.selectedIndex];
+  let selectedOptionId = selectedOption.getAttribute("id");
 
+  const request = await fetch(`http://localhost:8080/municipios/${selectedOptionId}`)
+  const response = await request.json()
 
-// window.addEventListener('load', async (e) => {
-//   const municipiosURL = 'https://servicodados.ibge.gov.br/api/v1/localidades/municipios'
-//   const request = await fetch(municipiosURL)
-//   const response = await request.json()
+  const options = document.createElement('optgroup');
+  options.setAttribute('label', 'Cidades');
 
-//   const novoJSON = response.map(municipio => {
-//     return {
-//       id_municipio: municipio.id,
-//       nome_municipio: municipio.nome,
-//       id_uf: municipio.microrregiao.mesorregiao.UF.id
-//     };
-//   });
+  response.forEach((municipio) => {
+    const option = document.createElement('option');
+    option.textContent = municipio.nome;
+    options.appendChild(option);
+  })
+  inaturalidade.innerHTML = ''
+  inaturalidade.append(options)
+})
 
-//   const insertStatements = novoJSON.map(municipio => {
-//     return `INSERT INTO municipios (id, nome, estado_id) VALUES (${municipio.id_municipio}, '${municipio.nome_municipio}', ${municipio.id_uf});`;
-//   });
-  
-//   // console.log(insertStatements.join('\n'));
-//   // console.log(JSON.stringify(novoJSON, null, 2));
-// })
+ilogradourouf.addEventListener('change', async () => {
 
+  let selectedOption = ilogradourouf.options[ilogradourouf.selectedIndex];
+  let selectedOptionId = selectedOption.getAttribute("id");
 
+  const request = await fetch(`http://localhost:8080/municipios/${selectedOptionId}`)
+  const response = await request.json()
+
+  const options = document.createElement('optgroup');
+  options.setAttribute('label', 'Cidades');
+
+  response.forEach((municipio) => {
+    const option = document.createElement('option');
+    option.textContent = municipio.nome;
+    options.appendChild(option);
+  })
+  icidade.innerHTML = ''
+  icidade.append(options)
+})
+
+async function buscaEstados() {
+  try {
+    const request = await fetch('http://localhost:8080/estados');
+    const response = await request.json();
+
+    const options = document.createElement('optgroup');
+    options.setAttribute('label', 'UFs');
+
+    response.forEach((uf) => {
+      const option = document.createElement('option');
+      option.textContent = uf.sigla;
+      option.id = uf.id
+      options.appendChild(option);
+    });
+
+    return options;
+  } catch (error) {
+    throw new Error('Erro ao buscar os estados');
+  }
+}
