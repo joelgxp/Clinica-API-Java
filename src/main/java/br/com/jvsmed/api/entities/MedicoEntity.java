@@ -50,7 +50,7 @@ public class MedicoEntity {
     }
 
     public void atualizarInformacoes(DadosAtualizacaoMedico dados) {
-        if(dados.nome() != null) {
+        if (dados.nome() != null) {
             this.nome = dados.nome();
         }
         if (dados.telefone() != null) {

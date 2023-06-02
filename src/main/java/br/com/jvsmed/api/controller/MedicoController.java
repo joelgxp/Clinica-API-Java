@@ -31,6 +31,7 @@ public class MedicoController {
     public DadosListagemMedico listarPorId(@PathVariable Long id) {
         return new DadosListagemMedico(repository.getReferenceById(id));
     }
+
     @GetMapping("/paginacao")
     public Page<DadosListagemMedico> listarPaginacao(Pageable paginacao) {
         return repository.findAll(paginacao).map(DadosListagemMedico::new);

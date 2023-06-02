@@ -1,33 +1,49 @@
 package br.com.jvsmed.api.entities;
 
-
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import br.com.jvsmed.api.registro.fichaMedica.DadosCadastroFichaMedica;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Table(name = "ficha_medica")
+@Entity(name = "FichaMedicaEntity")
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 
 public class FichaMedicaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
     @Column(name = "id_paciente")
     private Long idPaciente;
-    @NotBlank
-    @Column(name = "lado_esquerdo")
+
+    @Column(name = "ladoesquerdo")
     private String ladoEsquerdo;
-    @NotBlank
-    @Column(name = "lado_direito")
+
+    @Column(name = "ladodireito")
     private String ladoDireito;
-    @NotBlank
+
     private String correcao;
 
-    public FichaMedicaEntity(Long idPaciente, String ladoEsquerdo, String ladoDireito, String correcao) {
-        this.idPaciente = idPaciente;
-        this.ladoEsquerdo = ladoEsquerdo;
-        this.ladoDireito = ladoDireito;
-        this.correcao = correcao;
+    @Column(name = "examevalidade")
+    private String exameValidade;
+
+
+    public FichaMedicaEntity(DadosCadastroFichaMedica dados) {
+        this.idPaciente = dados.idPaciente();
+        this.ladoEsquerdo = dados.ladoEsquerdo();
+        this.ladoDireito = dados.ladoDireito();
+        this.correcao = dados.correcao();
+        this.exameValidade = dados.exameValidade();
+    }
+
+    public void setIdPaciente(Long id) {
     }
 }
