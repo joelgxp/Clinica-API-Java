@@ -36,7 +36,7 @@
     </header>
 
     <main>
-        <section id="ficha-paciente" class="py-5">
+        <!-- <section id="ficha-paciente" class="py-5">
             <div class="container d-flex justify-content-center align-items-center">
                 <form action="">
                     <div class="row">
@@ -54,15 +54,14 @@
                                 <div class="col-4">
                                     <label for="inputDataVencimento" class="form-label">Data vencimento</label>
                                     <input type="date" class="form-control" id="inputDataVencimento">
-                                <br>
+                                    <br>
 
                                 </div>
                             </div>
                             <div class="row">
                                 <h4>Acuidade visual</h4>
                                 <div class="col-4">
-                                    <label for="acuidadeEsquerdo" class="form-label">Lado
-                                        Esquerdo</label>
+                                    <label for="acuidadeEsquerdo" class="form-label">Lado Esquerdo</label>
                                     <input type="text" class="form-control" id="acuidadeEsquerdo">
                                 </div>
                                 <div class="col-4">
@@ -96,7 +95,115 @@
 
                 </form>
             </div>
+        </section> -->
+
+
+
+        <section id="ficha-paciente" class="py-5">
+            <div class="container">
+                <h2>Ficha de atendimento</h2>
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <form action="" id="formMedico">
+                            <div class="row mb-3">
+                                <div class="col-3">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Pesquisa por CPF"
+                                            id="inputCPFBusca" maxlength="11">
+                                        <button class="btn btn-primary" type="button" id="btnconsultar">
+                                            <i class="bi bi-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-5">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Pesquisa Nome do Candidato"
+                                            id="inputNomeCandidatoBusca">
+                                        <button class="btn btn-primary" type="button">
+                                            <i class="bi bi-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <nav aria-label="Navegação">
+                                        <ul class="pagination">
+                                            <li class="page-item">
+                                                <a class="page-link" href="#" aria-label="Primeiro">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                </a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="#" aria-label="Anterior">
+                                                    <span aria-hidden="true">&lsaquo;</span>
+                                                </a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="#" aria-label="Próximo">
+                                                    <span aria-hidden="true">&rsaquo;</span>
+                                                </a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="#" aria-label="Último">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-8">
+                                    <label for="nome" class="form-label">Nome</label>
+                                    <input type="text" class="form-control" id="nome" disabled>
+                                </div>                                
+                                <div class="col-2">
+                                    <label for="inputDataVencimento" class="form-label">Data vencimento</label>
+                                    <input type="date" class="form-control" id="inputDataVencimento">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-2">
+                                    <label for="acuidadeDireito" class="form-label">Acuidade visual L.D.</label>
+                                    <input type="text" class="form-control" id="acuidadeDireito">                                    
+                                </div>
+                                <div class="col-2">
+                                    <label for="acuidadeEsquerdo" class="form-label">Acuidade visual L.E.</label>
+                                    <input type="text" class="form-control" id="acuidadeEsquerdo">
+                                </div>
+                                <div class="col-2">
+                                    <label for="inputCorrecao" class="form-label">Correção visual</label>
+                                    <select class="form-select" id="inputCorrecao">
+                                        <option value="SEM_CORRECAO">Sem Correção</option>
+                                        <option value="COM_CORRECAO">Com Correção</option>
+                                    </select>
+                                </div>
+                                <div class="col-2">
+                                    <label for="campoVisualDireito" class="form-label">Campo Visual L.D.</label>
+                                    <input type="text" class="form-control" id="campoVisualDireito">                                    
+                                </div>
+                                <div class="col-2">
+                                    <label for="campoVisualEsquerdo" class="form-label">Campo Visual L.E.</label>
+                                    <input type="text" class="form-control" id="campoVisualEsquerdo">
+                                </div>                                
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary" id="btncadastrar">Salvar</button>
+                            <button type="submit" class="btn btn-primary" id="btneditar">Editar</button>
+                            <button type="submit" class="btn btn-primary" id="btnexcluir">Excluir</button>
+                            <button type="submit" class="btn btn-primary" id="btnlimpar">Limpar dados</button>
+                            <button type="submit" class="btn btn-primary" id="1">Ficha</button>
+                            <button type="submit" class="btn btn-primary" id="2">Encaminhar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </section>
+
+
+
+
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
 </body>
