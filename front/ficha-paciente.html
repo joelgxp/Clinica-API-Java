@@ -153,13 +153,20 @@
                             </div>
 
                             <div class="row mb-3">
-                                <div class="col-8">
+                                <div class="col-6">
                                     <label for="nome" class="form-label">Nome</label>
                                     <input type="text" class="form-control" id="nome" disabled>
                                 </div>                                
                                 <div class="col-2">
                                     <label for="inputDataVencimento" class="form-label">Data vencimento</label>
                                     <input type="date" class="form-control" id="inputDataVencimento">
+                                </div>
+                                <div class="col-2">
+                                    <label for="inputConclusao" class="form-label">Conclusão</label>
+                                    <select class="form-select" id="inputConclusao">
+                                        <option value="APTO">Apto</option>
+                                        <option value="INAPTO">Inapto</option>
+                                    </select>
                                 </div>
                             </div>
 
@@ -191,10 +198,8 @@
                             
                             <button type="submit" class="btn btn-primary" id="btncadastrar">Salvar</button>
                             <button type="submit" class="btn btn-primary" id="btneditar">Editar</button>
-                            <button type="submit" class="btn btn-primary" id="btnexcluir">Excluir</button>
                             <button type="submit" class="btn btn-primary" id="btnlimpar">Limpar dados</button>
-                            <button type="submit" class="btn btn-primary" id="1">Ficha</button>
-                            <button type="submit" class="btn btn-primary" id="2">Encaminhar</button>
+                          
                         </form>
                     </div>
                 </div>

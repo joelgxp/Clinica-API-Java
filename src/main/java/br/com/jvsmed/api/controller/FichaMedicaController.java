@@ -24,9 +24,9 @@ public class FichaMedicaController {
     }
 
     @GetMapping("/{idPaciente}")
-    public List<FichaMedicaEntity> findByIdPaciente(@PathVariable Long id) {
+    public List<FichaMedicaEntity> findByIdPaciente(@PathVariable Integer idPaciente) {
         FichaMedicaEntity fichaMedicaEntity = new FichaMedicaEntity();
-        fichaMedicaEntity.setIdPaciente(id);
+        fichaMedicaEntity.setIdPaciente(idPaciente);
 
         return repository.findByIdPaciente(fichaMedicaEntity);
     }

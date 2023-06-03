@@ -22,7 +22,7 @@ public class FichaMedicaEntity {
     private Long id;
 
     @Column(name = "id_paciente")
-    private Long idPaciente;
+    private Integer idPaciente;
 
     @Column(name = "ladoesquerdo")
     private String ladoEsquerdo;
@@ -44,6 +44,6 @@ public class FichaMedicaEntity {
         this.exameValidade = dados.exameValidade();
     }
 
-    public void setIdPaciente(Long id) {
+    public void setIdPaciente(Integer idPaciente) {
     }
 }
