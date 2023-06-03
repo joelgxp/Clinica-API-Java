@@ -1,7 +1,12 @@
 const iacuidadeEsquerdo = document.querySelector("#acuidadeEsquerdo");
 const iacuidadeDireito = document.querySelector("#acuidadeDireito");
 const iacuidadeCorrecao = document.querySelector("#inputAcuidadeCorrecao");
+const icampoVisualDireito = document.querySelector("#inputCampoVisualDireito");
+const icampoVisualEsquerdo = document.querySelector("#inputCampoVisualEsquerdo");
+const iinputComplemento = document.querySelector("#inputComplemento");
 const iinputDataVencimento = document.querySelector("#inputDataVencimento");
+const iinputConclusao = document.querySelector("#inputConclusao");
+
 const btnSalvar = document.querySelector("#btnSalvar");
 
 
@@ -23,7 +28,7 @@ function cadastraDadosExame() {
     const id = idPaciente;
     console.log(id);
     //const valoresFormulario = capturarValoresFormulario()
-    // console.log(valoresFormulario),
+    console.log(formMedico),
     fetch("http://localhost:8080/ficha_medica",
       {
         headers: {
@@ -36,7 +41,12 @@ function cadastraDadosExame() {
             ladoEsquerdo: iacuidadeEsquerdo.value,
             ladoDireito: iacuidadeDireito.value,
             correcao: iacuidadeCorrecao.value,
-            exameValidade: iinputDataVencimento.value
+            campoVisualEsquerdo: icampoVisualEsquerdo.value,
+            campoVisualDireito: icampoVisualDireito.value,
+            exameValidade: iinputDataVencimento.value,
+            conclusao: iinputConclusao.value,
+            complemento: iinputComplemento.value,
+            status: "true"
         })
       })
       .then(function (response) {

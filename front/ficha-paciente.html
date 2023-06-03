@@ -24,7 +24,7 @@
                             <a class="nav-link" href="cadastro.html">Cadastro de Candidato</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#ficha-candidato">Ficha do Candidato</a>
+                            <a class="nav-link" href="ficha-paciente.html">Ficha do Candidato</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="fila-atendimento.html">Fila de Atendimento Médico</a>
@@ -180,23 +180,32 @@
                                     <input type="text" class="form-control" id="acuidadeEsquerdo">
                                 </div>
                                 <div class="col-2">
-                                    <label for="inputCorrecao" class="form-label">Correção visual</label>
-                                    <select class="form-select" id="inputCorrecao">
+                                    <label for="inputAcuidadeCorrecao" class="form-label">Correção visual</label>
+                                    <select class="form-select" id="inputAcuidadeCorrecao">
                                         <option value="SEM_CORRECAO">Sem Correção</option>
                                         <option value="COM_CORRECAO">Com Correção</option>
                                     </select>
                                 </div>
                                 <div class="col-2">
                                     <label for="campoVisualDireito" class="form-label">Campo Visual L.D.</label>
-                                    <input type="text" class="form-control" id="campoVisualDireito">                                    
+                                    <input type="text" class="form-control" id="inputCampoVisualDireito">                                    
                                 </div>
                                 <div class="col-2">
                                     <label for="campoVisualEsquerdo" class="form-label">Campo Visual L.E.</label>
-                                    <input type="text" class="form-control" id="campoVisualEsquerdo">
+                                    <input type="text" class="form-control" id="inputCampoVisualEsquerdo">
                                 </div>                                
                             </div>
+
+                            <div class="row mb-3">
+                                <div class="col-10">
+                                    <div class="form-group">
+                                        <label for="inputComplemento" class="form-label">Anamnese - Evolução - Exames Complementares</label>                                        
+                                        <textarea class="form-control" id="inputComplemento" rows="5"></textarea>
+                                      </div>
+                                </div>
+                            </div>
                             
-                            <button type="submit" class="btn btn-primary" id="btncadastrar">Salvar</button>
+                            <button type="submit" class="btn btn-primary" id="btnSalvar">Salvar</button>
                             <button type="submit" class="btn btn-primary" id="btneditar">Editar</button>
                             <button type="submit" class="btn btn-primary" id="btnlimpar">Limpar dados</button>
                           

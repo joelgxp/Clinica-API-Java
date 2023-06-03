@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
         row.appendChild(horaCell);
 
         var exameCell = document.createElement("td");
-        exameCell.textContent = item.registro;
+        exameCell.textContent = item.solitacao;
         row.appendChild(exameCell);
 
         var buttonCell = document.createElement("td");
