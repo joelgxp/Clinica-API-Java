@@ -26,8 +26,6 @@ inome.value = nome;
 
 function cadastraDadosExame() {
     const id = idPaciente;
-    console.log(id);
-    //const valoresFormulario = capturarValoresFormulario()
     console.log(formMedico),
     fetch("http://localhost:8080/ficha_medica",
       {

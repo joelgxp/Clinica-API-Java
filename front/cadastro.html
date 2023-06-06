@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./scriptCadastro.js" defer></script>
+    <script src="./cadastro.js" defer></script>
     <title>Clínica Médica</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
@@ -164,48 +164,26 @@
                                     <label for="inputRgOrgao" class="form-label">Orgão</label>
                                     <input type="text" class="form-control" id="inputRgOrgao">
                                 </div>
-                                <!-- <div class="col-1">
-                                    <label for="inputRgOrgaoUF" class="form-label">UF</label>
-                                    <input type="text" class="form-control" id="inputRgOrgaoUF">
-                                </div> -->
-
                                 <div class="col-2">
                                     <label for="inputRgOrgaoUF" class="form-label">UF</label>
                                     <select class="form-select" id="inputRgOrgaoUF">
                                         <option value="default" disabled selected hidden></option>
                                     </select>
                                 </div>
-
-                                <!-- <div class="col">
-                                    <label for="inputNaturalidade" class="form-label">Naturalidade</label>
-                                    <input type="text" class="form-control" id="inputNaturalidade">
-                                </div> -->
                                 <div class="col-2">
                                     <label for="inputNaturalidade" class="form-label">Naturalidade</label>
                                     <select class="form-select" id="inputNaturalidade">
-                                        <!-- <option value="default" disabled selected hidden></option> -->
                                     </select>
                                 </div>
-
-                                <!-- <div class="col-1">
-                                    <label for="inputNaturalidadeUF" class="form-label">UF</label>
-                                    <input type="text" class="form-control" id="inputNaturalidadeUF">
-                                </div> -->
                                 <div class="col-2">
                                     <label for="inputNaturalidadeUF" class="form-label">UF</label>
                                     <select class="form-select" id="inputNaturalidadeUF">
                                         <option value="default" disabled selected hidden></option>
                                     </select>
                                 </div>
-
-                                <!-- <div class="col">
-                                    <label for="inputNacionalidade" class="form-label">Nacionalidade</label>
-                                    <input type="text" class="form-control" id="inputNacionalidade">
-                                </div> -->
                                 <div class="col-2">
                                     <label for="inputNacionalidade" class="form-label">Nacionalidade</label>
                                     <select class="form-select" id="inputNacionalidade">
-                                        <!-- <option value="default" disabled selected hidden></option> -->
                                     </select>
                                 </div>
                             </div>
@@ -241,14 +219,9 @@
                                     <label for="inputCidade" class="form-label">Cidade</label>
                                     <select class="form-select" id="inputCidade"></select>
                                 </div>
-                                <!-- <div class="col-1">
-                                    <label for="inputLogradouroUF" class="form-label">UF</label>
-                                    <input type="text" class="form-control" id="inputLogradouroUF">
-                                </div> -->
                                 <div class="col-2">
                                     <label for="inputLogradouroUF" class="form-label">UF</label>
                                     <select class="form-select" id="inputLogradouroUF">
-                                        <!-- <option value="default" disabled selected hidden></option> -->
                                     </select>
                                 </div>
                                 <div class="col-2">
@@ -276,13 +249,43 @@
                             <button type="submit" class="btn btn-primary" id="btneditar">Editar</button>
                             <button type="submit" class="btn btn-primary" id="btnexcluir">Excluir</button>
                             <button type="submit" class="btn btn-primary" id="btnlimpar">Limpar dados</button>
-                            <button type="submit" class="btn btn-primary" id="1">Ficha</button>
+                            <button type="submit" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#ficha-paciente-modal-content">Ficha</button>
                             <button type="submit" class="btn btn-primary" id="2">Encaminhar</button>
                         </form>
                     </div>
                 </div>
             </div>
         </section>
+
+        <section id="ficha-paciente-modal">
+
+            <div id="ficha-paciente-modal-content" class="modal">
+
+                <div class="modal-dialog modal-xl">
+
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <h5 class="modal-title">Ficha</h5>
+                            <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <p>Ficha</p>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        </div>
+
+                    </div>
+
+                </div>
+            /div>
+
+        </section>
+
     </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>

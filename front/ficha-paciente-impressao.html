@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha de atendimento médico</title>
+    <link rel="stylesheet" href="ficha-paciente-impressao.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand" href="#">Clínica</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="cadastro.html">Cadastro de Candidato</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="ficha-paciente.html">Ficha do Candidato</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="fila-atendimento.html">Fila de Atendimento Médico</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <section>
+        <div class="container">
+            <p>CLIMPÉ - Clínica Médico-Psicotécnica de Guaxupé</p>
+            <div id="linha">
+                <div>
+                    <label for="inputGuia" class="form-label">Guia</label>
+                    <input type="text" class="form-control" id="inputGuia">
+                </div>
+                <div>
+                    <label for="inputRegistro" class="form-label">Registro</label>
+                    <input type="text" class="form-control" id="inputRegistro">
+                </div>
+                <div>
+                    <label for="inputDataCadastro" class="form-label">Data Cadastro</label>
+                    <input type="date" class="form-control" id="inputDataCadastro">
+                </div>
+            </div>
+            <div id="linha">
+                <div>
+                    <label for="inputSolicitacao" class="form-label">Solicitação</label>
+                    <select class="form-select" id="inputSolicitacao">
+                        <option value="CADASTRO_CNH">Primeira habilitação</option>
+                        <option value="RENOVACAO_CNH">Renovação de exame</option>
+                        <option value="ADICAO_CATEGORIA">Adição de categoria</option>
+                        <option value="MUDANCA_CATEGORIA">Mudança de categoria</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="inputCategoria" class="form-label">Categoria</label>
+                    <select class="form-select" id="inputCategoria">
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                        <option value="AB">AB</option>
+                        <option value="AC">AC</option>
+                        <option value="AD">AD</option>
+                        <option value="AE">AE</option>
+                    </select>
+                </div>
+            </div>
+
+            
+           
+        </div>
+
+        <div id="linha">
+            <div class="col-6">
+                <label for="inputNomeCandidato" class="form-label">Nome do Candidato</label>
+                <input type="text" class="form-control" id="inputNomeCandidato">
+            </div>
+            <div class="col">
+                <label for="inputNascimento" class="form-label">Nascimento</label>
+                <input type="date" class="form-control" id="inputNascimento">
+            </div>
+            <div class="col">
+                <label for="inputSexo" class="form-label">Sexo</label>
+                <select class="form-select" id="inputSexo">
+                    <option value="MASCULINO">Masculino</option>
+                    <option value="FEMININO">Feminino</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="linha">
+            <div class="col">
+                <label for="inputRgIdentidade" class="form-label">Identidade</label>
+                <input type="text" class="form-control" id="inputRgIdentidade">
+            </div>
+            <div class="col-1">
+                <label for="inputRgOrgao" class="form-label">Orgão</label>
+                <input type="text" class="form-control" id="inputRgOrgao">
+            </div>
+            <div class="col-2">
+                <label for="inputRgOrgaoUF" class="form-label">UF</label>
+                <select class="form-select" id="inputRgOrgaoUF">
+                    <option value="default" disabled selected hidden></option>
+                </select>
+            </div>
+            <div class="col-2">
+                <label for="inputNaturalidade" class="form-label">Naturalidade</label>
+                <select class="form-select" id="inputNaturalidade">
+                </select>
+            </div>
+            <div class="col-2">
+                <label for="inputNaturalidadeUF" class="form-label">UF</label>
+                <select class="form-select" id="inputNaturalidadeUF">
+                    <option value="default" disabled selected hidden></option>
+                </select>
+            </div>
+            <div class="col-2">
+                <label for="inputNacionalidade" class="form-label">Nacionalidade</label>
+                <select class="form-select" id="inputNacionalidade">
+                </select>
+            </div>
+        </div>
+
+        <div id="linha">
+            <div class="col">
+                <label for="inputNomeMae" class="form-label">Nome da mãe</label>
+                <input type="text" class="form-control" id="inputNomeMae">
+            </div>
+            <div class="col">
+                <label for="inputNomePai" class="form-label">Nome do pai</label>
+                <input type="text" class="form-control" id="inputNomePai">
+            </div>
+        </div>
+
+        <div id="linha">
+            <div class="col-7">
+                <label for="inputLogradouro" class="form-label">Logradouro</label>
+                <input type="text" class="form-control" id="inputLogradouro">
+            </div>
+            <div class="col-2">
+                <label for="inputNumero" class="form-label">Número</label>
+                <input type="text" class="form-control" id="inputNumero">
+            </div>
+            <div class="col">
+                <label for="inputBairro" class="form-label">Bairro</label>
+                <input type="text" class="form-control" id="inputBairro">
+            </div>
+        </div>
+
+        <div id="linha">
+            <div class="col">
+                <label for="inputCidade" class="form-label">Cidade</label>
+                <select class="form-select" id="inputCidade"></select>
+            </div>
+            <div class="col-2">
+                <label for="inputLogradouroUF" class="form-label">UF</label>
+                <select class="form-select" id="inputLogradouroUF">
+                </select>
+            </div>
+            <div class="col-2">
+                <label for="inputCEP" class="form-label">CEP</label>
+                <input type="text" class="form-control" id="inputCEP" maxlength="8">
+            </div>
+            <div class="col-3">
+                <label for="inputComplemento" class="form-label">Complemento</label>
+                <input type="text" class="form-control" id="inputComplemento">
+            </div>
+        </div>
+
+        <div id="linha">
+            <div class="col-3">
+                <label for="inputCPF" class="form-label">CPF</label>
+                <input type="text" class="form-control" id="inputCPF" maxlength="11">
+            </div>
+            <div class="col-3">
+                <label for="inputTelefone" class="form-label">Telefone</label>
+                <input type="text" class="form-control" id="inputTelefone">
+            </div>
+        </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
