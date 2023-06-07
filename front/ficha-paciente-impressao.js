@@ -44,7 +44,6 @@ fetch(`http://localhost:8080/pacientes/${idCPF.value}`, {
     }
   })
   .then((paciente) => {
-    console.log(idCPF);
     iguia.value = paciente.guia;
     iregistro.value = paciente.registro;
     isolicitacao.value = paciente.solicitacao;
@@ -56,9 +55,9 @@ fetch(`http://localhost:8080/pacientes/${idCPF.value}`, {
     isexo.value = paciente.sexo;
     iidentidade.value = paciente.identidade;
     iorgao.value = paciente.orgao;
-    iorgaouf.value = paciente.rgOrgaoUF;
+    iorgaouf.value = paciente.ufIdentidade;
     inaturalidade.value = paciente.naturalidade;
-    inaturalidadeuf.value = paciente.naturalidadeUF;
+    inaturalidadeuf.value = paciente.ufNaturalidade;
     inacionalidade.value = paciente.nacionalidade;
     inomeMae.value = paciente.nomeMae;
     inomePai.value = paciente.nomePai;
@@ -66,7 +65,7 @@ fetch(`http://localhost:8080/pacientes/${idCPF.value}`, {
     inumero.value = paciente.numero;
     ibairro.value = paciente.bairro;
     icidade.value = paciente.cidade;
-    ilogradourouf.value = paciente.logradouroUF;
+    ilogradourouf.value = paciente.ufCidade;
     icep.value = paciente.cep;
     icomplemento.value = paciente.complemento;
     icpf.value = paciente.cpf;
