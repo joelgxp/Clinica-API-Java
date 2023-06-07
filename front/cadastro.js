@@ -17,7 +17,7 @@ const idataHabilitacao = document.querySelector("#inputDataHabilitacao");
 const inome = document.querySelector("#inputNomeCandidato");
 const idataNascimento = document.querySelector("#inputNascimento");
 const isexo = document.querySelector("#inputSexo");
-const iidentidade = document.querySelector("#inputIdentidade");
+const iidentidade = document.querySelector("#inputRgIdentidade");
 const iorgao = document.querySelector("#inputOrgao");
 const iorgaouf = document.querySelector("#inputRgOrgaoUF");
 const inaturalidade = document.querySelector("#inputNaturalidade");
@@ -36,20 +36,20 @@ const icomplemento = document.querySelector("#inputComplemento");
 const icpf = document.querySelector("#inputCPF");
 const itelefone = document.querySelector("#inputTelefone");
 
-let pacienteResultado = null
+let pacienteResultado = null;
 
 function buscaPaciente() {
   fetch(`http://localhost:8080/pacientes/${icpfconsulta.value}`, {
     method: "GET",
   })
-    .then(response => {
+    .then((response) => {
       if (response.ok) {
-        return response.json()
+        return response.json();
       } else {
-        throw new Error("Recurso não encontrado")
+        throw new Error("Recurso não encontrado");
       }
     })
-    .then(paciente => {
+    .then((paciente) => {
       //pacienteResultado = paciente
 
       // btnEditar.disabled = false
@@ -100,23 +100,23 @@ function excluiPaciente() {
   fetch(`http://localhost:8080/pacientes/${pacienteResultado.id}`, {
     method: "DELETE",
   })
-    .then(response => {
-      console.log(response)
+    .then((response) => {
+      console.log(response);
     })
     .catch(function (error) {
       console.error("Ocorreu um erro:", error);
     });
-  limpaFormulario()
+  limpaFormulario();
 }
 
 function editaPaciente() {
-  const identificador = pacienteResultado.id
-  const dadosAtualizados = capturarValoresFormulario()
-  dadosAtualizados.id = identificador
+  const identificador = pacienteResultado.id;
+  const dadosAtualizados = capturarValoresFormulario();
+  dadosAtualizados.id = identificador;
 
   fetch(`http://localhost:8080/pacientes/${identificador}`, {
     headers: {
-      "Accept": "application/json",
+      Accept: "application/json",
       "Content-Type": "application/json",
     },
     method: "PUT",
@@ -124,7 +124,7 @@ function editaPaciente() {
   })
     .then(function (res) {
       if (res.ok) {
-        limpaFormulario()
+        limpaFormulario();
       }
     })
     .catch(function (res) {
@@ -135,44 +135,50 @@ function editaPaciente() {
 function cadastraPaciente() {
   //const valoresFormulario = capturarValoresFormulario()
   // console.log(valoresFormulario),
-  fetch("http://localhost:8080/pacientes",
-    {
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      body: JSON.stringify({
-        guia: iguia.value,
-        registro: iregistro.value,
-        categoria: icategoria.value,
-        dataCadastro: idataCadastro.value,
-        dataHabilitacao: idataHabilitacao.value,
-        nome: inome.value,
-        dataNascimento: idataNascimento.value,
-        sexo: isexo.value,
-        cpf: icpf.value,
-        nacionalidade: inacionalidade.value,
-        nomeMae: inomeMae.value,
-        nomePai: inomePai.value,
-        telefone: itelefone.value,
-        logradouro: ilogradouro.value,
-        bairro: ibairro.value,
-        cep: icep.value,
-        numero: inumero.value,
-        complemento: icomplemento.value,
-        cidade: icidade.value,
-      })
-    })
+  fetch("http://localhost:8080/pacientes", {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+    body: JSON.stringify({
+      guia: iguia.value,
+      registro: iregistro.value,
+      solicitacao: isolicitacao.value,
+      categoria: icategoria.value,
+      dataCadastro: idataCadastro.value,
+      dataHabilitacao: idataHabilitacao.value,
+      nome: inome.value,
+      dataNascimento: idataNascimento.value,
+      sexo: isexo.value,
+      identidade: iidentidade.value,
+      orgao: iorgao.value,
+      ufIdentidade: iorgaouf.value,
+      naturalidade: inaturalidade.value,
+      ufNaturalidade: inaturalidadeuf.value,
+      nacionalidade: inacionalidade.value,
+      nomeMae: inomeMae.value,
+      nomePai: inomePai.value,
+      logradouro: ilogradouro.value,
+      numero: inumero.value,
+      bairro: ibairro.value,
+      cidade: icidade.value,
+      ufCidade: ilogradourouf.value,
+      cep: icep.value,
+      complemento: icomplemento.value,
+      cpf: icpf.value,
+      telefone: itelefone.value,
+    }),
+  })
     .then(function (response) {
       if (response.ok) {
         //limpaFormulario()
       } else {
-        throw new Error("Erro ao cadastrar paciente")
+        throw new Error("Erro ao cadastrar paciente");
       }
     })
     .catch(function (error) {
-      alert("Ocorreu um erro ao cadastrar o paciente")
+      alert("Ocorreu um erro ao cadastrar o paciente");
     });
 }
 
@@ -186,26 +192,36 @@ function capturarValoresFormulario() {
       valores[input.id] = input.value;
     }
   }
-  console.log(valores)
+  console.log(valores);
   return valores;
 }
 
 function limpaFormulario() {
   var elementos = formulario.elements;
-  iregistro.disabled = false
-  icpf.disabled = false
-  btnEditar.disabled = true
-  bntExcluir.disabled = true
-  inaturalidade.innerHTML = ''
-  icidade.innerHTML = ''
+  iregistro.disabled = false;
+  icpf.disabled = false;
+  btnEditar.disabled = true;
+  bntExcluir.disabled = true;
+  inaturalidade.innerHTML = "";
+  icidade.innerHTML = "";
 
   for (var i = 0; i < elementos.length; i++) {
     var elemento = elementos[i];
 
-    if (elemento.type !== 'button') {
-      elemento.value = '';
+    if (elemento.type !== "button") {
+      elemento.value = "";
     }
   }
+}
+
+function capturaCPFencaminhaFichaImpressao() {
+  var cpf = icpf.value;
+
+  var url = "ficha-paciente-impressao.html";
+  var encodedCPF = encodeURIComponent(cpf);
+
+  //window.location.href = url + "?id=" + rowId + "&nome=" + nome + "&hora=" + hora + "&exame=" + exame;
+  window.location.href = url + "?cpf=" + encodedCPF;
 }
 
 bntConsultar.addEventListener("click", function (event) {
@@ -217,6 +233,12 @@ bntCadastrar.addEventListener("click", function (event) {
   event.preventDefault();
   cadastraPaciente();
 });
+
+btnficha.addEventListener("click", function (event) {
+  event.preventDefault();
+  capturaCPFencaminhaFichaImpressao();
+  buscaPaciente();
+})
 
 // btnEditar.addEventListener("click", function (event) {
 //   event.preventDefault();
@@ -233,93 +255,95 @@ btnLimpar.addEventListener("click", function (event) {
   limpaFormulario();
 });
 
-iorgaouf.addEventListener('focus', () => {
+iorgaouf.addEventListener("focus", () => {
   buscaEstados()
     .then((options) => {
-      iorgaouf.append(options)
+      iorgaouf.append(options);
     })
     .catch((error) => {
-      console.error('Erro ao buscar os estados:', error)
-    })
-})
+      console.error("Erro ao buscar os estados:", error);
+    });
+});
 
-inaturalidadeuf.addEventListener('focus', () => {
+inaturalidadeuf.addEventListener("focus", () => {
   buscaEstados()
     .then((options) => {
-      inaturalidadeuf.append(options)
+      inaturalidadeuf.append(options);
     })
     .catch((error) => {
-      console.error('Erro ao buscar os estados:', error)
-    })
-})
+      console.error("Erro ao buscar os estados:", error);
+    });
+});
 
-ilogradourouf.addEventListener('focus', () => {
+ilogradourouf.addEventListener("focus", () => {
   buscaEstados()
     .then((options) => {
-      ilogradourouf.append(options)
+      ilogradourouf.append(options);
     })
     .catch((error) => {
-      console.error('Erro ao buscar os estados:', error)
-    })
-})
+      console.error("Erro ao buscar os estados:", error);
+    });
+});
 
-inaturalidadeuf.addEventListener('change', async () => {
-
+inaturalidadeuf.addEventListener("change", async () => {
   let selectedOption = inaturalidadeuf.options[inaturalidadeuf.selectedIndex];
   let selectedOptionId = selectedOption.getAttribute("id");
 
-  const request = await fetch(`http://localhost:8080/municipios/${selectedOptionId}`)
-  const response = await request.json()
+  const request = await fetch(
+    `http://localhost:8080/municipios/${selectedOptionId}`
+  );
+  const response = await request.json();
 
-  const options = document.createElement('optgroup');
-  options.setAttribute('label', 'Cidades');
+  const options = document.createElement("optgroup");
+  options.setAttribute("label", "Cidades");
 
   response.forEach((municipio) => {
-    const option = document.createElement('option');
+    const option = document.createElement("option");
     option.textContent = municipio.nome;
     options.appendChild(option);
-  })
-  inaturalidade.innerHTML = ''
-  inaturalidade.append(options)
-})
+  });
+  inaturalidade.innerHTML = "";
+  inaturalidade.append(options);
+});
 
-ilogradourouf.addEventListener('change', async () => {
-
+ilogradourouf.addEventListener("change", async () => {
   let selectedOption = ilogradourouf.options[ilogradourouf.selectedIndex];
   let selectedOptionId = selectedOption.getAttribute("id");
 
-  const request = await fetch(`http://localhost:8080/municipios/${selectedOptionId}`)
-  const response = await request.json()
+  const request = await fetch(
+    `http://localhost:8080/municipios/${selectedOptionId}`
+  );
+  const response = await request.json();
 
-  const options = document.createElement('optgroup');
-  options.setAttribute('label', 'Cidades');
+  const options = document.createElement("optgroup");
+  options.setAttribute("label", "Cidades");
 
   response.forEach((municipio) => {
-    const option = document.createElement('option');
+    const option = document.createElement("option");
     option.textContent = municipio.nome;
     options.appendChild(option);
-  })
-  icidade.innerHTML = ''
-  icidade.append(options)
-})
+  });
+  icidade.innerHTML = "";
+  icidade.append(options);
+});
 
 async function buscaEstados() {
   try {
-    const request = await fetch('http://localhost:8080/estados');
+    const request = await fetch("http://localhost:8080/estados");
     const response = await request.json();
 
-    const options = document.createElement('optgroup');
-    options.setAttribute('label', 'UFs');
+    const options = document.createElement("optgroup");
+    options.setAttribute("label", "UFs");
 
     response.forEach((uf) => {
-      const option = document.createElement('option');
+      const option = document.createElement("option");
       option.textContent = uf.sigla;
-      option.id = uf.id
+      option.id = uf.id;
       options.appendChild(option);
     });
 
     return options;
   } catch (error) {
-    throw new Error('Erro ao buscar os estados');
+    throw new Error("Erro ao buscar os estados");
   }
 }

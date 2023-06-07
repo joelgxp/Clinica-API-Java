@@ -162,7 +162,7 @@
                                 </div>
                                 <div class="col-1">
                                     <label for="inputRgOrgao" class="form-label">Orgão</label>
-                                    <input type="text" class="form-control" id="inputRgOrgao">
+                                    <input type="text" class="form-control" id="inputOrgao">
                                 </div>
                                 <div class="col-2">
                                     <label for="inputRgOrgaoUF" class="form-label">UF</label>
@@ -184,6 +184,8 @@
                                 <div class="col-2">
                                     <label for="inputNacionalidade" class="form-label">Nacionalidade</label>
                                     <select class="form-select" id="inputNacionalidade">
+                                        <option value="BRASILEIRA">Brasileira</option>
+                                        <option value="ESTRANGEIRA">Estrangeira</option>
                                     </select>
                                 </div>
                             </div>
@@ -249,43 +251,13 @@
                             <button type="submit" class="btn btn-primary" id="btneditar">Editar</button>
                             <button type="submit" class="btn btn-primary" id="btnexcluir">Excluir</button>
                             <button type="submit" class="btn btn-primary" id="btnlimpar">Limpar dados</button>
-                            <button type="submit" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#ficha-paciente-modal-content">Ficha</button>
+                            <button type="submit" class="btn btn-primary" id="btnficha">Ficha</button>
                             <button type="submit" class="btn btn-primary" id="2">Encaminhar</button>
                         </form>
                     </div>
                 </div>
             </div>
         </section>
-
-        <section id="ficha-paciente-modal">
-
-            <div id="ficha-paciente-modal-content" class="modal">
-
-                <div class="modal-dialog modal-xl">
-
-                    <div class="modal-content">
-
-                        <div class="modal-header">
-                            <h5 class="modal-title">Ficha</h5>
-                            <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-
-                        <div class="modal-body">
-                            <p>Ficha</p>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-
-        </section>
-
     </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>

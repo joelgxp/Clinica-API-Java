@@ -18,7 +18,7 @@ header {
     display: none;
 }
 
-#linha {
+.linha {
     display: flex;
     flex-direction: row;
 }

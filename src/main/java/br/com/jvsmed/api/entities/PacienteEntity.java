@@ -1,6 +1,8 @@
 package br.com.jvsmed.api.entities;
 
 import br.com.jvsmed.api.enums.ECategoria;
+import br.com.jvsmed.api.enums.ENacionalidade;
+import br.com.jvsmed.api.enums.ESexo;
 import br.com.jvsmed.api.enums.ESolicitacao;
 import br.com.jvsmed.api.registro.paciente.DadosCadastroPaciente;
 import jakarta.persistence.*;
@@ -24,7 +26,6 @@ public class PacienteEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
     private String guia;
 
     private String registro;
@@ -36,20 +37,33 @@ public class PacienteEntity {
     private ESolicitacao solicitacao;
 
     @Column(name = "data_cadastro")
-    @NotBlank
     private String dataCadastro;
 
-    @NotBlank
+    @Column(name = "data_habilitacao")
+    private String dataHabilitacao;
+
     private String nome;
 
     @Column(name = "data_nascimento")
     private String dataNascimento;
 
-    private String sexo;
+    @Enumerated(EnumType.STRING)
+    private ESexo sexo;
 
-    @NotBlank
-    @Size(min = 11, max = 11, message = "CPF deve ter exatamente 11 dígitos")
-    private String cpf;
+    private String identidade;
+
+    private String orgao;
+
+    @Column(name = "uf_identidade")
+    private String ufIdentidade;
+
+    private String naturalidade;
+
+    @Column(name = "uf_naturalidade")
+    private String ufNaturalidade;
+
+    @Enumerated(EnumType.STRING)
+    private ENacionalidade nacionalidade;
 
     @Column(name = "nome_mae")
     private String nomeMae;
@@ -57,8 +71,26 @@ public class PacienteEntity {
     @Column(name = "nome_pai")
     private String nomePai;
 
+    private String logradouro;
+
+    private String numero;
+
+    private String bairro;
+
+    private String cidade;
+
+    @Column(name = "uf_cidade")
+    private String ufCidade;
+
+    private String cep;
+
+    private String complemento;
+
     private String telefone;
 
+    private String cpf;
+
+    private Integer status;
     public PacienteEntity(DadosCadastroPaciente dados) {
 //        BeanUtils.copyProperties(dados, this);
         this.guia = dados.guia();
@@ -66,13 +98,28 @@ public class PacienteEntity {
         this.categoria = dados.categoria();
         this.solicitacao = dados.solicitacao();
         this.dataCadastro = dados.dataCadastro();
+        this.dataHabilitacao = dados.dataHabilitacao();
         this.nome = dados.nome();
         this.dataNascimento = dados.dataNascimento();
-        this.sexo = String.valueOf(dados.sexo());
-        this.cpf = dados.cpf();
+        this.sexo = dados.sexo();
+        this.identidade = dados.identidade();
+        this.orgao = dados.orgao();
+        this.ufIdentidade = dados.ufIdentidade();
+        this.naturalidade = dados.naturalidade();
+        this.ufNaturalidade = dados.ufNaturalidade();
+        this.nacionalidade = dados.nacionalidade();
         this.nomeMae = dados.nomeMae();
         this.nomePai = dados.nomePai();
+        this.logradouro = dados.logradouro();
+        this.numero = dados.numero();
+        this.bairro = dados.bairro();
+        this.cidade = dados.cidade();
+        this.ufCidade = dados.ufCidade();
+        this.cep = dados.cep();
+        this.complemento = dados.complemento();
+        this.cpf = dados.cpf();
         this.telefone = dados.telefone();
+        this.status = 0;
     }
 
 //    public void atualizarInformacoes(DadosAtualizacaoPaciente dados) {
