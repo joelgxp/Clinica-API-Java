@@ -3,6 +3,7 @@ const bntExcluir = document.querySelector("#btnexcluir");
 const bntCadastrar = document.querySelector("#btncadastrar");
 const bntConsultar = document.querySelector("#btnconsultar");
 const btnLimpar = document.querySelector("#btnlimpar");
+const btnficha = document.querySelector("#btnficha");
 
 const formulario = document.querySelector("#formMedico");
 
@@ -237,7 +238,8 @@ bntCadastrar.addEventListener("click", function (event) {
 btnficha.addEventListener("click", function (event) {
   event.preventDefault();
   capturaCPFencaminhaFichaImpressao();
-  buscaPaciente();
+  
+  console.log(pacienteResultado);
 })
 
 // btnEditar.addEventListener("click", function (event) {
