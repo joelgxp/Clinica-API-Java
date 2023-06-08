@@ -4,6 +4,7 @@ const bntCadastrar = document.querySelector("#btncadastrar");
 const bntConsultar = document.querySelector("#btnconsultar");
 const btnLimpar = document.querySelector("#btnlimpar");
 const btnficha = document.querySelector("#btnficha");
+const btnEncaminhar = document.querySelector("#btnencaminhar");
 
 const formulario = document.querySelector("#formMedico");
 
@@ -38,6 +39,8 @@ const icpf = document.querySelector("#inputCPF");
 const itelefone = document.querySelector("#inputTelefone");
 
 let pacienteResultado = null;
+btnficha.disabled = true;
+btnEncaminhar.disabled = true;
 
 function buscaPaciente() {
   fetch(`http://localhost:8080/pacientes/${icpfconsulta.value}`, {
@@ -85,6 +88,9 @@ function buscaPaciente() {
 
       iregistro.disabled = true;
       icpf.disabled = true;
+      btnficha.disabled = false;
+      btnEncaminhar.disabled = false;
+      bntCadastrar.disabled = true;
     })
     .catch(function (error) {
       if (error.message === "Recurso não encontrado") {
@@ -238,9 +244,7 @@ bntCadastrar.addEventListener("click", function (event) {
 btnficha.addEventListener("click", function (event) {
   event.preventDefault();
   capturaCPFencaminhaFichaImpressao();
-  
-  console.log(pacienteResultado);
-})
+});
 
 // btnEditar.addEventListener("click", function (event) {
 //   event.preventDefault();
