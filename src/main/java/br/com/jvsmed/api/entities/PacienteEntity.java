@@ -32,8 +32,8 @@ public class PacienteEntity {
     @Enumerated(EnumType.STRING)
     private ECategoria categoria;
 
-    @Enumerated(EnumType.STRING)
-    private ESolicitacao solicitacao;
+//    @Enumerated(EnumType.STRING)
+    private String solicitacao;
 
     @Column(name = "data_cadastro")
     @NotBlank

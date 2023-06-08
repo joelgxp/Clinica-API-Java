@@ -57,28 +57,39 @@ function buscaPaciente() {
 
       iguia.value = paciente.guia;
       iregistro.value = paciente.registro;
-      isolicitacao.value = paciente.solicitacao;
+      // isolicitacao.textContent = paciente.solicitacao;
+
+
+      const options = Array.from(isolicitacao.options);
+      console.log(options)
+      const selectedOption = options.find(option => option.textContent === paciente.solicitacao);
+      if (selectedOption) {
+        selectedOption.selected = true;
+        selectedOption.textContent = selectedOption.innerText;
+      }
+
+
       icategoria.value = paciente.categoria;
-      idataCadastro.value = paciente.dataCadastro;
-      idataHabilitacao.value = paciente.dataHabilitacao;
+      // idataCadastro.value = paciente.dataCadastro;
+      // idataHabilitacao.value = paciente.dataHabilitacao;
       inome.value = paciente.nome;
-      idataNascimento.value = paciente.dataNascimento;
+      // idataNascimento.value = paciente.dataNascimento;
       isexo.value = paciente.sexo;
-      iidentidade.value = paciente.identidade;
-      iorgao.value = paciente.orgao;
-      iorgaouf.value = paciente.rgOrgaoUF;
-      inaturalidade.value = paciente.naturalidade;
-      inaturalidadeuf.value = paciente.naturalidadeUF;
-      inacionalidade.value = paciente.nacionalidade;
+      // iidentidade.value = paciente.identidade;
+      // iorgao.value = paciente.orgao;
+      // iorgaouf.value = paciente.rgOrgaoUF;
+      // inaturalidade.value = paciente.naturalidade;
+      // inaturalidadeuf.value = paciente.naturalidadeUF;
+      // inacionalidade.value = paciente.nacionalidade;
       inomeMae.value = paciente.nomeMae;
       inomePai.value = paciente.nomePai;
-      ilogradouro.value = paciente.logradouro;
-      inumero.value = paciente.numero;
-      ibairro.value = paciente.bairro;
-      icidade.value = paciente.cidade;
-      ilogradourouf.value = paciente.logradouroUF;
-      icep.value = paciente.cep;
-      icomplemento.value = paciente.complemento;
+      // ilogradouro.value = paciente.logradouro;
+      // inumero.value = paciente.numero;
+      // ibairro.value = paciente.bairro;
+      // icidade.value = paciente.cidade;
+      // ilogradourouf.value = paciente.logradouroUF;
+      // icep.value = paciente.cep;
+      // icomplemento.value = paciente.complemento;
       icpf.value = paciente.cpf;
       itelefone.value = paciente.telefone;
 
@@ -92,6 +103,7 @@ function buscaPaciente() {
       } else {
         // Tratamento genérico de erros
         alert("Ocorreu um erro ao obter os dados do paciente");
+        console.log(error)
       }
     });
 }
@@ -145,6 +157,7 @@ function cadastraPaciente() {
       body: JSON.stringify({
         guia: iguia.value,
         registro: iregistro.value,
+        solicitacao: isolicitacao.textContent,
         categoria: icategoria.value,
         dataCadastro: idataCadastro.value,
         dataHabilitacao: idataHabilitacao.value,

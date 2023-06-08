@@ -1,6 +1,6 @@
 create table pacientes (
 
-    id bigint not null auto_increment primary key,
+    id bigint auto_increment primary key,
     guia int not null,
     registro varchar(30) not null unique,
     categoria varchar(2) not null,

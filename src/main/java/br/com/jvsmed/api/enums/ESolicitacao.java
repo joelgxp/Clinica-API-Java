@@ -1,19 +1,32 @@
 package br.com.jvsmed.api.enums;
 
 public enum ESolicitacao {
-    CADASTRO_CNH("Habilitação"),
-    RENOVACAO_CNH("Renovação"),
-    ADICAO_CATEGORIA("Adição"),
-    MUDANCA_CATEGORIA("Mudança");
+    CADASTRO_CNH("Primeira habilitação"),
+    RENOVACAO_CNH("Renovação de exame"),
+    ADICAO_CATEGORIA("Adição de categoria"),
+    MUDANCA_CATEGORIA("Mudança de categoria");
 
-    private String solicitacao;
+    private final String descricao;
 
-    ESolicitacao(String solicitacao) {
-        this.solicitacao = solicitacao;
+    ESolicitacao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public String getSolicitacao() {
-        return solicitacao;
+    public String getDescricao() {
+        return descricao;
     }
 
+    public static ESolicitacao getByDescricao(String descricao) {
+        for (ESolicitacao solicitacao : ESolicitacao.values()) {
+            if (solicitacao.getDescricao().equals(descricao)) {
+                return solicitacao;
+            }
+        }
+        throw new IllegalArgumentException("Descrição de Solicitacao inválida: " + descricao);
+    }
+
+    @Override
+    public String toString() {
+        return this.descricao;
+    }
 }
