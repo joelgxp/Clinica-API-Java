@@ -7,7 +7,7 @@ const idataHabilitacao = document.querySelector("#inputDataHabilitacao");
 const inome = document.querySelector("#inputNomeCandidato");
 const idataNascimento = document.querySelector("#inputNascimento");
 const isexo = document.querySelector("#inputSexo");
-const iidentidade = document.querySelector("#inputIdentidade");
+const iidentidade = document.querySelector("#inputRgIdentidade");
 const iorgao = document.querySelector("#inputOrgao");
 const iorgaouf = document.querySelector("#inputRgOrgaoUF");
 const inaturalidade = document.querySelector("#inputNaturalidade");
@@ -26,14 +26,11 @@ const icomplemento = document.querySelector("#inputComplemento");
 const icpf = document.querySelector("#inputCPF");
 const itelefone = document.querySelector("#inputTelefone");
 
-const btnSalvar = document.querySelector("#btnSalvar");
-
 var urlParams = new URLSearchParams(window.location.search);
 var encodedCPF = urlParams.get("cpf");
 var idCPF = decodeURIComponent(encodedCPF);
-console.log(idCPF);
 
-fetch(`http://localhost:8080/pacientes/${idCPF.value}`, {
+fetch(`http://localhost:8080/pacientes/${idCPF}`, {
   method: "GET",
 })
   .then((response) => {
@@ -49,16 +46,16 @@ fetch(`http://localhost:8080/pacientes/${idCPF.value}`, {
     isolicitacao.value = paciente.solicitacao;
     icategoria.value = paciente.categoria;
     idataCadastro.value = paciente.dataCadastro;
-    idataHabilitacao.value = paciente.dataHabilitacao;
+    //idataHabilitacao.value = paciente.dataHabilitacao;
     inome.value = paciente.nome;
     idataNascimento.value = paciente.dataNascimento;
     isexo.value = paciente.sexo;
     iidentidade.value = paciente.identidade;
-    iorgao.value = paciente.orgao;
+    //iorgao.value = paciente.orgao;
     iorgaouf.value = paciente.ufIdentidade;
     inaturalidade.value = paciente.naturalidade;
     inaturalidadeuf.value = paciente.ufNaturalidade;
-    inacionalidade.value = paciente.nacionalidade;
+    //inacionalidade.value = paciente.nacionalidade;
     inomeMae.value = paciente.nomeMae;
     inomePai.value = paciente.nomePai;
     ilogradouro.value = paciente.logradouro;
@@ -80,8 +77,3 @@ fetch(`http://localhost:8080/pacientes/${idCPF.value}`, {
       alert("Ocorreu um erro ao obter os dados do paciente");
     }
   });
-
-bntConsultar.addEventListener("click", function (event) {
-  event.preventDefault();
-  buscaPaciente();
-});
