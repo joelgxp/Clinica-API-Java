@@ -3,15 +3,10 @@ package br.com.jvsmed.api.controller;
 
 import br.com.jvsmed.api.entities.FichaMedicaEntity;
 import br.com.jvsmed.api.registro.fichaMedica.DadosCadastroFichaMedica;
-import br.com.jvsmed.api.registro.fichaMedica.DadosListagemFichaMedica;
-import br.com.jvsmed.api.registro.paciente.DadosListagemPaciente;
 import br.com.jvsmed.api.repositories.FichaMedicaRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @CrossOrigin("*")
 @RestController
