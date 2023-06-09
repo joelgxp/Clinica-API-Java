@@ -5,9 +5,11 @@ const bntConsultar = document.querySelector("#btnconsultar");
 const btnLimpar = document.querySelector("#btnlimpar");
 const btnficha = document.querySelector("#btnficha");
 const btnEncaminhar = document.querySelector("#btnencaminhar");
+const btnBuscarPorNome = document.getElementById('btnBuscarPorNome');
 
 const formulario = document.querySelector("#formMedico");
 
+const inputNomeCandidatoBusca = document.getElementById('inputNomeCandidatoBusca');
 const icpfconsulta = document.querySelector("#inputCPFBusca");
 
 const iguia = document.querySelector("#inputGuia");
@@ -37,6 +39,9 @@ const icep = document.querySelector("#inputCEP");
 const icomplemento = document.querySelector("#inputComplemento");
 const icpf = document.querySelector("#inputCPF");
 const itelefone = document.querySelector("#inputTelefone");
+
+const tabelaResultados = document.getElementById('tabelaResultados');
+const tbody = tabelaResultados.querySelector('tbody');
 
 
 var dataHoraAtual = new Date();
@@ -237,7 +242,58 @@ function capturaCPFencaminhaFichaImpressao() {
   window.location.href = url + "?cpf=" + encodedCPF;
 }
 
+
+inputNomeCandidatoBusca.addEventListener('input', () => {
+  const nome = inputNomeCandidatoBusca.value;
+  buscarNomeNoBancoDeDados(nome);
+});
+
+function buscarNomeNoBancoDeDados(nome) {
+  // Limpar a tabela
+  tbody.innerHTML = '';
+
+  // Fazer a busca no banco de dados usando fetch
+  fetch(`http://localhost:8080/pacientes/nome/${nome}`)
+    .then(response => response.json())
+    .then(resultados => {
+      // Adicionar os resultados à tabela
+      resultados.forEach(resultado => {
+        const tr = document.createElement('tr');
+        const tdNome = document.createElement('td');
+        const tdIdade = document.createElement('td');
+        const tdEmail = document.createElement('td');
+
+        tdNome.textContent = resultado.nome;
+        tdIdade.textContent = resultado.idade;
+        tdEmail.textContent = resultado.email;
+
+        tr.appendChild(tdNome);
+        tr.appendChild(tdIdade);
+        tr.appendChild(tdEmail);
+
+        tbody.appendChild(tr);
+      });
+    })
+    .catch(error => {
+      console.error('Ocorreu um erro na busca:', error);
+    });
+}
+
+
+btnBuscarPorNome.addEventListener('click', () => {
+  const nome = inputNomeCandidatoBusca.value;
+  buscarNomeNoBancoDeDados(nome);
+});
+
+
+
 icpf.addEventListener('input', function() {
+  let cpf = this.value.replace(/\D/g, '');
+  cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+  this.value = cpf;  
+});
+
+inputCPFBusca.addEventListener('input', function() {
   let cpf = this.value.replace(/\D/g, '');
   cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
   this.value = cpf;  
@@ -279,6 +335,8 @@ btnLimpar.addEventListener("click", function (event) {
   event.preventDefault();
   limpaFormulario();
 });
+
+
 
 iorgaouf.addEventListener("focus", () => {
   buscaEstados()

@@ -63,11 +63,22 @@
                                     <div class="input-group">
                                         <input type="text" class="form-control" placeholder="Pesquisa Nome do Candidato"
                                             id="inputNomeCandidatoBusca">
-                                        <button class="btn btn-primary" type="button">
+                                        <button class="btn btn-primary" type="button" id="btnBuscarPorNome">
                                             <i class="bi bi-search"></i>
                                         </button>
                                     </div>
+                                    <table id="tabelaResultados" class="table">
+                                        <thead>
+                                          <tr>
+                                            <th>Nome</th>
+                                            <th>Idade</th>
+                                            <th>Email</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                      </table>
                                 </div>
+
                                 <div class="col-auto">
                                     <nav aria-label="Navegação">
                                         <ul class="pagination">
