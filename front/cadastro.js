@@ -253,9 +253,12 @@ function buscarNomeNoBancoDeDados(nome) {
   tbody.innerHTML = '';
 
   // Fazer a busca no banco de dados usando fetch
-  fetch(`http://localhost:8080/pacientes/nome/${nome}`)
+  //fetch(`http://localhost:8080/api/busca-nomes?nome=${nome}`)
+  fetch(`http://localhost:8080/nome/${nome}`)
+    
     .then(response => response.json())
     .then(resultados => {
+      
       // Adicionar os resultados à tabela
       resultados.forEach(resultado => {
         const tr = document.createElement('tr');
@@ -280,13 +283,6 @@ function buscarNomeNoBancoDeDados(nome) {
 }
 
 
-btnBuscarPorNome.addEventListener('click', () => {
-  const nome = inputNomeCandidatoBusca.value;
-  buscarNomeNoBancoDeDados(nome);
-});
-
-
-
 icpf.addEventListener('input', function() {
   let cpf = this.value.replace(/\D/g, '');
   cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
@@ -305,6 +301,10 @@ itelefone.addEventListener('input', function() {
   this.value = telefone;
 });
 
+btnBuscarPorNome.addEventListener('click', () => {
+  const nome = inputNomeCandidatoBusca.value;
+  buscarNomeNoBancoDeDados(nome);
+});
 
 bntConsultar.addEventListener("click", function (event) {
   event.preventDefault();
@@ -321,21 +321,20 @@ btnficha.addEventListener("click", function (event) {
   capturaCPFencaminhaFichaImpressao();
 });
 
-// btnEditar.addEventListener("click", function (event) {
-//   event.preventDefault();
-//   editaPaciente();
-// });
+btnEditar.addEventListener("click", function (event) {
+  event.preventDefault();
+  editaPaciente();
+});
 
-// bntExcluir.addEventListener("click", function (event) {
-//   event.preventDefault();
-//   excluiPaciente();
-// });
+bntExcluir.addEventListener("click", function (event) {
+  event.preventDefault();
+  excluiPaciente();
+});
 
 btnLimpar.addEventListener("click", function (event) {
   event.preventDefault();
   limpaFormulario();
 });
-
 
 
 iorgaouf.addEventListener("focus", () => {
