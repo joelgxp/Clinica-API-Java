@@ -237,6 +237,19 @@ function capturaCPFencaminhaFichaImpressao() {
   window.location.href = url + "?cpf=" + encodedCPF;
 }
 
+icpf.addEventListener('input', function() {
+  let cpf = this.value.replace(/\D/g, '');
+  cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+  this.value = cpf;  
+});
+
+itelefone.addEventListener('input', function() {
+  let telefone = this.value.replace(/\D/g, '');
+  telefone = telefone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+  this.value = telefone;
+});
+
+
 bntConsultar.addEventListener("click", function (event) {
   event.preventDefault();
   buscaPaciente();
