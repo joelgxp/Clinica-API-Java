@@ -38,6 +38,12 @@ const icomplemento = document.querySelector("#inputComplemento");
 const icpf = document.querySelector("#inputCPF");
 const itelefone = document.querySelector("#inputTelefone");
 
+
+var dataHoraAtual = new Date();
+dataHoraAtual.setTime;
+
+
+
 let pacienteResultado = null;
 btnficha.disabled = true;
 btnEncaminhar.disabled = true;
