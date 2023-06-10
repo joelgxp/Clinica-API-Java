@@ -55,4 +55,8 @@ public class PacienteService {
     public ResponseEntity<PacienteEntity> findByCpf(String cpf) {
         return ResponseEntity.ok(repository.findByCpf(cpf));
     }
+
+    public ResponseEntity<PacienteEntity> findByNome(String nome) {
+        return ResponseEntity.ok(repository.findByNome(nome));
+    }
 }

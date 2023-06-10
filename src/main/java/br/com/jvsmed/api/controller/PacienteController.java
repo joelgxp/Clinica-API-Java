@@ -38,6 +38,19 @@ public class PacienteController {
         return ResponseEntity.status(200).body(new DadosListagemPaciente(service.findByCpf(cpf).getBody()));
     }
 
+    @GetMapping("/nome/{nome}")
+    public List<PacienteEntity> buscarPorNome(@PathVariable String nome) {
+         // Lógica para buscar nomes no banco de dados
+        // e retornar os resultados em uma lista de objetos ResultadoBusca
+
+        // Exemplo de implementação:
+        List<PacienteEntity> resultados = new ArrayList<>();
+        // Adicione resultados à lista
+        // ...
+
+        return resultados;
+    }
+
     @PostMapping
     public ResponseEntity<?> cadastrar(@RequestBody @Valid DadosCadastroPaciente paciente, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
