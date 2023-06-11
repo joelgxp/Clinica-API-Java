@@ -1,10 +1,10 @@
 CREATE TABLE municipios (
     id INT PRIMARY KEY,
-    nome VARCHAR(255),
+    nome VARCHAR(50),
     estado_id INT,
     CONSTRAINT fk_estado
-        FOREIGN KEY (estado_id)
-        REFERENCES estados(id)
+        FOREIGN KEY (estado_id) REFERENCES estados(id),
+    INDEX idx_municipios_nome (nome)
 );
 
 INSERT INTO municipios (id, nome, estado_id) VALUES (1100015, 'Alta Floresta D''Oeste', 11);

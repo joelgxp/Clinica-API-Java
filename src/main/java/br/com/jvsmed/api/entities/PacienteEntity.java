@@ -33,8 +33,8 @@ public class PacienteEntity {
     @Enumerated(EnumType.STRING)
     private ECategoria categoria;
 
-//    @Enumerated(EnumType.STRING)
-    private String solicitacao;
+    @Enumerated(EnumType.STRING)
+    private ESolicitacao solicitacao;
 
     @Column(name = "data_cadastro")
     private String dataCadastro;
@@ -81,7 +81,6 @@ public class PacienteEntity {
     private Endereco endereco;
 
     public PacienteEntity(DadosCadastroPaciente dados) {
-//        BeanUtils.copyProperties(dados, this);
         this.guia = dados.guia();
         this.registro = dados.registro();
         this.categoria = dados.categoria();

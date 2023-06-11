@@ -53,8 +53,8 @@ let pacienteResultado = null;
 btnficha.disabled = true;
 btnEncaminhar.disabled = true;
 
-function buscaPaciente() {
-  fetch(`http://localhost:8080/pacientes/${icpfconsulta.value}`, {
+async function buscaPaciente() {
+  await fetch(`http://localhost:8080/pacientes/${icpfconsulta.value}`, {
     method: "GET",
   })
     .then((response) => {
@@ -64,12 +64,31 @@ function buscaPaciente() {
         throw new Error("Recurso não encontrado");
       }
     })
-    .then((paciente) => {
-      //pacienteResultado = paciente
+    .then(async (paciente) => {
+      pacienteResultado = paciente
 
       // btnEditar.disabled = false
       // bntExcluir.disabled = false
-      console.log(paciente.endereco)
+      iorgaouf.value = paciente.ufIdentidade;
+      inaturalidadeuf.value = paciente.ufNaturalidade;
+      ilogradourouf.value = paciente.endereco.ufCidade;
+
+      await filtrarMunicipios(ilogradourouf.options[ilogradourouf.selectedIndex].id, icidade);
+      await filtrarMunicipios(inaturalidadeuf.options[inaturalidadeuf.selectedIndex].id, inaturalidade);
+
+      for (var i = 0; i < icidade.options.length; i++) {
+        if (icidade.options[i].value === paciente.endereco.cidade) {
+            icidade.selectedIndex = i;
+            break;
+        }
+      }
+
+      for (var i = 0; i < inaturalidade.options.length; i++) {
+        if (inaturalidade.options[i].value === paciente.naturalidade) {
+          inaturalidade.selectedIndex = i;
+            break;
+        }
+      }
 
       iguia.value = paciente.guia;
       iregistro.value = paciente.registro;
@@ -82,9 +101,7 @@ function buscaPaciente() {
       isexo.value = paciente.sexo;
       iidentidade.value = paciente.identidade;
       iorgao.value = paciente.orgao;
-      iorgaouf.value = paciente.rgOrgaoUF;
-      inaturalidade.value = paciente.naturalidade;
-      inaturalidadeuf.value = paciente.naturalidadeUF;
+      
       inacionalidade.value = paciente.nacionalidade;
       inomeMae.value = paciente.nomeMae;
       inomePai.value = paciente.nomePai;
@@ -92,8 +109,7 @@ function buscaPaciente() {
       ilogradouro.value = paciente.endereco.logradouro;
       inumero.value = paciente.endereco.numero;
       ibairro.value = paciente.endereco.bairro;
-      ilogradourouf.value = paciente.endereco.ufCidade;
-      icidade.value = paciente.endereco.cidade;
+      
       icep.value = paciente.endereco.cep;
       icomplemento.value = paciente.endereco.complemento;
 
@@ -189,13 +205,6 @@ function cadastraPaciente() {
         cep: icep.value,
         complemento: icomplemento.value
       },
-      // logradouro: ilogradouro.value,
-      // numero: inumero.value,
-      // bairro: ibairro.value,
-      // cidade: icidade.value,
-      // ufCidade: ilogradourouf.value,
-      // cep: icep.value,
-      // complemento: icomplemento.value,
       cpf: icpf.value,
       telefone: itelefone.value,
     }),
@@ -254,7 +263,6 @@ function capturaCPFencaminhaFichaImpressao() {
   //window.location.href = url + "?id=" + rowId + "&nome=" + nome + "&hora=" + hora + "&exame=" + exame;
   window.location.href = url + "?cpf=" + encodedCPF;
 }
-
 
 inputNomeCandidatoBusca.addEventListener('input', () => {
   const nome = inputNomeCandidatoBusca.value;
@@ -349,78 +357,97 @@ btnLimpar.addEventListener("click", function (event) {
   limpaFormulario();
 });
 
+// iorgaouf.addEventListener("focus", () => {
+//   buscaEstados()
+//     .then((options) => {
+//       iorgaouf.append(options);
+//     })
+//     .catch((error) => {
+//       console.error("Erro ao buscar os estados:", error);
+//     });
+// });
 
-iorgaouf.addEventListener("focus", () => {
-  buscaEstados()
-    .then((options) => {
-      iorgaouf.append(options);
-    })
-    .catch((error) => {
-      console.error("Erro ao buscar os estados:", error);
-    });
-});
+// inaturalidadeuf.addEventListener("focus", () => {
+//   buscaEstados()
+//     .then((options) => {
+//       inaturalidadeuf.append(options);
+//     })
+//     .catch((error) => {
+//       console.error("Erro ao buscar os estados:", error);
+//     });
+// });
 
-inaturalidadeuf.addEventListener("focus", () => {
-  buscaEstados()
-    .then((options) => {
-      inaturalidadeuf.append(options);
-    })
-    .catch((error) => {
-      console.error("Erro ao buscar os estados:", error);
-    });
-});
+// ilogradourouf.addEventListener("focus", () => {
+//   buscaEstados()
+//     .then((options) => {
+//       ilogradourouf.append(options);
+//     })
+//     .catch((error) => {
+//       console.error("Erro ao buscar os estados:", error);
+//     });
+// });
 
-ilogradourouf.addEventListener("focus", () => {
-  buscaEstados()
-    .then((options) => {
-      ilogradourouf.append(options);
-    })
-    .catch((error) => {
-      console.error("Erro ao buscar os estados:", error);
-    });
-});
+// inaturalidadeuf.addEventListener("change", async () => {
+//   let selectedOption = inaturalidadeuf.options[inaturalidadeuf.selectedIndex];
+//   let selectedOptionId = selectedOption.getAttribute("id");
 
-inaturalidadeuf.addEventListener("change", async () => {
-  let selectedOption = inaturalidadeuf.options[inaturalidadeuf.selectedIndex];
-  let selectedOptionId = selectedOption.getAttribute("id");
+//   const request = await fetch(
+//     `http://localhost:8080/municipios/${selectedOptionId}`
+//   );
+//   const response = await request.json();
 
-  const request = await fetch(
-    `http://localhost:8080/municipios/${selectedOptionId}`
-  );
-  const response = await request.json();
+//   const options = document.createElement("optgroup");
+//   options.setAttribute("label", "Cidades");
 
-  const options = document.createElement("optgroup");
-  options.setAttribute("label", "Cidades");
+//   response.forEach((municipio) => {
+//     const option = document.createElement("option");
+//     option.textContent = municipio.nome;
+//     options.appendChild(option);
+//   });
+//   inaturalidade.innerHTML = "";
+//   inaturalidade.append(options);
+// });
 
-  response.forEach((municipio) => {
-    const option = document.createElement("option");
-    option.textContent = municipio.nome;
-    options.appendChild(option);
-  });
-  inaturalidade.innerHTML = "";
-  inaturalidade.append(options);
-});
+// ilogradourouf.addEventListener("change", async () => {
+//   let selectedOption = ilogradourouf.options[ilogradourouf.selectedIndex];
+//   let selectedOptionId = selectedOption.getAttribute("id");
 
-ilogradourouf.addEventListener("change", async () => {
-  let selectedOption = ilogradourouf.options[ilogradourouf.selectedIndex];
-  let selectedOptionId = selectedOption.getAttribute("id");
+//   const request = await fetch(
+//     `http://localhost:8080/municipios/${selectedOptionId}`
+//   );
+//   const response = await request.json();
 
-  const request = await fetch(
-    `http://localhost:8080/municipios/${selectedOptionId}`
-  );
-  const response = await request.json();
+//   const options = document.createElement("optgroup");
+//   options.setAttribute("label", "Cidades");
 
-  const options = document.createElement("optgroup");
-  options.setAttribute("label", "Cidades");
+//   response.forEach((municipio) => {
+//     const option = document.createElement("option");
+//     option.textContent = municipio.nome;
+//     options.appendChild(option);
+//   });
+//   icidade.innerHTML = "";
+//   icidade.append(options);
+// });
 
-  response.forEach((municipio) => {
-    const option = document.createElement("option");
-    option.textContent = municipio.nome;
-    options.appendChild(option);
-  });
-  icidade.innerHTML = "";
-  icidade.append(options);
-});
+// ilogradourouf.addEventListener('change', () => filtrarMunicipios(ilogradourouf.options[ilogradourouf.selectedIndex].id, icidade));
+// inaturalidadeuf.addEventListener('change', () => filtrarMunicipios(inaturalidadeuf.options[inaturalidadeuf.selectedIndex].id, inaturalidade));
+
+async function filtrarMunicipios(estadoId, selectMunicipio) {
+  
+  if (estadoId && selectMunicipio) {
+      const response = await fetch('http://localhost:8080/municipios/' + estadoId)
+      const data = await response.json()
+
+      selectMunicipio.innerHTML = ""; // Limpa as opções existentes
+
+      data.forEach(municipio => {
+          const optionElement = document.createElement('option');
+          optionElement.value = municipio.nome;
+          optionElement.textContent = municipio.nome;
+          selectMunicipio.appendChild(optionElement);
+      });
+  }
+}
 
 async function buscaEstados() {
   try {
@@ -442,3 +469,37 @@ async function buscaEstados() {
     throw new Error("Erro ao buscar os estados");
   }
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  fetch('http://localhost:8080/estados')
+      .then(response => response.json())
+      .then(data => {
+          data.forEach(estado => {
+              const optionElement1 = document.createElement('option');
+              const optionElement2 = document.createElement('option');
+              const optionElement3 = document.createElement('option');
+
+              optionElement1.value = estado.sigla;
+              optionElement1.id = estado.id
+              optionElement1.textContent = estado.sigla;
+              iorgaouf.appendChild(optionElement1);
+
+              optionElement2.value = estado.sigla;
+              optionElement2.id = estado.id
+              optionElement2.textContent = estado.sigla;
+              inaturalidadeuf.appendChild(optionElement2);
+
+              optionElement3.value = estado.sigla;
+              optionElement3.id = estado.id
+              optionElement3.textContent = estado.sigla;
+              ilogradourouf.appendChild(optionElement3);
+          });
+
+          ilogradourouf.addEventListener('change', () => filtrarMunicipios(ilogradourouf.options[ilogradourouf.selectedIndex].id, icidade));
+          inaturalidadeuf.addEventListener('change', () => filtrarMunicipios(inaturalidadeuf.options[inaturalidadeuf.selectedIndex].id, inaturalidade));
+
+      })
+      .catch(error => {
+          console.error('Ocorreu um erro ao buscar os estados:', error);
+      });
+});
