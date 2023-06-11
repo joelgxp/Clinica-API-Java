@@ -7,6 +7,9 @@ import br.com.jvsmed.api.enums.ENacionalidade;
 import br.com.jvsmed.api.enums.ESexo;
 import br.com.jvsmed.api.enums.ESolicitacao;
 
+import java.sql.Time;
+import java.util.Date;
+
 public record DadosListagemPaciente(
         Long id,
         String guia,
@@ -35,7 +38,8 @@ public record DadosListagemPaciente(
         String complemento,
         String cpf,
         String telefone,
-        Integer status
+        Date hora,
+        boolean atendido
 ) {
     public DadosListagemPaciente(PacienteEntity pacienteEntity) {
         this(pacienteEntity.getId(),
@@ -65,7 +69,8 @@ public record DadosListagemPaciente(
                 pacienteEntity.getComplemento(),
                 pacienteEntity.getCpf(),
                 pacienteEntity.getTelefone(),
-                pacienteEntity.getStatus()
+                pacienteEntity.getHora(),
+                pacienteEntity.getAtendido()
         );
     }
 

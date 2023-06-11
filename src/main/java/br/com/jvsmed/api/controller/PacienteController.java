@@ -2,12 +2,14 @@ package br.com.jvsmed.api.controller;
 
 import br.com.jvsmed.api.entities.PacienteEntity;
 import br.com.jvsmed.api.exceptions.InvalidRequestException;
+import br.com.jvsmed.api.registro.paciente.DadosAtualizacaoPaciente;
 import br.com.jvsmed.api.registro.paciente.DadosCadastroPaciente;
 import br.com.jvsmed.api.registro.paciente.DadosListagemPaciente;
 
 import br.com.jvsmed.api.registro.paciente.DadosListagemPacienteBuscaNome;
 import br.com.jvsmed.api.repositories.PacienteRepository;
 import br.com.jvsmed.api.service.PacienteService;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -64,11 +66,25 @@ public class PacienteController {
         }
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<PacienteEntity> atualizar(@PathVariable Long id, @RequestBody PacienteEntity paciente) {
-        service.atualizarPaciente(paciente);
-        return ResponseEntity.status(200).build();
+    @Transactional
+    @PutMapping("/{cpf}")
+    public ResponseEntity<?> atualizar(@PathVariable String cpf, @RequestBody @Valid DadosAtualizacaoPaciente paciente, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            // Tratativa de erros de validação
+            List<String> erros = new ArrayList<>();
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                erros.add(error.getField() + " -> " + error.getDefaultMessage());
+            }
+            return ResponseEntity.badRequest().body("Erros de validação: \n" + erros);
+        }
+        try {
+            service.atualizarPacientePorCpf(cpf, paciente);
+            return ResponseEntity.status(200).build();
+        } catch (InvalidRequestException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> remover(@PathVariable Long id) {

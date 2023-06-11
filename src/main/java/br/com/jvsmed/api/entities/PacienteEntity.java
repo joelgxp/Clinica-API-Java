@@ -4,6 +4,7 @@ import br.com.jvsmed.api.enums.ECategoria;
 import br.com.jvsmed.api.enums.ENacionalidade;
 import br.com.jvsmed.api.enums.ESexo;
 import br.com.jvsmed.api.enums.ESolicitacao;
+import br.com.jvsmed.api.registro.paciente.DadosAtualizacaoPaciente;
 import br.com.jvsmed.api.registro.paciente.DadosCadastroPaciente;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -13,6 +14,9 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.sql.Time;
+import java.util.Date;
 
 @Table(name = "pacientes")
 @Entity(name = "PacienteEntity")
@@ -90,7 +94,9 @@ public class PacienteEntity {
 
     private String cpf;
 
-    private Integer status;
+    private Boolean atendido;
+
+    private Time hora;
     public PacienteEntity(DadosCadastroPaciente dados) {
 //        BeanUtils.copyProperties(dados, this);
         this.guia = dados.guia();
@@ -119,37 +125,89 @@ public class PacienteEntity {
         this.complemento = dados.complemento();
         this.cpf = dados.cpf();
         this.telefone = dados.telefone();
-        this.status = 0;
+        this.hora = (Time) dados.hora();
+        this.atendido = false;
     }
 
 
-//    public void atualizarInformacoes(DadosAtualizacaoPaciente dados) {
-//        if (dados.guia() != null) {
-//            this.guia = dados.guia();
-//        }
-//        if (dados.categoria() != null) {
-//            this.categoria = dados.categoria();
-//        }
-//        if (dados.dataCadastro() != null) {
-//            this.dataCadastro = dados.dataCadastro();
-//        }
-//        if (dados.nome() != null) {
-//            this.nome = dados.nome();
-//        }
-//        if (dados.dataNascimento() != null) {
-//            this.dataNascimento = dados.dataNascimento();
-//        }
-//        if (dados.sexo() != null) {
-//            this.sexo = String.valueOf(dados.sexo());
-//        }
-//        if (dados.nomeMae() != null) {
-//            this.nomeMae = dados.nomeMae();
-//        }
-//        if (dados.nomePai() != null) {
-//            this.nomePai = dados.nomePai();
-//        }
-//        if (dados.telefone() != null) {
-//            this.telefone = dados.telefone();
-//        }
-//    }
+    public void atualizarInformacoes(DadosAtualizacaoPaciente dados) {
+        if (dados.guia() != null) {
+            this.guia = dados.guia();
+        }
+        if (dados.registro() != null) {
+            this.registro = dados.registro();
+        }
+        if (dados.solicitacao() != null) {
+            this.solicitacao = dados.solicitacao();
+        }
+        if (dados.categoria() != null) {
+            this.categoria = dados.categoria();
+        }
+        if (dados.dataCadastro() != null) {
+            this.dataCadastro = dados.dataCadastro();
+        }
+        if (dados.dataHabilitacao() != null) {
+            this.dataHabilitacao = dados.dataHabilitacao();
+        }
+        if (dados.nome() != null) {
+            this.nome = dados.nome();
+        }
+        if (dados.dataNascimento() != null) {
+            this.dataNascimento = dados.dataNascimento();
+        }
+        if (dados.sexo() != null) {
+            this.sexo = dados.sexo();
+        }
+        if (dados.identidade() != null) {
+            this.identidade = dados.identidade();
+        }
+        if (dados.orgao() != null) {
+            this.orgao = dados.orgao();
+        }
+        if (dados.ufIdentidade() != null) {
+            this.ufIdentidade = dados.ufIdentidade();
+        }
+        if (dados.naturalidade() != null) {
+            this.naturalidade = dados.naturalidade();
+        }
+        if (dados.ufNaturalidade() != null) {
+            this.ufNaturalidade = dados.ufNaturalidade();
+        }
+        if (dados.nacionalidade() != null) {
+            this.nacionalidade = dados.nacionalidade();
+        }
+        if (dados.nomeMae() != null) {
+            this.nomeMae = dados.nomeMae();
+        }
+        if (dados.nomePai() != null) {
+            this.nomePai = dados.nomePai();
+        }
+        if (dados.logradouro() != null) {
+            this.logradouro = dados.logradouro();
+        }
+        if (dados.numero() != null) {
+            this.numero = dados.numero();
+        }
+        if (dados.bairro() != null) {
+            this.bairro = dados.bairro();
+        }
+        if (dados.cidade() != null) {
+            this.cidade = dados.cidade();
+        }
+        if (dados.ufCidade() != null) {
+            this.ufCidade = dados.ufCidade();
+        }
+        if (dados.cep() != null) {
+            this.cep = dados.cep();
+        }
+        if (dados.complemento() != null) {
+            this.complemento = dados.complemento();
+        }
+        if (dados.cpf() != null) {
+            this.cpf = dados.cpf();
+        }
+        if (dados.telefone() != null) {
+            this.telefone = dados.telefone();
+        }
+    }
 }

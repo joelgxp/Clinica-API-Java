@@ -39,15 +39,9 @@ const icep = document.querySelector("#inputCEP");
 const icomplemento = document.querySelector("#inputComplemento");
 const icpf = document.querySelector("#inputCPF");
 const itelefone = document.querySelector("#inputTelefone");
+const ihora = document.querySelector("#inputHoraCadastro");
 
-
-
-var dataHoraAtual = new Date();
-dataHoraAtual.setTime;
-
-
-
-let pacienteResultado = null;
+let pacienteResultado = icpf;
 btnficha.disabled = true;
 btnEncaminhar.disabled = true;
 btnEditar.disabled = true;
@@ -92,6 +86,7 @@ function buscaPaciente() {
       icomplemento.value = paciente.complemento;
       icpf.value = paciente.cpf;
       itelefone.value = paciente.telefone;
+      ihora.value = paciente.hora;
 
       iregistro.disabled = true;
       icpf.disabled = true;
@@ -128,7 +123,7 @@ function buscarPacientesPorNome(nome) {
         row.appendChild(nomeCell);
 
         var idadeCell = document.createElement('td');
-        idadeCell.textContent = paciente.idade;
+        idadeCell.textContent = paciente.cpf;
         row.appendChild(idadeCell);
 
         // Adicione outras células da tabela conforme necessário
@@ -153,17 +148,41 @@ function excluiPaciente() {
 }
 
 function editaPaciente() {
-  const identificador = pacienteResultado.id;
-  const dadosAtualizados = capturarValoresFormulario();
-  dadosAtualizados.id = identificador;
-
-  fetch(`http://localhost:8080/pacientes/${identificador}`, {
+  fetch(`http://localhost:8080/pacientes/${icpfconsulta.value}`, {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
     method: "PUT",
-    body: JSON.stringify(dadosAtualizados),
+    body: JSON.stringify({
+      guia: iguia.value,
+      registro: iregistro.value,
+      solicitacao: isolicitacao.value,
+      categoria: icategoria.value,
+      dataCadastro: idataCadastro.value,
+      dataHabilitacao: idataHabilitacao.value,
+      nome: inome.value,
+      dataNascimento: idataNascimento.value,
+      sexo: isexo.value,
+      identidade: iidentidade.value,
+      orgao: iorgao.value,
+      ufIdentidade: iorgaouf.value,
+      naturalidade: inaturalidade.value,
+      ufNaturalidade: inaturalidadeuf.value,
+      nacionalidade: inacionalidade.value,
+      nomeMae: inomeMae.value,
+      nomePai: inomePai.value,
+      logradouro: ilogradouro.value,
+      numero: inumero.value,
+      bairro: ibairro.value,
+      cidade: icidade.value,
+      ufCidade: ilogradourouf.value,
+      cep: icep.value,
+      complemento: icomplemento.value,
+      cpf: icpf.value,
+      telefone: itelefone.value,
+      hora: ihora.value,
+  }),
   })
     .then(function (res) {
       if (res.ok) {
@@ -211,6 +230,7 @@ function cadastraPaciente() {
       complemento: icomplemento.value,
       cpf: icpf.value,
       telefone: itelefone.value,
+      hora: ihora.value,
     }),
   })
     .then(function (response) {
@@ -270,6 +290,22 @@ function capturaCPFencaminhaFichaImpressao() {
   window.location.href = url + "?cpf=" + encodedCPF;
 }
 
+function encaminhaPacienteExame() {
+  fetch(`http://localhost:8080/pacientes/${icpf.value}`, {    
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    method: "PUT",
+    body: JSON.stringify({
+      atendido: "true",
+    })
+  })
+}
+
+var dataHoraAtual = new Date();
+var horaAtual = dataHoraAtual.toLocaleTimeString();
+document.getElementById("inputHoraCadastro").value = horaAtual;
 
 inputNomeCandidatoBusca.addEventListener('input', () => {
   const nome = inputNomeCandidatoBusca.value;
@@ -305,11 +341,6 @@ bntCadastrar.addEventListener("click", function (event) {
   cadastraPaciente();
 });
 
-btnficha.addEventListener("click", function (event) {
-  event.preventDefault();
-  capturaCPFencaminhaFichaImpressao();
-});
-
 btnEditar.addEventListener("click", function (event) {
   event.preventDefault();
   editaPaciente();
@@ -324,6 +355,19 @@ btnLimpar.addEventListener("click", function (event) {
   event.preventDefault();
   limpaFormulario();
 });
+
+btnficha.addEventListener("click", function (event) {
+  event.preventDefault();
+  capturaCPFencaminhaFichaImpressao();
+});
+
+btnEncaminhar.addEventListener("click", function (event) {
+  event.preventDefault();
+  encaminhaPacienteExame();
+})
+
+
+
 
 
 iorgaouf.addEventListener("focus", () => {

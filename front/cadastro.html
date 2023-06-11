@@ -68,13 +68,12 @@
                                         </button>
                                     </div>
                                     <table class="table">
-                                        <thead>
+                                        <!-- <thead>
                                           <tr>
                                             <th>Nome</th>
-                                            <th>Idade</th>
-                                            <!-- Outras colunas -->
+                                            <th>CPF</th>
                                           </tr>
-                                        </thead>
+                                        </thead> -->
                                         <tbody id="resultadoTbody">
                                           <!-- Os resultados da busca serão inseridos aqui -->
                                         </tbody>
@@ -259,6 +258,12 @@
                                     <label for="inputTelefone" class="form-label">Telefone</label>
                                     <input type="text" class="form-control" id="inputTelefone" maxlength="15">
                                 </div>
+
+                                <div class="col-2">
+                                    <label for="inputHoraCadastro" class="form-label">Hora Cadastro</label>
+                                    <input type="text" class="form-control" id="inputHoraCadastro" readonly>
+                                </div>
+
                             </div>
 
                             <button type="submit" class="btn btn-primary" id="btncadastrar">Salvar</button>
