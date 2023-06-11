@@ -7,7 +7,6 @@ import br.com.jvsmed.api.enums.ENacionalidade;
 import br.com.jvsmed.api.enums.ESexo;
 import br.com.jvsmed.api.enums.ESolicitacao;
 
-import java.sql.Time;
 import java.util.Date;
 
 public record DadosListagemPaciente(
