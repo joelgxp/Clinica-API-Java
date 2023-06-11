@@ -34,12 +34,12 @@ public class PacienteController {
     @GetMapping("/{cpf}")
     public ResponseEntity<?> buscarPorCPF(@PathVariable String cpf) {
 //        return new DadosListagemPaciente(service.findByCpf(cpf));
-
-        return ResponseEntity.status(200).body(new DadosListagemPaciente(service.findByCpf(cpf).getBody()));
+        String cpfSoNumeros = cpf.replaceAll("[^0-9]", "");
+        return ResponseEntity.status(200).body(new DadosListagemPaciente(service.findByCpf(cpfSoNumeros).getBody()));
     }
 
     @GetMapping("/nome/{nome}")
-    public List<PacienteEntity> buscarPorNome(@PathVariable String nome) {
+    public ResponseEntity<?> buscarPorNome(@PathVariable String nome) {
          // Lógica para buscar nomes no banco de dados
         // e retornar os resultados em uma lista de objetos ResultadoBusca
 
@@ -47,8 +47,7 @@ public class PacienteController {
         List<PacienteEntity> resultados = new ArrayList<>();
         // Adicione resultados à lista
         // ...
-
-        return resultados;
+        return ResponseEntity.status(200).body(new DadosListagemPaciente(service.findByNome(nome).getBody()));
     }
 
     @PostMapping

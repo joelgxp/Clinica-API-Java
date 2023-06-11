@@ -69,6 +69,7 @@ function buscaPaciente() {
 
       // btnEditar.disabled = false
       // bntExcluir.disabled = false
+      console.log(paciente.endereco)
 
       iguia.value = paciente.guia;
       iregistro.value = paciente.registro;
@@ -87,13 +88,15 @@ function buscaPaciente() {
       inacionalidade.value = paciente.nacionalidade;
       inomeMae.value = paciente.nomeMae;
       inomePai.value = paciente.nomePai;
-      ilogradouro.value = paciente.logradouro;
-      inumero.value = paciente.numero;
-      ibairro.value = paciente.bairro;
-      icidade.value = paciente.cidade;
-      ilogradourouf.value = paciente.logradouroUF;
-      icep.value = paciente.cep;
-      icomplemento.value = paciente.complemento;
+
+      ilogradouro.value = paciente.endereco.logradouro;
+      inumero.value = paciente.endereco.numero;
+      ibairro.value = paciente.endereco.bairro;
+      ilogradourouf.value = paciente.endereco.ufCidade;
+      icidade.value = paciente.endereco.cidade;
+      icep.value = paciente.endereco.cep;
+      icomplemento.value = paciente.endereco.complemento;
+
       icpf.value = paciente.cpf;
       itelefone.value = paciente.telefone;
 
@@ -177,13 +180,22 @@ function cadastraPaciente() {
       nacionalidade: inacionalidade.value,
       nomeMae: inomeMae.value,
       nomePai: inomePai.value,
-      logradouro: ilogradouro.value,
-      numero: inumero.value,
-      bairro: ibairro.value,
-      cidade: icidade.value,
-      ufCidade: ilogradourouf.value,
-      cep: icep.value,
-      complemento: icomplemento.value,
+      endereco: {
+        logradouro: ilogradouro.value,
+        numero: inumero.value,
+        bairro: ibairro.value,
+        cidade: icidade.value,
+        ufCidade: ilogradourouf.value,
+        cep: icep.value,
+        complemento: icomplemento.value
+      },
+      // logradouro: ilogradouro.value,
+      // numero: inumero.value,
+      // bairro: ibairro.value,
+      // cidade: icidade.value,
+      // ufCidade: ilogradourouf.value,
+      // cep: icep.value,
+      // complemento: icomplemento.value,
       cpf: icpf.value,
       telefone: itelefone.value,
     }),
@@ -191,6 +203,7 @@ function cadastraPaciente() {
     .then(function (response) {
       if (response.ok) {
         //limpaFormulario()
+        console.log("Response OK")
       } else {
         throw new Error("Erro ao cadastrar paciente");
       }
@@ -289,7 +302,7 @@ icpf.addEventListener('input', function() {
   this.value = cpf;  
 });
 
-inputCPFBusca.addEventListener('input', function() {
+icpfconsulta.addEventListener('input', function() {
   let cpf = this.value.replace(/\D/g, '');
   cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
   this.value = cpf;  

@@ -71,26 +71,15 @@ public class PacienteEntity {
     @Column(name = "nome_pai")
     private String nomePai;
 
-    private String logradouro;
-
-    private String numero;
-
-    private String bairro;
-
-    private String cidade;
-
-    @Column(name = "uf_cidade")
-    private String ufCidade;
-
-    private String cep;
-
-    private String complemento;
-
     private String telefone;
 
     private String cpf;
 
     private Integer status;
+
+    @Embedded
+    private Endereco endereco;
+
     public PacienteEntity(DadosCadastroPaciente dados) {
 //        BeanUtils.copyProperties(dados, this);
         this.guia = dados.guia();
@@ -110,16 +99,10 @@ public class PacienteEntity {
         this.nacionalidade = dados.nacionalidade();
         this.nomeMae = dados.nomeMae();
         this.nomePai = dados.nomePai();
-        this.logradouro = dados.logradouro();
-        this.numero = dados.numero();
-        this.bairro = dados.bairro();
-        this.cidade = dados.cidade();
-        this.ufCidade = dados.ufCidade();
-        this.cep = dados.cep();
-        this.complemento = dados.complemento();
         this.cpf = dados.cpf();
         this.telefone = dados.telefone();
         this.status = 0;
+        this.endereco = new Endereco(dados.endereco());
     }
 
 //    public void atualizarInformacoes(DadosAtualizacaoPaciente dados) {
