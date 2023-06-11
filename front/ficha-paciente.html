@@ -7,6 +7,7 @@
     <title>Ficha de atendimento médico</title>
     <script src="./ficha-paciente.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 </head>
 
 <body>
@@ -36,69 +37,6 @@
     </header>
 
     <main>
-        <!-- <section id="ficha-paciente" class="py-5">
-            <div class="container d-flex justify-content-center align-items-center">
-                <form action="">
-                    <div class="row">
-                        <div class="text-center-row">
-                            <br>
-                            <h2>Ficha de atendimento</h2>
-                        </div>
-                        <div class="col-6 card-header">
-                            <div class="row">
-                                <div class="col-8">
-                                    <label for="nome" class="form-label">Nome</label>
-                                    <input type="text" class="form-control" id="nome" disabled>
-                                </div>
-                                <br>
-                                <div class="col-4">
-                                    <label for="inputDataVencimento" class="form-label">Data vencimento</label>
-                                    <input type="date" class="form-control" id="inputDataVencimento">
-                                    <br>
-
-                                </div>
-                            </div>
-                            <div class="row">
-                                <h4>Acuidade visual</h4>
-                                <div class="col-4">
-                                    <label for="acuidadeEsquerdo" class="form-label">Lado Esquerdo</label>
-                                    <input type="text" class="form-control" id="acuidadeEsquerdo">
-                                </div>
-                                <div class="col-4">
-                                    <label for="acuidadeDireito" class="form-label">Lado Direito</label>
-                                    <input type="text" class="form-control" id="acuidadeDireito">
-                                </div>
-                                <div class="col-4">
-                                    <label for="inputAcuidadeCorrecao" class="form-label">Correção</label>
-                                    <select class="form-select" id="inputAcuidadeCorrecao">
-                                        <option value="SEM_CORRECAO">Não</option>
-                                        <option value="COM_CORRECAO">Sim</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="row-mb-3">
-                                <br>
-                                <button type="submit" class="btn btn-primary" id="btnSalvar">Salvar</button>
-                                <br>
-                            </div>
-
-                        </div>
-
-                        <div class="col-6 card-header">
-
-                            <br>
-
-
-                        </div>
-                    </div>
-
-                </form>
-            </div>
-        </section> -->
-
-
-
         <section id="ficha-paciente" class="py-5">
             <div class="container">
                 <h2>Ficha de atendimento</h2>
@@ -156,7 +94,7 @@
                                 <div class="col-6">
                                     <label for="nome" class="form-label">Nome</label>
                                     <input type="text" class="form-control" id="nome" disabled>
-                                </div>                                
+                                </div>
                                 <div class="col-2">
                                     <label for="inputDataVencimento" class="form-label">Data vencimento</label>
                                     <input type="date" class="form-control" id="inputDataVencimento">
@@ -173,7 +111,7 @@
                             <div class="row mb-3">
                                 <div class="col-2">
                                     <label for="acuidadeDireito" class="form-label">Acuidade visual L.D.</label>
-                                    <input type="text" class="form-control" id="acuidadeDireito">                                    
+                                    <input type="text" class="form-control" id="acuidadeDireito">
                                 </div>
                                 <div class="col-2">
                                     <label for="acuidadeEsquerdo" class="form-label">Acuidade visual L.E.</label>
@@ -187,37 +125,34 @@
                                     </select>
                                 </div>
                                 <div class="col-2">
-                                    <label for="campoVisualDireito" class="form-label">Campo Visual L.D.</label>
-                                    <input type="text" class="form-control" id="inputCampoVisualDireito">                                    
+                                    <label for="inputCampoVisualDireito" class="form-label">Campo Visual L.D.</label>
+                                    <input type="text" class="form-control" id="inputCampoVisualDireito">
                                 </div>
                                 <div class="col-2">
-                                    <label for="campoVisualEsquerdo" class="form-label">Campo Visual L.E.</label>
+                                    <label for="inputCampoVisualEsquerdo" class="form-label">Campo Visual L.E.</label>
                                     <input type="text" class="form-control" id="inputCampoVisualEsquerdo">
-                                </div>                                
+                                </div>
                             </div>
 
                             <div class="row mb-3">
                                 <div class="col-10">
                                     <div class="form-group">
-                                        <label for="inputComplemento" class="form-label">Anamnese - Evolução - Exames Complementares</label>                                        
+                                        <label for="inputComplemento" class="form-label">Anamnese - Evolução - Exames
+                                            Complementares</label>
                                         <textarea class="form-control" id="inputComplemento" rows="5"></textarea>
-                                      </div>
+                                    </div>
                                 </div>
                             </div>
-                            
+
                             <button type="submit" class="btn btn-primary" id="btnSalvar">Salvar</button>
                             <button type="submit" class="btn btn-primary" id="btneditar">Editar</button>
                             <button type="submit" class="btn btn-primary" id="btnlimpar">Limpar dados</button>
-                          
+
                         </form>
                     </div>
                 </div>
             </div>
         </section>
-
-
-
-
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
 </body>

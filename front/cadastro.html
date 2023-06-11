@@ -53,7 +53,7 @@
                                 <div class="col-3">
                                     <div class="input-group">
                                         <input type="text" class="form-control" placeholder="Pesquisa por CPF"
-                                            id="inputCPFBusca" maxlength="11">
+                                            id="inputCPFBusca" maxlength="14">
                                         <button class="btn btn-primary" type="button" id="btnconsultar">
                                             <i class="bi bi-search"></i>
                                         </button>
@@ -63,11 +63,22 @@
                                     <div class="input-group">
                                         <input type="text" class="form-control" placeholder="Pesquisa Nome do Candidato"
                                             id="inputNomeCandidatoBusca">
-                                        <button class="btn btn-primary" type="button">
+                                        <button class="btn btn-primary" type="button" id="btnBuscarPorNome">
                                             <i class="bi bi-search"></i>
                                         </button>
                                     </div>
+                                    <table id="tabelaResultados" class="table">
+                                        <thead>
+                                          <tr>
+                                            <th>Nome</th>
+                                            <th>Idade</th>
+                                            <th>Email</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                      </table>
                                 </div>
+
                                 <div class="col-auto">
                                     <nav aria-label="Navegação">
                                         <ul class="pagination">
@@ -103,7 +114,7 @@
                                 </div>
                                 <div class="col-2">
                                     <label for="inputRegistro" class="form-label">Registro</label>
-                                    <input type="text" class="form-control" id="inputRegistro">
+                                    <input type="text" class="form-control" id="inputRegistro" maxlength="11">
                                 </div>
                                 <div class="col-2">
                                     <label for="inputSolicitacao" class="form-label">Solicitação</label>
@@ -156,17 +167,23 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
+                                <div class="col-2">
+                                    <label for="inputRgOrgaoUF" class="form-label">UF Identidade</label>
+                                    <select class="form-select" id="inputRgOrgaoUF">
+                                        <option value="default" disabled selected hidden></option>
+                                    </select>
+                                </div>
                                 <div class="col">
                                     <label for="inputRgIdentidade" class="form-label">Identidade</label>
                                     <input type="text" class="form-control" id="inputRgIdentidade">
                                 </div>
                                 <div class="col-1">
-                                    <label for="inputRgOrgao" class="form-label">Orgão</label>
-                                    <input type="text" class="form-control" id="inputRgOrgao">
+                                    <label for="inputOrgao" class="form-label">Orgão</label>
+                                    <input type="text" class="form-control" id="inputOrgao">
                                 </div>
                                 <div class="col-2">
-                                    <label for="inputRgOrgaoUF" class="form-label">UF</label>
-                                    <select class="form-select" id="inputRgOrgaoUF">
+                                    <label for="inputNaturalidadeUF" class="form-label">UF Nat.</label>
+                                    <select class="form-select" id="inputNaturalidadeUF">
                                         <option value="default" disabled selected hidden></option>
                                     </select>
                                 </div>
@@ -176,14 +193,10 @@
                                     </select>
                                 </div>
                                 <div class="col-2">
-                                    <label for="inputNaturalidadeUF" class="form-label">UF</label>
-                                    <select class="form-select" id="inputNaturalidadeUF">
-                                        <option value="default" disabled selected hidden></option>
-                                    </select>
-                                </div>
-                                <div class="col-2">
                                     <label for="inputNacionalidade" class="form-label">Nacionalidade</label>
                                     <select class="form-select" id="inputNacionalidade">
+                                        <option value="BRASILEIRA">Brasileira</option>
+                                        <option value="ESTRANGEIRA">Estrangeira</option>
                                     </select>
                                 </div>
                             </div>
@@ -215,14 +228,15 @@
                             </div>
 
                             <div class="row mb-3">
+                                <div class="col-2">
+                                    <label for="inputLogradouroUF" class="form-label">UF Cidade</label>
+                                    <select class="form-select" id="inputLogradouroUF">
+                                        <option value="default" disabled selected hidden></option>
+                                    </select>
+                                </div>
                                 <div class="col">
                                     <label for="inputCidade" class="form-label">Cidade</label>
                                     <select class="form-select" id="inputCidade"></select>
-                                </div>
-                                <div class="col-2">
-                                    <label for="inputLogradouroUF" class="form-label">UF</label>
-                                    <select class="form-select" id="inputLogradouroUF">
-                                    </select>
                                 </div>
                                 <div class="col-2">
                                     <label for="inputCEP" class="form-label">CEP</label>
@@ -241,7 +255,7 @@
                                 </div>
                                 <div class="col-3">
                                     <label for="inputTelefone" class="form-label">Telefone</label>
-                                    <input type="text" class="form-control" id="inputTelefone">
+                                    <input type="text" class="form-control" id="inputTelefone" maxlength="15">
                                 </div>
                             </div>
 
@@ -249,43 +263,13 @@
                             <button type="submit" class="btn btn-primary" id="btneditar">Editar</button>
                             <button type="submit" class="btn btn-primary" id="btnexcluir">Excluir</button>
                             <button type="submit" class="btn btn-primary" id="btnlimpar">Limpar dados</button>
-                            <button type="submit" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#ficha-paciente-modal-content">Ficha</button>
-                            <button type="submit" class="btn btn-primary" id="2">Encaminhar</button>
+                            <button type="submit" class="btn btn-primary" id="btnficha">Ficha</button>
+                            <button type="submit" class="btn btn-primary" id="btnencaminhar">Encaminhar</button>
                         </form>
                     </div>
                 </div>
             </div>
         </section>
-
-        <section id="ficha-paciente-modal">
-
-            <div id="ficha-paciente-modal-content" class="modal">
-
-                <div class="modal-dialog modal-xl">
-
-                    <div class="modal-content">
-
-                        <div class="modal-header">
-                            <h5 class="modal-title">Ficha</h5>
-                            <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-
-                        <div class="modal-body">
-                            <p>Ficha</p>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-
-        </section>
-
     </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>

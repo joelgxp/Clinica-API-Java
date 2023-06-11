@@ -1,9 +1,7 @@
 package br.com.jvsmed.api.enums;
 
 public enum ESexo {
-    MASCULINO("Masculino"),
-    FEMININO("Feminino");
+    MASCULINO,
+    FEMININO
 
-    ESexo(String sexo) {
-    }
 }

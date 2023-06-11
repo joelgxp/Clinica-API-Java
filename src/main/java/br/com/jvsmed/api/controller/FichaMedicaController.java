@@ -8,8 +8,6 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @CrossOrigin("*")
 @RestController
 @RequestMapping("ficha_medica")
@@ -21,14 +19,6 @@ public class FichaMedicaController {
     @GetMapping
     public Iterable<FichaMedicaEntity> findAll() {
         return repository.findAll();
-    }
-
-    @GetMapping("/{idPaciente}")
-    public List<FichaMedicaEntity> findByIdPaciente(@PathVariable Integer idPaciente) {
-        FichaMedicaEntity fichaMedicaEntity = new FichaMedicaEntity();
-        fichaMedicaEntity.setIdPaciente(idPaciente);
-
-        return repository.findByIdPaciente(fichaMedicaEntity);
     }
 
     @PostMapping

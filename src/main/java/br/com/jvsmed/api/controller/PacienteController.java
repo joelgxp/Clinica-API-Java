@@ -34,8 +34,20 @@ public class PacienteController {
     @GetMapping("/{cpf}")
     public ResponseEntity<?> buscarPorCPF(@PathVariable String cpf) {
 //        return new DadosListagemPaciente(service.findByCpf(cpf));
+        String cpfSoNumeros = cpf.replaceAll("[^0-9]", "");
+        return ResponseEntity.status(200).body(new DadosListagemPaciente(service.findByCpf(cpfSoNumeros).getBody()));
+    }
 
-        return ResponseEntity.status(200).body(new DadosListagemPaciente(service.findByCpf(cpf).getBody()));
+    @GetMapping("/nome/{nome}")
+    public ResponseEntity<?> buscarPorNome(@PathVariable String nome) {
+         // Lógica para buscar nomes no banco de dados
+        // e retornar os resultados em uma lista de objetos ResultadoBusca
+
+        // Exemplo de implementação:
+        List<PacienteEntity> resultados = new ArrayList<>();
+        // Adicione resultados à lista
+        // ...
+        return ResponseEntity.status(200).body(new DadosListagemPaciente(service.findByNome(nome).getBody()));
     }
 
     @PostMapping
