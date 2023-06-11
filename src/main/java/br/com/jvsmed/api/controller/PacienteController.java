@@ -5,6 +5,8 @@ import br.com.jvsmed.api.exceptions.InvalidRequestException;
 import br.com.jvsmed.api.registro.paciente.DadosCadastroPaciente;
 import br.com.jvsmed.api.registro.paciente.DadosListagemPaciente;
 
+import br.com.jvsmed.api.registro.paciente.DadosListagemPacienteBuscaNome;
+import br.com.jvsmed.api.repositories.PacienteRepository;
 import br.com.jvsmed.api.service.PacienteService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,17 +41,10 @@ public class PacienteController {
     }
 
     @GetMapping("/nome/{nome}")
-    public List<PacienteEntity> buscarPorNome(@PathVariable String nome) {
-         // Lógica para buscar nomes no banco de dados
-        // e retornar os resultados em uma lista de objetos ResultadoBusca
-
-        // Exemplo de implementação:
-        List<PacienteEntity> resultados = new ArrayList<>();
-        // Adicione resultados à lista
-        // ...
-
-        return resultados;
+    public ResponseEntity<?> buscarPorNome(@PathVariable String nome) {
+        return service.buscarPorNome(nome);
     }
+
 
     @PostMapping
     public ResponseEntity<?> cadastrar(@RequestBody @Valid DadosCadastroPaciente paciente, BindingResult bindingResult) {

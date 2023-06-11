@@ -122,6 +122,7 @@ public class PacienteEntity {
         this.status = 0;
     }
 
+
 //    public void atualizarInformacoes(DadosAtualizacaoPaciente dados) {
 //        if (dados.guia() != null) {
 //            this.guia = dados.guia();

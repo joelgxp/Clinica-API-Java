@@ -40,8 +40,6 @@ const icomplemento = document.querySelector("#inputComplemento");
 const icpf = document.querySelector("#inputCPF");
 const itelefone = document.querySelector("#inputTelefone");
 
-const tabelaResultados = document.getElementById('tabelaResultados');
-const tbody = tabelaResultados.querySelector('tbody');
 
 
 var dataHoraAtual = new Date();
@@ -52,6 +50,8 @@ dataHoraAtual.setTime;
 let pacienteResultado = null;
 btnficha.disabled = true;
 btnEncaminhar.disabled = true;
+btnEditar.disabled = true;
+bntExcluir.disabled = true;
 
 function buscaPaciente() {
   fetch(`http://localhost:8080/pacientes/${icpfconsulta.value}`, {
@@ -66,10 +66,6 @@ function buscaPaciente() {
     })
     .then((paciente) => {
       //pacienteResultado = paciente
-
-      // btnEditar.disabled = false
-      // bntExcluir.disabled = false
-
       iguia.value = paciente.guia;
       iregistro.value = paciente.registro;
       isolicitacao.value = paciente.solicitacao;
@@ -102,6 +98,8 @@ function buscaPaciente() {
       btnficha.disabled = false;
       btnEncaminhar.disabled = false;
       bntCadastrar.disabled = true;
+      btnEditar.disabled = false;
+      bntExcluir.disabled = false;
     })
     .catch(function (error) {
       if (error.message === "Recurso não encontrado") {
@@ -112,6 +110,33 @@ function buscaPaciente() {
         alert("Ocorreu um erro ao obter os dados do paciente");
       }
     });
+}
+
+function buscarPacientesPorNome(nome) {
+  fetch('http://localhost:8080/pacientes/nome/' + nome)
+    .then(response => response.json())
+    .then(data => {
+      // Limpar a tabela
+      document.getElementById('resultadoTbody').innerHTML = '';
+
+      // Iterar sobre os resultados e adicionar linhas à tabela
+      data.forEach(paciente => {
+        var row = document.createElement('tr');
+
+        var nomeCell = document.createElement('td');
+        nomeCell.textContent = paciente.nome;
+        row.appendChild(nomeCell);
+
+        var idadeCell = document.createElement('td');
+        idadeCell.textContent = paciente.idade;
+        row.appendChild(idadeCell);
+
+        // Adicione outras células da tabela conforme necessário
+
+        document.getElementById('resultadoTbody').appendChild(row);
+      });
+    })
+    .catch(error => console.error(error));
 }
 
 function excluiPaciente() {
@@ -191,6 +216,7 @@ function cadastraPaciente() {
     .then(function (response) {
       if (response.ok) {
         //limpaFormulario()
+        alert("Paciente cadastrado com sucesso");
       } else {
         throw new Error("Erro ao cadastrar paciente");
       }
@@ -218,11 +244,13 @@ function limpaFormulario() {
   var elementos = formulario.elements;
   iregistro.disabled = false;
   icpf.disabled = false;
+  bntCadastrar.disabled = false;
   btnEditar.disabled = true;
   bntExcluir.disabled = true;
+  btnficha.disabled = true;
+  btnEncaminhar.disabled = true;
   inaturalidade.innerHTML = "";
   icidade.innerHTML = "";
-
   for (var i = 0; i < elementos.length; i++) {
     var elemento = elementos[i];
 
@@ -245,65 +273,26 @@ function capturaCPFencaminhaFichaImpressao() {
 
 inputNomeCandidatoBusca.addEventListener('input', () => {
   const nome = inputNomeCandidatoBusca.value;
-  buscarNomeNoBancoDeDados(nome);
+  buscarPacientesPorNome(nome);
 });
 
-function buscarNomeNoBancoDeDados(nome) {
-  // Limpar a tabela
-  tbody.innerHTML = '';
 
-  // Fazer a busca no banco de dados usando fetch
-  //fetch(`http://localhost:8080/api/busca-nomes?nome=${nome}`)
-  fetch(`http://localhost:8080/nome/${nome}`)
-    
-    .then(response => response.json())
-    .then(resultados => {
-      
-      // Adicionar os resultados à tabela
-      resultados.forEach(resultado => {
-        const tr = document.createElement('tr');
-        const tdNome = document.createElement('td');
-        const tdIdade = document.createElement('td');
-        const tdEmail = document.createElement('td');
-
-        tdNome.textContent = resultado.nome;
-        tdIdade.textContent = resultado.idade;
-        tdEmail.textContent = resultado.email;
-
-        tr.appendChild(tdNome);
-        tr.appendChild(tdIdade);
-        tr.appendChild(tdEmail);
-
-        tbody.appendChild(tr);
-      });
-    })
-    .catch(error => {
-      console.error('Ocorreu um erro na busca:', error);
-    });
-}
-
-
-icpf.addEventListener('input', function() {
+icpf.addEventListener('input', function () {
   let cpf = this.value.replace(/\D/g, '');
   cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
-  this.value = cpf;  
+  this.value = cpf;
 });
 
-inputCPFBusca.addEventListener('input', function() {
+inputCPFBusca.addEventListener('input', function () {
   let cpf = this.value.replace(/\D/g, '');
   cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
-  this.value = cpf;  
+  this.value = cpf;
 });
 
-itelefone.addEventListener('input', function() {
+itelefone.addEventListener('input', function () {
   let telefone = this.value.replace(/\D/g, '');
   telefone = telefone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
   this.value = telefone;
-});
-
-btnBuscarPorNome.addEventListener('click', () => {
-  const nome = inputNomeCandidatoBusca.value;
-  buscarNomeNoBancoDeDados(nome);
 });
 
 bntConsultar.addEventListener("click", function (event) {

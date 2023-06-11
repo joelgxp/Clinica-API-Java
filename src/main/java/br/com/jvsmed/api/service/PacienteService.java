@@ -3,6 +3,8 @@ package br.com.jvsmed.api.service;
 
 import br.com.jvsmed.api.entities.PacienteEntity;
 import br.com.jvsmed.api.registro.paciente.DadosCadastroPaciente;
+import br.com.jvsmed.api.registro.paciente.DadosListagemPaciente;
+import br.com.jvsmed.api.registro.paciente.DadosListagemPacienteBuscaNome;
 import br.com.jvsmed.api.repositories.PacienteRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.springframework.http.ResponseEntity.ok;
 
 @Service
 public class PacienteService {
@@ -37,6 +43,7 @@ public class PacienteService {
         return ResponseEntity.status(200).build();
     }
 
+
     @Transactional
     public ResponseEntity<?> excluirPaciente(Long id) {
 //        PacienteEntity paciente = repository.findById(id)
@@ -53,10 +60,18 @@ public class PacienteService {
     }
 
     public ResponseEntity<PacienteEntity> findByCpf(String cpf) {
-        return ResponseEntity.ok(repository.findByCpf(cpf));
+
+        return ok(repository.findByCpf(cpf));
     }
 
-    public ResponseEntity<PacienteEntity> findByNome(String nome) {
-        return ResponseEntity.ok(repository.findByNome(nome));
+    public ResponseEntity<List<DadosListagemPacienteBuscaNome>> buscarPorNome(String nome) {
+        List<PacienteEntity> pacientes = repository.findByNomeContaining(nome);
+        List<DadosListagemPacienteBuscaNome> dados = new ArrayList<>();
+        for (PacienteEntity paciente : pacientes) {
+            dados.add(new DadosListagemPacienteBuscaNome(paciente));
+        }
+        return ResponseEntity.ok(dados);
     }
+
+
 }
