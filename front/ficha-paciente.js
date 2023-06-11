@@ -17,18 +17,19 @@ var encodedId = urlParams.get("id");
 var encodedNome = urlParams.get("nome");
 var encodedHora = urlParams.get("hora");
 var encodedExame = urlParams.get("exame");
+var encodedCPF = urlParams.get("cpf");
 
 var idPaciente = decodeURIComponent(encodedId);
 var nome = decodeURIComponent(encodedNome);
 var hora = decodeURIComponent(encodedHora);
 var exame = decodeURIComponent(encodedExame);
+var cpf = decodeURIComponent(encodedCPF);
 
 var inome = document.getElementById("nome");
 inome.value = nome;
 
 function cadastraDadosExame() {
     const id = idPaciente;
-    console.log(formMedico),
     fetch("http://localhost:8080/ficha_medica",
       {
         headers: {
@@ -45,13 +46,12 @@ function cadastraDadosExame() {
             campoVisualDireito: icampoVisualDireito.value,
             exameValidade: iinputDataVencimento.value,
             conclusao: iinputConclusao.value,
-            complemento: iinputComplemento.value,
-            status: "true"
+            complemento: iinputComplemento.value
         })
       })
       .then(function (response) {
         if (response.ok) {
-          //limpaFormulario()
+          alteraStatusPacienteExame(cpf);
         } else {
           throw new Error("Erro ao cadastrar paciente")
         }
@@ -59,6 +59,28 @@ function cadastraDadosExame() {
       .catch(function (error) {
         alert("Ocorreu um erro ao cadastrar o paciente")
       });
+  }
+
+  function alteraStatusPacienteExame(cpf) {   
+    fetch(`http://localhost:8080/pacientes/atendido/` + cpf, {    
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      method: "PUT",
+      body: JSON.stringify({
+        atendido: "true",
+      })
+    })
+    .then(function (res) {
+      if (res.ok) {
+        alert("Ficha atualizada com sucesso");
+        limpaFormulario();
+      }
+    })
+    .catch(function (res) {
+      console.log(res);
+    });
   }
 
   function buscaDadosExame() {

@@ -148,7 +148,7 @@ function excluiPaciente() {
 }
 
 function editaPaciente() {
-  fetch(`http://localhost:8080/pacientes/${icpfconsulta.value}`, {
+  fetch(`http://localhost:8080/pacientes/${icpf.value}`, {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -291,16 +291,25 @@ function capturaCPFencaminhaFichaImpressao() {
 }
 
 function encaminhaPacienteExame() {
-  fetch(`http://localhost:8080/pacientes/${icpf.value}`, {    
+  fetch(`http://localhost:8080/pacientes/atendido/${icpf.value}`, {    
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
     method: "PUT",
     body: JSON.stringify({
-      atendido: "true",
+      atendido: "false",
     })
   })
+  .then(function (res) {
+    if (res.ok) {
+      alert("Paciente encaminhado com sucesso");
+      limpaFormulario();
+    }
+  })
+  .catch(function (res) {
+    console.log(res);
+  });
 }
 
 var dataHoraAtual = new Date();

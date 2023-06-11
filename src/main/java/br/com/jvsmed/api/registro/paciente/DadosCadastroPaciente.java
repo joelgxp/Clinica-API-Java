@@ -59,7 +59,7 @@ public record DadosCadastroPaciente(
         @Size(min = 11, max = 14, message = "CPF deve ter exatamente 11 dígitos")
         String cpf,
         String telefone,
-        boolean atendido,
+        Boolean atendido,
         Date hora
 ) {
 

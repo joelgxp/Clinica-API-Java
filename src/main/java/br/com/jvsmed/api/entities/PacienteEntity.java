@@ -4,6 +4,7 @@ import br.com.jvsmed.api.enums.ECategoria;
 import br.com.jvsmed.api.enums.ENacionalidade;
 import br.com.jvsmed.api.enums.ESexo;
 import br.com.jvsmed.api.enums.ESolicitacao;
+import br.com.jvsmed.api.registro.paciente.DadosAlteracaoAtendido;
 import br.com.jvsmed.api.registro.paciente.DadosAtualizacaoPaciente;
 import br.com.jvsmed.api.registro.paciente.DadosCadastroPaciente;
 import jakarta.persistence.*;
@@ -126,7 +127,7 @@ public class PacienteEntity {
         this.cpf = dados.cpf();
         this.telefone = dados.telefone();
         this.hora = (Time) dados.hora();
-        this.atendido = false;
+        this.atendido = null;
     }
 
 
@@ -209,5 +210,12 @@ public class PacienteEntity {
         if (dados.telefone() != null) {
             this.telefone = dados.telefone();
         }
+    }
+
+    public void atualizarAtendido(DadosAlteracaoAtendido dados) {
+        if (dados.cpf() != null) {
+            this.cpf = dados.cpf();
+        }
+        this.atendido = dados.atendido();
     }
 }

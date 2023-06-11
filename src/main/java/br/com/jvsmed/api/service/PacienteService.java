@@ -3,10 +3,7 @@ package br.com.jvsmed.api.service;
 
 import br.com.jvsmed.api.entities.PacienteEntity;
 import br.com.jvsmed.api.exceptions.InvalidRequestException;
-import br.com.jvsmed.api.registro.paciente.DadosAtualizacaoPaciente;
-import br.com.jvsmed.api.registro.paciente.DadosCadastroPaciente;
-import br.com.jvsmed.api.registro.paciente.DadosListagemPaciente;
-import br.com.jvsmed.api.registro.paciente.DadosListagemPacienteBuscaNome;
+import br.com.jvsmed.api.registro.paciente.*;
 import br.com.jvsmed.api.repositories.PacienteRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,12 +47,16 @@ public class PacienteService {
         if (pacienteExistente == null) {
             throw new InvalidRequestException("Paciente não encontrado com o CPF fornecido: " + cpf);
         }
-
-        // Atualizar os campos do pacienteExistente com base nos campos do paciente recebido
         pacienteExistente.atualizarInformacoes(dados);
+        repository.save(pacienteExistente);
+    }
 
-        // Atualize os outros campos conforme necessário
-
+    public void atualizarAtendidoPorCpf(String cpf, DadosAlteracaoAtendido dados) {
+        PacienteEntity pacienteExistente = repository.findByCpf(cpf);
+        if (pacienteExistente == null) {
+            throw new InvalidRequestException("Paciente não encontrado com o CPF fornecido: " + cpf);
+        }
+        pacienteExistente.atualizarAtendido(dados);
         repository.save(pacienteExistente);
     }
 
