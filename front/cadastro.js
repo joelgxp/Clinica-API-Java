@@ -39,9 +39,13 @@ const icep = document.querySelector("#inputCEP");
 const icomplemento = document.querySelector("#inputComplemento");
 const icpf = document.querySelector("#inputCPF");
 const itelefone = document.querySelector("#inputTelefone");
-const ihora = document.querySelector("#inputHoraCadastro");
+//const ihora = document.querySelector("#inputHoraCadastro");
 
-let pacienteResultado = icpf;
+var dataHoraAtual = new Date();
+var horaAtual = dataHoraAtual.toLocaleTimeString();
+//document.getElementById("inputHoraCadastro").value = horaAtual;
+
+let pacienteResultado = null;
 btnficha.disabled = true;
 btnEncaminhar.disabled = true;
 btnEditar.disabled = true;
@@ -86,7 +90,6 @@ function buscaPaciente() {
       icomplemento.value = paciente.complemento;
       icpf.value = paciente.cpf;
       itelefone.value = paciente.telefone;
-      ihora.value = paciente.hora;
 
       iregistro.disabled = true;
       icpf.disabled = true;
@@ -186,6 +189,7 @@ function editaPaciente() {
   })
     .then(function (res) {
       if (res.ok) {
+        alert("Paciente editado com sucesso!");
         limpaFormulario();
       }
     })
@@ -230,12 +234,11 @@ function cadastraPaciente() {
       complemento: icomplemento.value,
       cpf: icpf.value,
       telefone: itelefone.value,
-      hora: ihora.value,
     }),
   })
     .then(function (response) {
       if (response.ok) {
-        //limpaFormulario()
+        limpaFormulario()
         alert("Paciente cadastrado com sucesso");
       } else {
         throw new Error("Erro ao cadastrar paciente");
@@ -298,7 +301,8 @@ function encaminhaPacienteExame() {
     },
     method: "PUT",
     body: JSON.stringify({
-      atendido: "false",
+      hora: horaAtual,
+      atendido: "false"
     })
   })
   .then(function (res) {
@@ -311,10 +315,6 @@ function encaminhaPacienteExame() {
     console.log(res);
   });
 }
-
-var dataHoraAtual = new Date();
-var horaAtual = dataHoraAtual.toLocaleTimeString();
-document.getElementById("inputHoraCadastro").value = horaAtual;
 
 inputNomeCandidatoBusca.addEventListener('input', () => {
   const nome = inputNomeCandidatoBusca.value;

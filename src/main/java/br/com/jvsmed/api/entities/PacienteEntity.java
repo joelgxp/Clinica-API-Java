@@ -126,7 +126,6 @@ public class PacienteEntity {
         this.complemento = dados.complemento();
         this.cpf = dados.cpf();
         this.telefone = dados.telefone();
-        this.hora = (Time) dados.hora();
         this.atendido = null;
     }
 
@@ -215,6 +214,9 @@ public class PacienteEntity {
     public void atualizarAtendido(DadosAlteracaoAtendido dados) {
         if (dados.cpf() != null) {
             this.cpf = dados.cpf();
+        }
+        if (dados.hora() != null) {
+            this.hora = (Time) dados.hora();
         }
         this.atendido = dados.atendido();
     }

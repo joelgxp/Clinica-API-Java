@@ -12,13 +12,13 @@ public record DadosCadastroFichaMedica(
         String ladoDireito,
         @NotBlank
         String correcao,
-
+        @NotBlank
         String campoVisualDireito,
-
+        @NotBlank
         String campoVisualEsquerdo,
         @NotBlank
         String exameValidade,
-
+        @NotBlank
         String conclusao,
 
         String complemento

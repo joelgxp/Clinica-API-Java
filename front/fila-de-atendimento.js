@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   // Obtém a referência para a tabela de espera
   var tabelaEspera = document.querySelector("#tabela-espera tbody");
+  var tabelaAtendidos = document.querySelector("#tabela-atendidos tbody");
 
   // Faz uma solicitação ao backend para obter os dados da tabela
   // Você precisará substituir a URL pelo endpoint correto do seu backend
@@ -17,8 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
       data.forEach(function (item) {
         console.log(item);
         if (item.atendido == false) {
-
-
           var row = document.createElement("tr");
           row.setAttribute("data-id", item.id);
 
@@ -52,6 +51,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
           // Adiciona a nova linha à tabela de espera
           tabelaEspera.appendChild(row);
+        } else 
+        if (item.atendido == true) {
+          var row = document.createElement("tr");
+          row.setAttribute("data-id2", item.id);
+
+          // Cria as células e preenche com os dados correspondentes
+          var nomeCell = document.createElement("td");
+          nomeCell.textContent = item.nome;
+          row.appendChild(nomeCell);
+
+          var horaCell = document.createElement("td");
+          horaCell.textContent = item.hora;
+          row.appendChild(horaCell);
+
+          var exameCell = document.createElement("td");
+          exameCell.textContent = item.atendido;
+          row.appendChild(exameCell);
+
+          tabelaAtendidos.appendChild(row);
         }
       });
 

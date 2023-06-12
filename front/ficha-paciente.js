@@ -84,7 +84,7 @@ function cadastraDadosExame() {
   }
 
   function buscaDadosExame() {
-    fetch(`http://localhost:8080/ficha_medica/${iinputCPFBuscar.value}`, {
+    fetch(`http://localhost:8080/ficha_medica/${cpf.value}`, {
       method: "GET",
     })
       .then((response) => {
