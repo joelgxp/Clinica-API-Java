@@ -39,11 +39,9 @@ const icep = document.querySelector("#inputCEP");
 const icomplemento = document.querySelector("#inputComplemento");
 const icpf = document.querySelector("#inputCPF");
 const itelefone = document.querySelector("#inputTelefone");
-//const ihora = document.querySelector("#inputHoraCadastro");
 
 var dataHoraAtual = new Date();
 var horaAtual = dataHoraAtual.toLocaleTimeString();
-//document.getElementById("inputHoraCadastro").value = horaAtual;
 
 let pacienteResultado = null;
 btnficha.disabled = true;
