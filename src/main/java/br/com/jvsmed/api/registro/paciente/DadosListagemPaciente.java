@@ -7,9 +7,8 @@ import br.com.jvsmed.api.enums.ECategoria;
 import br.com.jvsmed.api.enums.ENacionalidade;
 import br.com.jvsmed.api.enums.ESexo;
 import br.com.jvsmed.api.enums.ESolicitacao;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+
+import java.util.Date;
 
 public record DadosListagemPaciente(
         Long id,
@@ -33,7 +32,9 @@ public record DadosListagemPaciente(
         String cpf,
         String telefone,
         Integer status,
-        Endereco endereco
+        Endereco endereco,
+        Date hora,
+        boolean atendido
 ) {
     public DadosListagemPaciente(PacienteEntity pacienteEntity) {
         this(pacienteEntity.getId(),
@@ -57,7 +58,9 @@ public record DadosListagemPaciente(
                 pacienteEntity.getCpf(),
                 pacienteEntity.getTelefone(),
                 pacienteEntity.getStatus(),
-                pacienteEntity.getEndereco()
+                pacienteEntity.getEndereco(),
+                pacienteEntity.getHora(),
+                pacienteEntity.getAtendido()
         );
     }
 

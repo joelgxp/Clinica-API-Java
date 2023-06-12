@@ -2,10 +2,11 @@ package br.com.jvsmed.api.controller;
 
 import br.com.jvsmed.api.entities.PacienteEntity;
 import br.com.jvsmed.api.exceptions.InvalidRequestException;
-import br.com.jvsmed.api.registro.paciente.DadosCadastroPaciente;
-import br.com.jvsmed.api.registro.paciente.DadosListagemPaciente;
+import br.com.jvsmed.api.registro.paciente.*;
 
+import br.com.jvsmed.api.repositories.PacienteRepository;
 import br.com.jvsmed.api.service.PacienteService;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,21 +35,15 @@ public class PacienteController {
     @GetMapping("/{cpf}")
     public ResponseEntity<?> buscarPorCPF(@PathVariable String cpf) {
 //        return new DadosListagemPaciente(service.findByCpf(cpf));
-        String cpfSoNumeros = cpf.replaceAll("[^0-9]", "");
-        return ResponseEntity.status(200).body(new DadosListagemPaciente(service.findByCpf(cpfSoNumeros).getBody()));
+
+        return ResponseEntity.status(200).body(new DadosListagemPaciente(service.findByCpf(cpf).getBody()));
     }
 
     @GetMapping("/nome/{nome}")
     public ResponseEntity<?> buscarPorNome(@PathVariable String nome) {
-         // Lógica para buscar nomes no banco de dados
-        // e retornar os resultados em uma lista de objetos ResultadoBusca
-
-        // Exemplo de implementação:
-        List<PacienteEntity> resultados = new ArrayList<>();
-        // Adicione resultados à lista
-        // ...
-        return ResponseEntity.status(200).body(new DadosListagemPaciente(service.findByNome(nome).getBody()));
+        return service.buscarPorNome(nome);
     }
+
 
     @PostMapping
     public ResponseEntity<?> cadastrar(@RequestBody @Valid DadosCadastroPaciente paciente, BindingResult bindingResult) {
@@ -68,10 +63,42 @@ public class PacienteController {
         }
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<PacienteEntity> atualizar(@PathVariable Long id, @RequestBody PacienteEntity paciente) {
-        service.atualizarPaciente(paciente);
-        return ResponseEntity.status(200).build();
+    @Transactional
+    @PutMapping("/{cpf}")
+    public ResponseEntity<?> atualizar(@PathVariable String cpf, @RequestBody @Valid DadosAtualizacaoPaciente paciente, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            // Tratativa de erros de validação
+            List<String> erros = new ArrayList<>();
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                erros.add(error.getField() + " -> " + error.getDefaultMessage());
+            }
+            return ResponseEntity.badRequest().body("Erros de validação: \n" + erros);
+        }
+        try {
+            service.atualizarPacientePorCpf(cpf, paciente);
+            return ResponseEntity.status(200).build();
+        } catch (InvalidRequestException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @Transactional
+    @PutMapping("/atendido/{cpf}")
+    public ResponseEntity<?> atualizar(@PathVariable String cpf, @RequestBody @Valid DadosAlteracaoAtendido paciente, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            // Tratativa de erros de validação
+            List<String> erros = new ArrayList<>();
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                erros.add(error.getField() + " -> " + error.getDefaultMessage());
+            }
+            return ResponseEntity.badRequest().body("Erros de validação: \n" + erros);
+        }
+        try {
+            service.atualizarAtendidoPorCpf(cpf, paciente);
+            return ResponseEntity.status(200).build();
+        } catch (InvalidRequestException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @DeleteMapping("/{id}")
