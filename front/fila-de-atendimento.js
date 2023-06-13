@@ -7,21 +7,16 @@ document.addEventListener("DOMContentLoaded", function () {
   // Você precisará substituir a URL pelo endpoint correto do seu backend
   fetch(`http://localhost:8080/pacientes`)
     .then(function (response) {
-      return response.json(); // Supõe-se que o backend retorna os dados em formato JSON
+      return response.json();
     })
     .then(function (data) {
-      // Limpa o conteúdo atual da tabela de espera
       tabelaEspera.innerHTML = "";
-
-      // Preenche a tabela com os novos dados obtidos do backend
-
       data.forEach(function (item) {
         console.log(item);
         if (item.atendido == false) {
           var row = document.createElement("tr");
           row.setAttribute("data-id", item.id);
 
-          // Cria as células e preenche com os dados correspondentes
           var nomeCell = document.createElement("td");
           nomeCell.textContent = item.nome;
           row.appendChild(nomeCell);
@@ -35,13 +30,13 @@ document.addEventListener("DOMContentLoaded", function () {
           row.appendChild(horaCell);
 
           var exameCell = document.createElement("td");
-          exameCell.textContent = item.atendido;
+          exameCell.textContent = item.solicitacao;
           row.appendChild(exameCell);
 
           var buttonCell = document.createElement("td");
           var button = document.createElement("button");
-          button.textContent = "Chamar"; // Texto do botão
-          button.setAttribute("class", "btn btn-primary"); // Adicione classes CSS ao botão, se necessário
+          button.textContent = "Chamar";
+          button.setAttribute("class", "btn btn-primary");
           buttonCell.appendChild(button);
           row.appendChild(buttonCell);
           button.addEventListener("click", function (event) {
@@ -49,14 +44,12 @@ document.addEventListener("DOMContentLoaded", function () {
             capturarLinha();
           });
 
-          // Adiciona a nova linha à tabela de espera
           tabelaEspera.appendChild(row);
         } else 
         if (item.atendido == true) {
           var row = document.createElement("tr");
-          row.setAttribute("data-id2", item.id);
+          row.setAttribute("data-id", item.id);
 
-          // Cria as células e preenche com os dados correspondentes
           var nomeCell = document.createElement("td");
           nomeCell.textContent = item.nome;
           row.appendChild(nomeCell);
@@ -66,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
           row.appendChild(horaCell);
 
           var exameCell = document.createElement("td");
-          exameCell.textContent = item.atendido;
+          exameCell.textContent = item.conclusao;
           row.appendChild(exameCell);
 
           tabelaAtendidos.appendChild(row);
