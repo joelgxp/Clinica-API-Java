@@ -2,13 +2,10 @@ package br.com.jvsmed.api.entities;
 
 import br.com.jvsmed.api.registro.fichaMedica.DadosCadastroFichaMedica;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
 @Table(name = "ficha_medica")
 @Entity(name = "FichaMedicaEntity")
 @Getter
@@ -23,6 +20,9 @@ public class FichaMedicaEntity {
 
     @Column(name = "id_paciente")
     private Integer idPaciente;
+
+    @Column(name = "data_exame")
+    private String dataExame;
 
     @Column(name = "ladoesquerdo")
     private String ladoEsquerdo;
@@ -48,6 +48,7 @@ public class FichaMedicaEntity {
 
     public FichaMedicaEntity(DadosCadastroFichaMedica dados) {
         this.idPaciente = dados.idPaciente();
+        this.dataExame = dados.dataExame();
         this.ladoEsquerdo = dados.ladoEsquerdo();
         this.ladoDireito = dados.ladoDireito();
         this.correcao = dados.correcao();

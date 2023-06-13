@@ -7,6 +7,7 @@ const iinputComplemento = document.querySelector("#inputComplemento");
 const iinputDataVencimento = document.querySelector("#inputDataVencimento");
 const iinputConclusao = document.querySelector("#inputConclusao");
 const iinputCPFBuscar = document.querySelector("#inputCPFBusca");
+const idataExame = document.querySelector("#inputDataExame");
 
 const btnSalvar = document.querySelector("#btnSalvar");
 const bntConsultar = document.querySelector("#btnconsultar");
@@ -27,8 +28,7 @@ var cpf = decodeURIComponent(encodedCPF);
 
 var inome = document.getElementById("nome");
 inome.value = nome;
-var idata = document.getElementById("inputDataExame");
-idata.value = new Date(Date.now()).toISOString().slice(0, 10);
+idataExame.value = new Date(Date.now()).toISOString().slice(0, 10);
 
 function cadastraDadosExame() {
     const id = idPaciente;
@@ -48,7 +48,8 @@ function cadastraDadosExame() {
             campoVisualDireito: icampoVisualDireito.value,
             exameValidade: iinputDataVencimento.value,
             conclusao: iinputConclusao.value,
-            complemento: iinputComplemento.value
+            complemento: iinputComplemento.value,
+            dataExame: idataExame.value
         })
       })
       .then(function (response) {
