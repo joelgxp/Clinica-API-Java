@@ -37,8 +37,7 @@ public record DadosListagemPaciente(
         String complemento,
         String cpf,
         String telefone,
-        Date hora,
-        boolean atendido
+        Date hora
 ) {
     public DadosListagemPaciente(PacienteEntity pacienteEntity) {
         this(pacienteEntity.getId(),
@@ -68,8 +67,7 @@ public record DadosListagemPaciente(
                 pacienteEntity.getComplemento(),
                 pacienteEntity.getCpf(),
                 pacienteEntity.getTelefone(),
-                pacienteEntity.getHora(),
-                pacienteEntity.getAtendido()
+                pacienteEntity.getHora()
         );
     }
 

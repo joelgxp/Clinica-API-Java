@@ -373,10 +373,6 @@ btnEncaminhar.addEventListener("click", function (event) {
   encaminhaPacienteExame();
 })
 
-
-
-
-
 iorgaouf.addEventListener("focus", () => {
   buscaEstados()
     .then((options) => {

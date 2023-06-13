@@ -8,16 +8,12 @@ import br.com.jvsmed.api.registro.paciente.DadosAlteracaoAtendido;
 import br.com.jvsmed.api.registro.paciente.DadosAtualizacaoPaciente;
 import br.com.jvsmed.api.registro.paciente.DadosCadastroPaciente;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.sql.Time;
-import java.util.Date;
 
 @Table(name = "pacientes")
 @Entity(name = "PacienteEntity")
@@ -126,10 +122,7 @@ public class PacienteEntity {
         this.complemento = dados.complemento();
         this.cpf = dados.cpf();
         this.telefone = dados.telefone();
-        this.atendido = null;
     }
-
-
     public void atualizarInformacoes(DadosAtualizacaoPaciente dados) {
         if (dados.guia() != null) {
             this.guia = dados.guia();
