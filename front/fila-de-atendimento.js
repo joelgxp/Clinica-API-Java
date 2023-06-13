@@ -1,10 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Obtém a referência para a tabela de espera
   var tabelaEspera = document.querySelector("#tabela-espera tbody");
   var tabelaAtendidos = document.querySelector("#tabela-atendidos tbody");
 
-  // Faz uma solicitação ao backend para obter os dados da tabela
-  // Você precisará substituir a URL pelo endpoint correto do seu backend
   fetch(`http://localhost:8080/pacientes`)
     .then(function (response) {
       return response.json();
@@ -12,7 +9,6 @@ document.addEventListener("DOMContentLoaded", function () {
     .then(function (data) {
       tabelaEspera.innerHTML = "";
       data.forEach(function (item) {
-        console.log(item);
         if (item.atendido == false) {
           var row = document.createElement("tr");
           row.setAttribute("data-id", item.id);
@@ -45,8 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
           });
 
           tabelaEspera.appendChild(row);
-        } else 
-        if (item.atendido == true) {
+        } else if (item.atendido == true) {
           var row = document.createElement("tr");
           row.setAttribute("data-id", item.id);
 
@@ -65,7 +60,6 @@ document.addEventListener("DOMContentLoaded", function () {
           tabelaAtendidos.appendChild(row);
         }
       });
-
     })
     .catch(function (error) {
       console.log("Erro ao obter os dados da tabela:", error);
@@ -82,12 +76,6 @@ document.addEventListener("DOMContentLoaded", function () {
         var hora = this.cells[2].innerText;
         var exame = this.cells[3].innerText;
 
-        // Faça o que desejar com os dados capturados
-        console.log("ID da linha:", rowId);
-        console.log("Nome:", nome);
-        console.log("Hora:", hora);
-        console.log("Exame:", exame);
-
         var url = "ficha-paciente.html";
         var encodedId = encodeURIComponent(rowId);
         var encodedNome = encodeURIComponent(nome);
@@ -95,8 +83,18 @@ document.addEventListener("DOMContentLoaded", function () {
         var encodedExame = encodeURIComponent(exame);
         var encodedCPF = encodeURIComponent(cpf);
         //window.location.href = url + "?id=" + rowId + "&nome=" + nome + "&hora=" + hora + "&exame=" + exame;
-        window.location.href = url + "?id=" + encodedId + "&nome=" + encodedNome + "&hora=" + encodedHora + "&exame=" + encodedExame + "&cpf=" + encodedCPF;
-
+        window.location.href =
+          url +
+          "?id=" +
+          encodedId +
+          "&nome=" +
+          encodedNome +
+          "&hora=" +
+          encodedHora +
+          "&exame=" +
+          encodedExame +
+          "&cpf=" +
+          encodedCPF;
       });
     }
   }

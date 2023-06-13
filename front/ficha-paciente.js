@@ -27,6 +27,8 @@ var cpf = decodeURIComponent(encodedCPF);
 
 var inome = document.getElementById("nome");
 inome.value = nome;
+var idata = document.getElementById("inputDataExame");
+idata.value = new Date(Date.now()).toISOString().slice(0, 10);
 
 function cadastraDadosExame() {
     const id = idPaciente;
