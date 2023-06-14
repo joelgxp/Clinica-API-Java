@@ -261,8 +261,9 @@ function cadastraPaciente() {
   })
     .then(function (response) {
       if (response.ok) {
-        limpaFormulario()
         alert("Paciente cadastrado com sucesso");
+        btnficha.disabled = false;
+        btnEncaminhar.disabled = false;
       } else {
         throw new Error("Erro ao cadastrar paciente");
       }

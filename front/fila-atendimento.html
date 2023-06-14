@@ -7,16 +7,6 @@
     <title>Fila de atendimento médico</title>
     <script src="./fila-de-atendimento.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css">
-    <style>
-        * {
-            box-shadow: none !important
-        }
-
-        .btn-custom {
-            width: 100px;
-            /* Altere o valor conforme necessário */
-        }
-    </style>
 </head>
 
 <body>
@@ -49,19 +39,20 @@
         <section id="fila-atendimento" class="py-5">
             <div class="container">
                 <h2>Atendimento</h2>
-                <div class="text-center row">
-                    <section class="card p-2">
-                        <h4>Fila de espera: </h4>
-                        <div class="row">
-                            <div class="col">
-                                <div style="max-height: 200px; overflow-y: auto;">
-                                    <table class="table table-bordered border-dark table-sm" id="tabela-espera">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <section>
+                            <h4>Fila de espera: </h4>
+                            <div class="row">
+                                <div class="col">
+                                    <table class="table table-striped" id="tabela-espera">
                                         <thead>
                                             <tr>
                                                 <th scope="col">Nome</th>
                                                 <th scope="col">CPF</th>
                                                 <th scope="col">Hora</th>
                                                 <th scope="col">Exame</th>
+                                                <th scope="col"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -70,26 +61,29 @@
                                     </table>
                                 </div>
                             </div>
-                        </div>
-                    </section>
-
-                    <section class="card p-2">
-                        <h4>Candidatos atendidos:</h4>
-                        <div style="max-height: 200px; overflow-y: auto;">
-                            <table class="table table-bordered border-dark table-sm" id="tabela-atendidos">
-                                <thead>
-                                    <tr>
-                                        <th>Nome</th>
-                                        <th>Hora</th>
-                                        <th>Conclusão</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Conteúdo da tabela de candidatos atendidos -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </section>                    
+                        </section>
+                        <p></p>
+                        <p></p>
+                        <section>
+                            <h4>Candidatos atendidos:</h4>
+                            <div class="row">
+                                <div class="col">
+                                    <table class="table table-striped" id="tabela-atendidos">
+                                        <thead>
+                                            <tr>
+                                                <th>Nome</th>
+                                                <th>Hora</th>
+                                                <th>Conclusão</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Conteúdo da tabela de candidatos atendidos -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
                 </div>
             </div>
         </section>
