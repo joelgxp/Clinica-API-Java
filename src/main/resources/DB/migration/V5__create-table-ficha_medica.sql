@@ -8,5 +8,6 @@ create table ficha_medica (
     complemento longtext,
     campo_visual_direito varchar(3) not null,
     campo_visual_esquerdo varchar(3) not null,
-    conclusao varchar(10) not null
+    conclusao varchar(10) not null,
+    data_exame varchar(10) not null
 );
