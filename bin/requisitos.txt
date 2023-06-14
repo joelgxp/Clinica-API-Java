@@ -1,0 +1,2 @@
+- Quando cadastrar um candidato:
+1. Quais são os requisitos?
