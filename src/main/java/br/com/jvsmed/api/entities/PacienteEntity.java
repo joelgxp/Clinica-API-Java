@@ -8,16 +8,12 @@ import br.com.jvsmed.api.registro.paciente.DadosAlteracaoAtendido;
 import br.com.jvsmed.api.registro.paciente.DadosAtualizacaoPaciente;
 import br.com.jvsmed.api.registro.paciente.DadosCadastroPaciente;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.sql.Time;
-import java.util.Date;
 
 @Table(name = "pacientes")
 @Entity(name = "PacienteEntity")
@@ -76,26 +72,9 @@ public class PacienteEntity {
     @Column(name = "nome_pai")
     private String nomePai;
 
-    private String logradouro;
-
-    private String numero;
-
-    private String bairro;
-
-    private String cidade;
-
-    @Column(name = "uf_cidade")
-    private String ufCidade;
-
-    private String cep;
-
-    private String complemento;
-
     private String telefone;
 
     private String cpf;
-
-    private Integer status;
 
     @Embedded
     private Endereco endereco;
@@ -124,11 +103,8 @@ public class PacienteEntity {
         this.nomePai = dados.nomePai();
         this.cpf = dados.cpf();
         this.telefone = dados.telefone();
-        this.status = 0;
         this.endereco = new Endereco(dados.endereco());
-        this.atendido = null;
     }
-
 
     public void atualizarInformacoes(DadosAtualizacaoPaciente dados) {
         if (dados.guia() != null) {
@@ -181,27 +157,6 @@ public class PacienteEntity {
         }
         if (dados.nomePai() != null) {
             this.nomePai = dados.nomePai();
-        }
-        if (dados.logradouro() != null) {
-            this.logradouro = dados.logradouro();
-        }
-        if (dados.numero() != null) {
-            this.numero = dados.numero();
-        }
-        if (dados.bairro() != null) {
-            this.bairro = dados.bairro();
-        }
-        if (dados.cidade() != null) {
-            this.cidade = dados.cidade();
-        }
-        if (dados.ufCidade() != null) {
-            this.ufCidade = dados.ufCidade();
-        }
-        if (dados.cep() != null) {
-            this.cep = dados.cep();
-        }
-        if (dados.complemento() != null) {
-            this.complemento = dados.complemento();
         }
         if (dados.cpf() != null) {
             this.cpf = dados.cpf();

@@ -268,6 +268,7 @@ function cadastraPaciente() {
       }
     })
     .catch(function (error) {
+      console.log(error)
       alert("Ocorreu um erro ao cadastrar o paciente");
     });
 }
@@ -388,39 +389,6 @@ btnLimpar.addEventListener("click", function (event) {
   limpaFormulario();
 });
 
-// iorgaouf.addEventListener("focus", () => {
-//   buscaEstados()
-//     .then((options) => {
-//       iorgaouf.append(options);
-//     })
-//     .catch((error) => {
-//       console.error("Erro ao buscar os estados:", error);
-//     });
-// });
-
-// inaturalidadeuf.addEventListener("focus", () => {
-//   buscaEstados()
-//     .then((options) => {
-//       inaturalidadeuf.append(options);
-//     })
-//     .catch((error) => {
-//       console.error("Erro ao buscar os estados:", error);
-//     });
-// });
-
-// ilogradourouf.addEventListener("focus", () => {
-//   buscaEstados()
-//     .then((options) => {
-//       ilogradourouf.append(options);
-//     })
-//     .catch((error) => {
-//       console.error("Erro ao buscar os estados:", error);
-//     });
-// });
-
-// inaturalidadeuf.addEventListener("change", async () => {
-//   let selectedOption = inaturalidadeuf.options[inaturalidadeuf.selectedIndex];
-//   let selectedOptionId = selectedOption.getAttribute("id");
 btnficha.addEventListener("click", function (event) {
   event.preventDefault();
   capturaCPFencaminhaFichaImpressao();
@@ -430,10 +398,6 @@ btnEncaminhar.addEventListener("click", function (event) {
   event.preventDefault();
   encaminhaPacienteExame();
 })
-
-
-
-
 
 //   const request = await fetch(
 //     `http://localhost:8080/municipios/${selectedOptionId}`

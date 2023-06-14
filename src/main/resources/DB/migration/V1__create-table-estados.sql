@@ -1,8 +1,8 @@
 CREATE TABLE estados (
-  id INT PRIMARY KEY,
-  nome VARCHAR(50),
-  sigla CHAR(2),
-  INDEX idx_estados_sigla (sigla)
+	id INT PRIMARY KEY,
+	nome VARCHAR(50),
+	sigla CHAR(2),
+	INDEX idx_estados_sigla (sigla)
 );
 
 INSERT INTO estados (id, nome, sigla) VALUES (11, 'Rondônia', 'RO');

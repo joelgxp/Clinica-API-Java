@@ -39,10 +39,9 @@ public record DadosCadastroPaciente(
         String nomeMae,
         @NotBlank
         String nomePai,
-        @Size(min = 11, max = 11, message = "CPF deve ter exatamente 11 dígitos")
+        @Size(min = 11, max = 14, message = "CPF deve ter exatamente 11 dígitos")
         String cpf,
         String telefone,
-        Integer status,
         DadosEnderecoDTO endereco
 ) {
 }
