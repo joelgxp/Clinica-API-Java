@@ -1,13 +1,24 @@
 package br.com.jvsmed.api.controller;
 
-import br.com.jvsmed.api.entities.Paciente;
+import br.com.jvsmed.api.entities.PacienteEntity;
+import br.com.jvsmed.api.exceptions.InvalidRequestException;
+import br.com.jvsmed.api.registro.paciente.DadosAlteracaoAtendido;
 import br.com.jvsmed.api.registro.paciente.DadosAtualizacaoPaciente;
 import br.com.jvsmed.api.registro.paciente.DadosCadastroPaciente;
 import br.com.jvsmed.api.registro.paciente.DadosListagemPaciente;
-import br.com.jvsmed.api.repositories.PacienteRepository;
+import br.com.jvsmed.api.service.PacienteService;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @CrossOrigin("*")
 @RestController
@@ -15,39 +26,92 @@ import org.springframework.web.bind.annotation.*;
 public class PacienteController {
 
     @Autowired
-    private PacienteRepository repository;
+    private PacienteService service;
 
     @GetMapping
-    public Iterable<Paciente> listar() {
-        return repository.findAll();
+    public Iterable<PacienteEntity> listar() {
+        return service.findAll();
     }
 
-    @GetMapping("/{id}")
-    public DadosListagemPaciente buscarPorID(@PathVariable Long id) {
-        return new DadosListagemPaciente(repository.getReferenceById(id));
+    @GetMapping("/{cpf}")
+    public ResponseEntity<?> buscarPorCPF(@PathVariable String cpf) {
+//        return new DadosListagemPaciente(service.findByCpf(cpf));
+
+        return ResponseEntity.status(200).body(new DadosListagemPaciente(service.findByCpf(cpf).getBody()));
     }
 
-    @GetMapping("/cpf/{cpf}")
-    public DadosListagemPaciente buscarPorCPF(@PathVariable String cpf) {
-        return new DadosListagemPaciente(repository.findByCpf(cpf));
+    @GetMapping("/nome/{nome}")
+    public ResponseEntity<?> buscarPorNome(@PathVariable String nome) {
+        return service.buscarPorNome(nome);
     }
 
-    @Transactional
+
     @PostMapping
-    public void cadastrar(@RequestBody DadosCadastroPaciente dados) {
-        repository.save(new Paciente(dados));
+    public ResponseEntity<?> cadastrar(@RequestBody @Valid DadosCadastroPaciente paciente, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            // Tratativa de erros de validação
+            List<String> erros = new ArrayList<>();
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                erros.add(error.getField() + " -> " + error.getDefaultMessage());
+            }
+            return ResponseEntity.badRequest().body("Erros de validação: \n" + erros);
+        }
+        try {
+            service.criarPaciente(paciente);
+            return ResponseEntity.status(201).build();
+        } catch (SQLException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro na camada Service: " + e.getMessage());
+        }
     }
 
     @Transactional
-    @PutMapping("/{id}")
-    public void atualizar(@PathVariable Long id, @RequestBody DadosAtualizacaoPaciente dados) {
-        var paciente = repository.getReferenceById(dados.id());
-        paciente.atualizarInformacoes(dados);
+    @PutMapping("/{cpf}")
+    public ResponseEntity<?> atualizar(@PathVariable String cpf, @RequestBody @Valid DadosAtualizacaoPaciente paciente, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            // Tratativa de erros de validação
+            List<String> erros = new ArrayList<>();
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                erros.add(error.getField() + " -> " + error.getDefaultMessage());
+            }
+            return ResponseEntity.badRequest().body("Erros de validação: \n" + erros);
+        }
+        try {
+            service.atualizarPacientePorCpf(cpf, paciente);
+            return ResponseEntity.status(200).build();
+        } catch (InvalidRequestException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
+
     @Transactional
+    @PutMapping("/atendido/{cpf}")
+    public ResponseEntity<?> atualizar(@PathVariable String cpf, @RequestBody @Valid DadosAlteracaoAtendido paciente, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            // Tratativa de erros de validação
+            List<String> erros = new ArrayList<>();
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                erros.add(error.getField() + " -> " + error.getDefaultMessage());
+            }
+            return ResponseEntity.badRequest().body("Erros de validação: \n" + erros);
+        }
+        try {
+            service.atualizarAtendidoPorCpf(cpf, paciente);
+            return ResponseEntity.status(200).build();
+        } catch (InvalidRequestException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
     @DeleteMapping("/{id}")
-    public void remover(@PathVariable Long id) {
-//        var paciente = repository.getReferenceById(id);
-        repository.deleteById(id);
+    public ResponseEntity<?> remover(@PathVariable Long id) {
+        try {
+//            if (id == null) {
+//                return ResponseEntity.badRequest().body("ID não fornecido na requisição DELETE.");
+//            }
+            return service.excluirPaciente(id);
+        } catch (InvalidRequestException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro na camada Service: " + e.getMessage());
+        }
     }
 }

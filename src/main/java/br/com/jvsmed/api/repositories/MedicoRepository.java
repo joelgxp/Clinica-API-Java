@@ -1,9 +1,9 @@
 package br.com.jvsmed.api.repositories;
 
-import br.com.jvsmed.api.entities.Medico;
+import br.com.jvsmed.api.entities.MedicoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface MedicoRepository extends JpaRepository<Medico, Long> {
+public interface MedicoRepository extends JpaRepository<MedicoEntity, Long> {
 
-//    Page<Medico> findAllByAtivoTrue(Pageable paginacao);
+//    Page<MedicoEntity> findAllByAtivoTrue(Pageable paginacao);
 }

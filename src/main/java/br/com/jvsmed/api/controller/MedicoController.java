@@ -1,6 +1,6 @@
 package br.com.jvsmed.api.controller;
 
-import br.com.jvsmed.api.entities.Medico;
+import br.com.jvsmed.api.entities.MedicoEntity;
 import br.com.jvsmed.api.registro.medico.DadosAtualizacaoMedico;
 import br.com.jvsmed.api.registro.medico.DadosCadastroMedico;
 import br.com.jvsmed.api.registro.medico.DadosListagemMedico;
@@ -31,6 +31,7 @@ public class MedicoController {
     public DadosListagemMedico listarPorId(@PathVariable Long id) {
         return new DadosListagemMedico(repository.getReferenceById(id));
     }
+
     @GetMapping("/paginacao")
     public Page<DadosListagemMedico> listarPaginacao(Pageable paginacao) {
         return repository.findAll(paginacao).map(DadosListagemMedico::new);
@@ -39,7 +40,7 @@ public class MedicoController {
     @PostMapping
     @Transactional
     public void cadastrar(@RequestBody @Valid DadosCadastroMedico dados) {
-        repository.save(new Medico(dados));
+        repository.save(new MedicoEntity(dados));
     }
 
     @PutMapping
@@ -54,7 +55,4 @@ public class MedicoController {
     public void inativar(@PathVariable Long id) {
         var medico = repository.getReferenceById(id);
     }
-
-
-
 }

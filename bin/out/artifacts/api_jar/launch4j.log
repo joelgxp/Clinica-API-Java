@@ -1,0 +1,25 @@
+
+
+Version:	3.50
+CmdLine:	C:\Users\usuario\OneDrive\WorkSpaces\SpringBoot3Alura\out\artifacts\api_jar\Clinica.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	C:\Users\usuario\OneDrive\WorkSpaces\SpringBoot3Alura\out\artifacts\api_jar\.
+Requires JDK:	Yes
+Requires 64-Bit: Yes
+Java min ver:	1.013.000
+Java max ver:	
+JRE paths:	java-runtime
+Check launcher:	C:\Users\usuario\OneDrive\WorkSpaces\SpringBoot3Alura\out\artifacts\api_jar\java-runtime\bin\javaw.exe (not found)
+64-bit search:	SOFTWARE\JavaSoft\Java Development Kit...
+64-bit search:	SOFTWARE\JavaSoft\JDK...
+Check:		SOFTWARE\JavaSoft\JDK\19.0.2
+Version string: 1.019.000_002 / 64-Bit (OK)
+Check launcher:	C:\Program Files\Java\jdk-19\bin\javaw.exe (OK)
+Check javac:	C:\Program Files\Java\jdk-19\bin\javac.exe (OK)
+Match:		1.019.000_002
+Runtime used:	1.019.000_002 (64-bit)
+Launcher:	C:\Program Files\Java\jdk-19\bin\javaw.exe
+Launcher args:	-jar "C:\Users\usuario\OneDrive\WorkSpaces\SpringBoot3Alura\out\artifacts\api_jar\Clinica.exe"
+Args length:	94/32768 chars
+Exit code:	0

@@ -8,5 +8,5 @@ public record DadosAtualizacaoMedico(
         String nome,
         String email,
         String telefone
-        ) {
+) {
 }
