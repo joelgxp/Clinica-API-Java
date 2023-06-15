@@ -6,5 +6,4 @@ public enum ESolicitacao {
     ADICAO_CATEGORIA,
     MUDANCA_CATEGORIA
 
-
 }

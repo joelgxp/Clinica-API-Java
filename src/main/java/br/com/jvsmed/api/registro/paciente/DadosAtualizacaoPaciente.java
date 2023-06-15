@@ -61,5 +61,4 @@ public record DadosAtualizacaoPaciente(
         Time hora
 ) {
 
-
 }
