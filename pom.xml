@@ -11,6 +11,7 @@
 	<groupId>br.com.jvsmed</groupId>
 	<artifactId>api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 	<name>api</name>
 	<description>API Rest</description>
 	<properties>
