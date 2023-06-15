@@ -3,7 +3,10 @@ package br.com.jvsmed.api.service;
 
 import br.com.jvsmed.api.entities.PacienteEntity;
 import br.com.jvsmed.api.exceptions.InvalidRequestException;
-import br.com.jvsmed.api.registro.paciente.*;
+import br.com.jvsmed.api.registro.paciente.DadosAlteracaoAtendido;
+import br.com.jvsmed.api.registro.paciente.DadosAtualizacaoPaciente;
+import br.com.jvsmed.api.registro.paciente.DadosCadastroPaciente;
+import br.com.jvsmed.api.registro.paciente.DadosListagemPacienteBuscaNome;
 import br.com.jvsmed.api.repositories.PacienteRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
