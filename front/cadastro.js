@@ -219,8 +219,6 @@ function editaPaciente() {
 }
 
 function cadastraPaciente() {
-  //const valoresFormulario = capturarValoresFormulario()
-  // console.log(valoresFormulario),
   fetch("http://localhost:8080/pacientes", {
     headers: {
       Accept: "application/json",
@@ -261,6 +259,7 @@ function cadastraPaciente() {
     .then(function (response) {
       if (response.ok) {
         alert("Paciente cadastrado com sucesso");
+        bntCadastrar.disabled = true;
         btnficha.disabled = false;
         btnEncaminhar.disabled = false;
       } else {
@@ -309,11 +308,8 @@ function limpaFormulario() {
 
 function capturaCPFencaminhaFichaImpressao() {
   var cpf = icpf.value;
-
   var url = "ficha-paciente-impressao.html";
   var encodedCPF = encodeURIComponent(cpf);
-
-  //window.location.href = url + "?id=" + rowId + "&nome=" + nome + "&hora=" + hora + "&exame=" + exame;
   window.location.href = url + "?cpf=" + encodedCPF;
 }
 
@@ -333,6 +329,9 @@ function encaminhaPacienteExame() {
     if (res.ok) {
       alert("Paciente encaminhado com sucesso");
       limpaFormulario();
+      bntCadastrar.disabled = true;
+      btnEncaminhar.disabled = true;
+      btnLimpar.disabled = true;
     }
   })
   .catch(function (res) {
