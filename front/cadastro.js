@@ -135,10 +135,7 @@ function buscarPacientesPorNome(nome) {
   fetch('http://localhost:8080/pacientes/nome/' + nome)
     .then(response => response.json())
     .then(data => {
-      // Limpar a tabela
       document.getElementById('resultadoTbody').innerHTML = '';
-
-      // Iterar sobre os resultados e adicionar linhas à tabela
       data.forEach(paciente => {
         var row = document.createElement('tr');
 
@@ -149,9 +146,6 @@ function buscarPacientesPorNome(nome) {
         var idadeCell = document.createElement('td');
         idadeCell.textContent = paciente.cpf;
         row.appendChild(idadeCell);
-
-        // Adicione outras células da tabela conforme necessário
-
         document.getElementById('resultadoTbody').appendChild(row);
       });
     })
@@ -219,8 +213,6 @@ function editaPaciente() {
 }
 
 function cadastraPaciente() {
-  //const valoresFormulario = capturarValoresFormulario()
-  // console.log(valoresFormulario),
   fetch("http://localhost:8080/pacientes", {
     headers: {
       Accept: "application/json",
@@ -313,7 +305,6 @@ function capturaCPFencaminhaFichaImpressao() {
   var url = "ficha-paciente-impressao.html";
   var encodedCPF = encodeURIComponent(cpf);
 
-  //window.location.href = url + "?id=" + rowId + "&nome=" + nome + "&hora=" + hora + "&exame=" + exame;
   window.location.href = url + "?cpf=" + encodedCPF;
 }
 
