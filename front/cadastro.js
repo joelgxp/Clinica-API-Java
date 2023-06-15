@@ -204,8 +204,7 @@ function editaPaciente() {
       cep: icep.value,
       complemento: icomplemento.value,
       cpf: icpf.value,
-      telefone: itelefone.value,
-      hora: ihora.value,
+      telefone: itelefone.value
   }),
   })
     .then(function (res) {
