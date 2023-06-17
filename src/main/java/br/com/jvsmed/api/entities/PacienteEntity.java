@@ -168,7 +168,7 @@ public class PacienteEntity {
             this.cpf = dados.cpf();
         }
         if (dados.hora() != null) {
-            this.hora = dados.hora();
+            this.hora =dados.hora();
         }
         this.atendido = dados.atendido();
     }
