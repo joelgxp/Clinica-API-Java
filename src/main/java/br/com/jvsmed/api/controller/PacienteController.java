@@ -35,8 +35,6 @@ public class PacienteController {
 
     @GetMapping("/{cpf}")
     public ResponseEntity<?> buscarPorCPF(@PathVariable String cpf) {
-//        return new DadosListagemPaciente(service.findByCpf(cpf));
-
         return ResponseEntity.status(200).body(new DadosListagemPaciente(service.findByCpf(cpf).getBody()));
     }
 
@@ -49,7 +47,6 @@ public class PacienteController {
     @PostMapping
     public ResponseEntity<?> cadastrar(@RequestBody @Valid DadosCadastroPaciente paciente, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            // Tratativa de erros de validação
             List<String> erros = new ArrayList<>();
             for (FieldError error : bindingResult.getFieldErrors()) {
                 erros.add(error.getField() + " -> " + error.getDefaultMessage());

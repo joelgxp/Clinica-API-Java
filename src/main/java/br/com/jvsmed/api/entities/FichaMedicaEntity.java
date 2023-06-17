@@ -59,6 +59,4 @@ public class FichaMedicaEntity {
         this.complemento = dados.complemento();
     }
 
-    public void setIdPaciente(Integer idPaciente) {
-    }
 }
