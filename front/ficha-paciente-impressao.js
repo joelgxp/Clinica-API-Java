@@ -30,7 +30,9 @@ var urlParams = new URLSearchParams(window.location.search);
 var encodedCPF = urlParams.get("cpf");
 var idCPF = decodeURIComponent(encodedCPF);
 
-fetch(`http://localhost:8080/pacientes/${idCPF}`, {
+const cpfconsulta = idCPF.replace(/\D/g, '');
+console.log(cpfconsulta);
+fetch(`http://localhost:8080/pacientes/${cpfconsulta}`, {
   method: "GET",
 })
   .then((response) => {

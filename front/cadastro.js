@@ -107,8 +107,8 @@ async function buscaPaciente() {
       icep.value = paciente.endereco.cep;
       icomplemento.value = paciente.endereco.complemento;
 
-      icpf.value = paciente.cpf;
-      itelefone.value = paciente.telefone;
+      icpf.value = formatarCPF(paciente.cpf);
+      itelefone.value = formatarTelefone(paciente.telefone);
 
       iregistro.disabled = true;
       icpf.disabled = true;
@@ -120,10 +120,8 @@ async function buscaPaciente() {
     })
     .catch(function (error) {
       if (error.message === "Recurso não encontrado") {
-        // Informe ao usuário que o recurso solicitado não foi encontrado
         alert("O paciente não foi encontrado");
       } else {
-        // Tratamento genérico de erros
         alert("Ocorreu um erro ao obter os dados do paciente");
       }
     });
@@ -133,10 +131,8 @@ function buscarPacientesPorNome(nome) {
   fetch('http://localhost:8080/pacientes/nome/' + nome)
     .then(response => response.json())
     .then(data => {
-      // Limpar a tabela
       document.getElementById('resultadoTbody').innerHTML = '';
 
-      // Iterar sobre os resultados e adicionar linhas à tabela
       data.forEach(paciente => {
         var row = document.createElement('tr');
 
@@ -147,9 +143,6 @@ function buscarPacientesPorNome(nome) {
         var idadeCell = document.createElement('td');
         idadeCell.textContent = paciente.cpf;
         row.appendChild(idadeCell);
-
-        // Adicione outras células da tabela conforme necessário
-
         document.getElementById('resultadoTbody').appendChild(row);
       });
     })
@@ -170,7 +163,10 @@ function excluiPaciente() {
 }
 
 function editaPaciente() {
-  fetch(`http://localhost:8080/pacientes/${icpf.value}`, {
+  const cpfconsulta = icpf.value.replace(/\D/g, '');
+  const cpf = icpf.value.replace(/\D/g, '');
+  const telefone = itelefone.value.replace(/\D/g, '');
+  fetch(`http://localhost:8080/pacientes/${cpfconsulta}`, {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -178,7 +174,7 @@ function editaPaciente() {
     method: "PUT",
     body: JSON.stringify({
       guia: iguia.value,
-      registro: iregistro.value,
+      //registro: iregistro.value,
       solicitacao: isolicitacao.value,
       categoria: icategoria.value,
       dataCadastro: idataCadastro.value,
@@ -194,21 +190,23 @@ function editaPaciente() {
       nacionalidade: inacionalidade.value,
       nomeMae: inomeMae.value,
       nomePai: inomePai.value,
-      logradouro: ilogradouro.value,
-      numero: inumero.value,
-      bairro: ibairro.value,
-      cidade: icidade.value,
-      ufCidade: ilogradourouf.value,
-      cep: icep.value,
-      complemento: icomplemento.value,
-      cpf: icpf.value,
-      telefone: itelefone.value
+      endereco: {
+        logradouro: ilogradouro.value,
+        numero: inumero.value,
+        bairro: ibairro.value,
+        cidade: icidade.value,
+        ufCidade: ilogradourouf.value,
+        cep: icep.value,
+        complemento: icomplemento.value
+      },
+      //cpf: cpf,
+      telefone: telefone,
   }),
   })
     .then(function (res) {
       if (res.ok) {
         alert("Paciente editado com sucesso!");
-        limpaFormulario();
+       
       }
     })
     .catch(function (res) {
@@ -306,13 +304,6 @@ function limpaFormulario() {
   }
 }
 
-// function capturaCPFencaminhaFichaImpressao() {
-//   var cpf = icpf.value;
-//   var url = "ficha-paciente-impressao.html";
-//   var encodedCPF = encodeURIComponent(cpf);
-//   window.location.href = url + "?cpf=" + encodedCPF;
-// }
-
 function capturaCPFencaminhaFichaImpressao() {
   var cpf = icpf.value;
   var url = "ficha-paciente-impressao.html";
@@ -320,12 +311,14 @@ function capturaCPFencaminhaFichaImpressao() {
   var novaJanela = window.open(url + "?cpf=" + encodedCPF, "_blank");
   novaJanela.addEventListener("load", function() {
     novaJanela.print();
+    //novaJanela.close();
   });
 }
 
 
 function encaminhaPacienteExame() {
-  fetch(`http://localhost:8080/pacientes/atendido/${icpf.value}`, {
+  const cpfconsulta = icpf.value.replace(/\D/g, '');
+  fetch(`http://localhost:8080/pacientes/atendido/${cpfconsulta}`, {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -373,6 +366,16 @@ itelefone.addEventListener('input', function () {
   telefone = telefone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
   this.value = telefone;
 });
+
+function formatarCPF(cpf) {
+  cpf = cpf.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+  return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+}
+
+function formatarTelefone(telefone) {
+  telefone = telefone.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+  return telefone.replace(/(\d{2})(\d{4,5})(\d{4})/, '($1) $2-$3');
+}
 
 bntConsultar.addEventListener("click", function (event) {
   event.preventDefault();

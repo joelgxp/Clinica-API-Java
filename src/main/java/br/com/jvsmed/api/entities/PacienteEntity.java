@@ -8,16 +8,13 @@ import br.com.jvsmed.api.registro.paciente.DadosAlteracaoAtendido;
 import br.com.jvsmed.api.registro.paciente.DadosAtualizacaoPaciente;
 import br.com.jvsmed.api.registro.paciente.DadosCadastroPaciente;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
+import lombok.*;
 import java.sql.Time;
 
 @Table(name = "pacientes")
 @Entity(name = "PacienteEntity")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
