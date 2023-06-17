@@ -7,10 +7,11 @@ const iinputComplemento = document.querySelector("#inputComplemento");
 const iinputDataVencimento = document.querySelector("#inputDataVencimento");
 const iinputConclusao = document.querySelector("#inputConclusao");
 const iinputCPFBuscar = document.querySelector("#inputCPFBusca");
+const idataExame = document.querySelector("#inputDataExame");
 
 const btnSalvar = document.querySelector("#btnSalvar");
 const bntConsultar = document.querySelector("#btnconsultar");
-
+const formulario = document.querySelector("#formMedico");
 
 var urlParams = new URLSearchParams(window.location.search);
 var encodedId = urlParams.get("id");
@@ -27,6 +28,7 @@ var cpf = decodeURIComponent(encodedCPF);
 
 var inome = document.getElementById("nome");
 inome.value = nome;
+idataExame.value = new Date(Date.now()).toISOString().slice(0, 10);
 
 function cadastraDadosExame() {
     const id = idPaciente;
@@ -46,7 +48,8 @@ function cadastraDadosExame() {
             campoVisualDireito: icampoVisualDireito.value,
             exameValidade: iinputDataVencimento.value,
             conclusao: iinputConclusao.value,
-            complemento: iinputComplemento.value
+            complemento: iinputComplemento.value,
+            dataExame: idataExame.value
         })
       })
       .then(function (response) {
@@ -95,32 +98,14 @@ function cadastraDadosExame() {
         }
       })
       .then((paciente) => {
-        iguia.value = paciente.guia;
-        iregistro.value = paciente.registro;
-        isolicitacao.value = paciente.solicitacao;
-        icategoria.value = paciente.categoria;
-        idataCadastro.value = paciente.dataCadastro;
-        idataHabilitacao.value = paciente.dataHabilitacao;
-        inome.value = paciente.nome;
-        idataNascimento.value = paciente.dataNascimento;
-        isexo.value = paciente.sexo;
-        iidentidade.value = paciente.identidade;
-        iorgao.value = paciente.orgao;
-        iorgaouf.value = paciente.rgOrgaoUF;
-        inaturalidade.value = paciente.naturalidade;
-        inaturalidadeuf.value = paciente.naturalidadeUF;
-        inacionalidade.value = paciente.nacionalidade;
-        inomeMae.value = paciente.nomeMae;
-        inomePai.value = paciente.nomePai;
-        ilogradouro.value = paciente.logradouro;
-        inumero.value = paciente.numero;
-        ibairro.value = paciente.bairro;
-        icidade.value = paciente.cidade;
-        ilogradourouf.value = paciente.logradouroUF;
-        icep.value = paciente.cep;
-        icomplemento.value = paciente.complemento;
-        icpf.value = paciente.cpf;
-        itelefone.value = paciente.telefone;
+        iacuidadeEsquerdo.value = paciente.ladoEsquerdo,
+        iacuidadeDireito.value = paciente.ladoDireito,
+        iacuidadeCorrecao.value = paciente.correcao,
+        icampoVisualEsquerdo.value = paciente.campoVisualEsquerdo,
+        icampoVisualDireito.value = paciente.campoVisualDireito,
+        iinputDataVencimento.value = paciente.exameValidade,
+        iinputConclusao.value = paciente.conclusao,
+        iinputComplemento.value = paciente.complemento
   
         // iregistro.disabled = true;
         // icpf.disabled = true;
@@ -138,6 +123,24 @@ function cadastraDadosExame() {
         }
       });
   }
+
+  function limpaFormulario() {
+    btnSalvar.disabled = true;
+    var elementos = formulario.elements;  
+    for (var i = 0; i < elementos.length; i++) {
+      var elemento = elementos[i];
+  
+      if (elemento.type !== "button") {
+        elemento.value = "";
+      }
+    }
+  }
+
+  inputCPFBusca.addEventListener('input', function () {
+    let cpf = this.value.replace(/\D/g, '');
+    cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+    this.value = cpf;
+  });
   
 
   btnSalvar.addEventListener("click", function (event) {

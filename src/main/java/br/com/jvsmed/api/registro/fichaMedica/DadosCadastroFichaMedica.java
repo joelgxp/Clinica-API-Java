@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotNull;
 public record DadosCadastroFichaMedica(
         @NotNull
         Integer idPaciente,
+        @NotNull
+        String dataExame,
         @NotBlank
         String ladoEsquerdo,
         @NotBlank

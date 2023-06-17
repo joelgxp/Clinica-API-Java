@@ -1,6 +1,7 @@
 package br.com.jvsmed.api.registro.paciente;
 
 
+import br.com.jvsmed.api.entities.Endereco;
 import br.com.jvsmed.api.entities.PacienteEntity;
 import br.com.jvsmed.api.enums.ECategoria;
 import br.com.jvsmed.api.enums.ENacionalidade;
@@ -28,17 +29,10 @@ public record DadosListagemPaciente(
         ENacionalidade nacionalidade,
         String nomeMae,
         String nomePai,
-        String logradouro,
-        String numero,
-        String bairro,
-        String cidade,
-        String ufCidade,
-        String cep,
-        String complemento,
         String cpf,
         String telefone,
-        Date hora,
-        boolean atendido
+        Endereco endereco,
+        Date hora
 ) {
     public DadosListagemPaciente(PacienteEntity pacienteEntity) {
         this(pacienteEntity.getId(),
@@ -59,17 +53,10 @@ public record DadosListagemPaciente(
                 pacienteEntity.getNacionalidade(),
                 pacienteEntity.getNomeMae(),
                 pacienteEntity.getNomePai(),
-                pacienteEntity.getLogradouro(),
-                pacienteEntity.getNumero(),
-                pacienteEntity.getBairro(),
-                pacienteEntity.getCidade(),
-                pacienteEntity.getUfCidade(),
-                pacienteEntity.getCep(),
-                pacienteEntity.getComplemento(),
                 pacienteEntity.getCpf(),
                 pacienteEntity.getTelefone(),
-                pacienteEntity.getHora(),
-                pacienteEntity.getAtendido()
+                pacienteEntity.getEndereco(),
+                pacienteEntity.getHora()
         );
     }
 

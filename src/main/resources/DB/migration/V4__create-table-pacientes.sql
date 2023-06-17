@@ -1,5 +1,4 @@
 create table pacientes (
-
     id bigint not null auto_increment primary key,
     guia int not null,
     registro varchar(30) not null unique,
@@ -27,5 +26,10 @@ create table pacientes (
     complemento varchar(45),
     cpf varchar(14) not null unique,
     telefone varchar(20) not null,
-    status tinyint not null
+    atendido tinyint,
+	hora time,
+	FOREIGN KEY (uf_identidade) REFERENCES estados(sigla),
+    FOREIGN KEY (uf_naturalidade) REFERENCES estados(sigla),
+    FOREIGN KEY (uf_cidade) REFERENCES estados(sigla),
+    FOREIGN KEY (cidade) REFERENCES municipios(nome)
 );
