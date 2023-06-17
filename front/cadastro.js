@@ -42,6 +42,8 @@ const itelefone = document.querySelector("#inputTelefone");
 
 var dataHoraAtual = new Date();
 var horaAtual = dataHoraAtual.toLocaleTimeString();
+idataCadastro.value = new Date(Date.now()).toISOString().slice(0, 10);
+
 
 let pacienteResultado = null;
 btnficha.disabled = true;
