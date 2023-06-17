@@ -20,8 +20,4 @@ public class EstadoController {
         return estadoRepository.findAll();
     }
 
-    @GetMapping("/{sigla}")
-    public EstadoEntity getEstadoId(@PathVariable String sigla) {
-        return estadoRepository.findBySigla(sigla);
-    }
 }
