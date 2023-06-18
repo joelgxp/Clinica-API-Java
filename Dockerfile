@@ -1,9 +1,7 @@
 FROM openjdk:17-jdk-slim
 
 WORKDIR /app
-
-COPY out/artifacts/api_jar/api.jar /app/api.jar
-
-RUN bash -c 'touch /app/api.jar'
-
-ENTRYPOINT ["java", "-jar", "api.jar"]
+ENV PORT 8080
+EXPOSE 8080
+COPY target/*.jar /app/api.jar
+ENTRYPOINT exec java $JAVA_OPTS -jar /app/api.jar
