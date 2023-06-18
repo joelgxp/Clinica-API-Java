@@ -1,8 +1,9 @@
-FROM ubuntu:latest
-LABEL authors="joelv"
+FROM openjdk:17-jdk-slim
 
 WORKDIR /app
 
-COPY target/*.jar app.jar
+COPY out/artifacts/api_jar/api.jar /app/api.jar
 
-ENTRYPOINT ["top", "-b"]
+RUN bash -c 'touch /app/api.jar'
+
+ENTRYPOINT ["java", "-jar", "api.jar"]
