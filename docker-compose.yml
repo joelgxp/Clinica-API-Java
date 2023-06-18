@@ -17,8 +17,8 @@ services:
     image: mysql:8.0.27
     environment:
       DATABASE_HOST: docker-mysql
-      DATABASE_PORT: 3306
+      DATABASE_PORT: 3307
       MYSQL_ROOT_PASSWORD: 12345678
-      MYSQL_DATABASE: vollmed_api
+      MYSQL_DATABASE: vollmed_api_test
       MYSQL_USER: root
       MYSQL_PASSWORD: 12345678
