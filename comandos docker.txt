@@ -1,0 +1,12 @@
+nome do container principal: projeto_cadastro_medico_spring_boot
+#back e BD
+docker build -t joelgxp/program:0.0.2 .
+docker-compose up
+
+#front
+docker build -t joelgxp/front:0.0.2 .
+docker run -p 80:80 joelgxp/front:0.0.2 -> NAO USAR ESSE COMANDO
+
+#unir back e front
+docker run --volumes-from projeto_cadastro_medico_spring_boot joelgxp/front:0.0.2
+

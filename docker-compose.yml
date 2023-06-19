@@ -19,3 +19,8 @@ services:
       DATABASE_PORT: 3306
       MYSQL_ROOT_PASSWORD: 12345678
       MYSQL_DATABASE: vollmed_api_test
+
+  front:
+    image: joelgxp/front:0.0.2
+    ports:
+      - "80:80"
