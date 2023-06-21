@@ -1,17 +1,6 @@
 version: '3.8'
 
 services:
-  app:
-    image: joelgxp/program:0.0.2
-    ports:
-      - "8080:8080"
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/vollmed_api_test?autoReconnect=true&allowPublicKeyRetrieval=true&useSSL=false
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: 12345678
-    depends_on:
-      - db
-
   db:
     image: mysql:8.0.27
     environment:
@@ -24,3 +13,14 @@ services:
     image: joelgxp/front:0.0.2
     ports:
       - "80:80"
+
+  app:
+    image: joelgxp/program:0.0.2
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/vollmed_api_test?autoReconnect=true&allowPublicKeyRetrieval=true&useSSL=false
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 12345678
+    depends_on:
+      - db
