@@ -1,26 +1,26 @@
 version: '3.8'
 
 services:
-  db:
-    image: mysql:8.0.27
+  mysql:
+    image: mysql:8.0.28
     environment:
-      DATABASE_HOST: docker-mysql
-      DATABASE_PORT: 3306
-      MYSQL_ROOT_PASSWORD: 12345678
-      MYSQL_DATABASE: vollmed_api_test
+          MYSQL_ROOT_PASSWORD: 12345678
+          MYSQL_DATABASE: vollmed_api_test
+    ports:
+      - "3306:3306"
 
   front:
     image: joelgxp/front:0.0.2
     ports:
-      - "80:80"
+      - "9000:80"
 
   app:
     image: joelgxp/program:0.0.2
     ports:
-      - "8080:8080"
+      - "9001:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/vollmed_api_test?autoReconnect=true&allowPublicKeyRetrieval=true&useSSL=false
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/vollmed_api_test?autoReconnect=true&allowPublicKeyRetrieval=true&useSSL=false
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: 12345678
     depends_on:
-      - db
+      - mysql

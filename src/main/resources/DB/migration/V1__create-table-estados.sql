@@ -1,4 +1,4 @@
-CREATE TABLE estados (
+CREATE TABLE IF NOT EXISTS estados (
 	id INT PRIMARY KEY,
 	nome VARCHAR(50),
 	sigla CHAR(2),

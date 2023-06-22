@@ -53,7 +53,7 @@ bntExcluir.disabled = true;
 
 async function buscaPaciente() {
   const cpfconsulta = icpfconsulta.value.replace(/\D/g, '');
-  await fetch(`http://localhost:8080/pacientes/${cpfconsulta}`, {
+  await fetch(`http://localhost:9001/pacientes/${cpfconsulta}`, {
     method: "GET",
   })
     .then((response) => {
@@ -130,7 +130,7 @@ async function buscaPaciente() {
 }
 
 function buscarPacientesPorNome(nome) {
-  fetch('http://localhost:8080/pacientes/nome/' + nome)
+  fetch('http://localhost:9001/pacientes/nome/' + nome)
     .then(response => response.json())
     .then(data => {
       document.getElementById('resultadoTbody').innerHTML = '';
@@ -152,7 +152,7 @@ function buscarPacientesPorNome(nome) {
 }
 
 function excluiPaciente() {
-  fetch(`http://localhost:8080/pacientes/${pacienteResultado.id}`, {
+  fetch(`http://localhost:9001/pacientes/${pacienteResultado.id}`, {
     method: "DELETE",
   })
     .then((response) => {
@@ -168,7 +168,7 @@ function editaPaciente() {
   const cpfconsulta = icpf.value.replace(/\D/g, '');
   const cpf = icpf.value.replace(/\D/g, '');
   const telefone = itelefone.value.replace(/\D/g, '');
-  fetch(`http://localhost:8080/pacientes/${cpfconsulta}`, {
+  fetch(`http://localhost:9001/pacientes/${cpfconsulta}`, {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -219,7 +219,7 @@ function editaPaciente() {
 function cadastraPaciente() {
   const cpf = icpf.value.replace(/\D/g, '');
   const telefone = itelefone.value.replace(/\D/g, '');
-  fetch("http://localhost:8080/pacientes", {
+  fetch("http://localhost:9001/pacientes", {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -320,7 +320,7 @@ function capturaCPFencaminhaFichaImpressao() {
 
 function encaminhaPacienteExame() {
   const cpfconsulta = icpf.value.replace(/\D/g, '');
-  fetch(`http://localhost:8080/pacientes/atendido/${cpfconsulta}`, {
+  fetch(`http://localhost:9001/pacientes/atendido/${cpfconsulta}`, {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -418,7 +418,7 @@ btnEncaminhar.addEventListener("click", function (event) {
 async function filtrarMunicipios(estadoId, selectMunicipio) {
 
   if (estadoId && selectMunicipio) {
-      const response = await fetch('http://localhost:8080/municipios/' + estadoId)
+      const response = await fetch('http://localhost:9001/municipios/' + estadoId)
       const data = await response.json()
 
       selectMunicipio.innerHTML = ""; // Limpa as opções existentes
@@ -434,7 +434,7 @@ async function filtrarMunicipios(estadoId, selectMunicipio) {
 
 async function buscaEstados() {
   try {
-    const request = await fetch("http://localhost:8080/estados");
+    const request = await fetch("http://localhost:9001/estados");
     const response = await request.json();
 
     const options = document.createElement("optgroup");
@@ -454,7 +454,7 @@ async function buscaEstados() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  fetch('http://localhost:8080/estados')
+  fetch('http://localhost:9001/estados')
       .then(response => response.json())
       .then(data => {
           data.forEach(estado => {

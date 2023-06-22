@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var tabelaEspera = document.querySelector("#tabela-espera tbody");
   var tabelaAtendidos = document.querySelector("#tabela-atendidos tbody");
 
-  fetch(`http://localhost:8080/pacientes`)
+  fetch(`http://localhost:9001/pacientes`)
     .then(function (response) {
       return response.json();
     })

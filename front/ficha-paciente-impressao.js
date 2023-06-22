@@ -32,7 +32,7 @@ var idCPF = decodeURIComponent(encodedCPF);
 
 const cpfconsulta = idCPF.replace(/\D/g, '');
 console.log(cpfconsulta);
-fetch(`http://localhost:8080/pacientes/${cpfconsulta}`, {
+fetch(`http://localhost:9001/pacientes/${cpfconsulta}`, {
   method: "GET",
 })
   .then((response) => {

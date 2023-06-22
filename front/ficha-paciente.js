@@ -35,7 +35,7 @@ isolicitacao.value = exame;
 
 function cadastraDadosExame() {
     const id = idPaciente;
-    fetch("http://localhost:8080/ficha_medica",
+    fetch("http://localhost:9001/ficha_medica",
       {
         headers: {
           "Accept": "application/json",
@@ -69,7 +69,7 @@ function cadastraDadosExame() {
   }
 
   function alteraStatusPacienteExame(cpf) {   
-    fetch(`http://localhost:8080/pacientes/atendido/` + cpf, {    
+    fetch(`http://localhost:9001/pacientes/atendido/` + cpf, {    
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -91,7 +91,7 @@ function cadastraDadosExame() {
   }
 
   function buscaDadosExame() {
-    fetch(`http://localhost:8080/ficha_medica/${cpf.value}`, {
+    fetch(`http://localhost:9001/ficha_medica/${cpf.value}`, {
       method: "GET",
     })
       .then((response) => {
