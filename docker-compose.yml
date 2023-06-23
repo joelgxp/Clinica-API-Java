@@ -4,8 +4,8 @@ services:
   mysql:
     image: mysql:8.0.28
     environment:
-          MYSQL_DATABASE: vollmed_api_test
-          MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_DATABASE: vollmed_api_test
+      MYSQL_ROOT_PASSWORD: 12345678
     ports:
       - "3306:3306"
 
@@ -24,3 +24,6 @@ services:
       SPRING_DATASOURCE_PASSWORD: 12345678
     depends_on:
       - mysql
+
+
+
