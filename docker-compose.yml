@@ -6,7 +6,6 @@ services:
     environment:
           MYSQL_DATABASE: vollmed_api_test
           MYSQL_ROOT_PASSWORD: 12345678
-
     ports:
       - "3306:3306"
 
