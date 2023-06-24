@@ -45,23 +45,23 @@ public class PacienteService {
         return ResponseEntity.status(200).build();
     }
 
-    public void atualizarPacientePorCpf(String cpf, DadosAtualizacaoPaciente dados) {
-        PacienteEntity pacienteExistente = repository.findByCpf(cpf);
-        if (pacienteExistente == null) {
-            throw new InvalidRequestException("Paciente não encontrado com o CPF fornecido: " + cpf);
-        }
-        pacienteExistente.atualizarInformacoes(dados);
-        repository.save(pacienteExistente);
-    }
-
-    public void atualizarAtendidoPorCpf(String cpf, DadosAlteracaoAtendido dados) {
-        PacienteEntity pacienteExistente = repository.findByCpf(cpf);
-        if (pacienteExistente == null) {
-            throw new InvalidRequestException("Paciente não encontrado com o CPF fornecido: " + cpf);
-        }
-        pacienteExistente.atualizarAtendido(dados);
-        repository.save(pacienteExistente);
-    }
+//    public void atualizarPacientePorCpf(String cpf, DadosAtualizacaoPaciente dados) {
+//        PacienteEntity pacienteExistente = repository.findByCpf(cpf);
+//        if (pacienteExistente == null) {
+//            throw new InvalidRequestException("Paciente não encontrado com o CPF fornecido: " + cpf);
+//        }
+//        pacienteExistente.atualizarInformacoes(dados);
+//        repository.save(pacienteExistente);
+//    }
+//
+//    public void atualizarAtendidoPorCpf(String cpf, DadosAlteracaoAtendido dados) {
+//        PacienteEntity pacienteExistente = repository.findByCpf(cpf);
+//        if (pacienteExistente == null) {
+//            throw new InvalidRequestException("Paciente não encontrado com o CPF fornecido: " + cpf);
+//        }
+//        pacienteExistente.atualizarAtendido(dados);
+//        repository.save(pacienteExistente);
+//    }
 
 
     @Transactional
@@ -77,11 +77,6 @@ public class PacienteService {
 
     public Iterable<PacienteEntity> findAll() {
         return repository.findAll();
-    }
-
-    public ResponseEntity<PacienteEntity> findByCpf(String cpf) {
-
-        return ok(repository.findByCpf(cpf));
     }
 
     public ResponseEntity<List<DadosListagemPacienteBuscaNome>> buscarPorNome(String nome) {
