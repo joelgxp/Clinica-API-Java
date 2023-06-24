@@ -432,26 +432,26 @@ async function filtrarMunicipios(estadoId, selectMunicipio) {
   }
 }
 
-async function buscaEstados() {
-  try {
-    const request = await fetch("http://localhost:8080/estados");
-    const response = await request.json();
+// async function buscaEstados() {
+//   try {
+//     const request = await fetch("http://localhost:8080/estados");
+//     const response = await request.json();
 
-    const options = document.createElement("optgroup");
-    options.setAttribute("label", "UFs");
+//     const options = document.createElement("optgroup");
+//     options.setAttribute("label", "UFs");
 
-    response.forEach((uf) => {
-      const option = document.createElement("option");
-      option.textContent = uf.sigla;
-      option.id = uf.id;
-      options.appendChild(option);
-    });
+//     response.forEach((uf) => {
+//       const option = document.createElement("option");
+//       option.textContent = uf.sigla;
+//       option.id = uf.id;
+//       options.appendChild(option);
+//     });
 
-    return options;
-  } catch (error) {
-    throw new Error("Erro ao buscar os estados");
-  }
-}
+//     return options;
+//   } catch (error) {
+//     throw new Error("Erro ao buscar os estados");
+//   }
+// }
 
 document.addEventListener("DOMContentLoaded", function () {
   fetch('http://localhost:8080/estados')
@@ -464,17 +464,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
               optionElement1.value = estado.sigla;
               optionElement1.id = estado.id
-              optionElement1.textContent = estado.sigla;
+              optionElement1.textContent = estado.nome;
               iorgaouf.appendChild(optionElement1);
 
               optionElement2.value = estado.sigla;
               optionElement2.id = estado.id
-              optionElement2.textContent = estado.sigla;
+              optionElement2.textContent = estado.nome;
               inaturalidadeuf.appendChild(optionElement2);
 
               optionElement3.value = estado.sigla;
               optionElement3.id = estado.id
-              optionElement3.textContent = estado.sigla;
+              optionElement3.textContent = estado.nome;
               ilogradourouf.appendChild(optionElement3);
           });
 
