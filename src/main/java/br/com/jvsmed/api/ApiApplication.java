@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-//@ComponentScan(basePackages = "br.com.jvsmed.api.exceptions")
 public class ApiApplication {
 
     public static void main(String[] args) {

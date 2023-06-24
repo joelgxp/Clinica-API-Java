@@ -3,6 +3,7 @@ package br.com.jvsmed.api.controller;
 import br.com.jvsmed.api.entities.EstadoEntity;
 import br.com.jvsmed.api.repositories.EstadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class EstadoController {
 
     @GetMapping
     public List<EstadoEntity> getAllEstados() {
-        return estadoRepository.findAll();
+        return estadoRepository.findAll(Sort.by("nome"));
     }
 
 }
