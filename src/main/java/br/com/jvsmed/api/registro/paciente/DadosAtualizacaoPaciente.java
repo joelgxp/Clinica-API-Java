@@ -1,5 +1,6 @@
 package br.com.jvsmed.api.registro.paciente;
 
+import br.com.jvsmed.api.dto.DadosEnderecoDTO;
 import br.com.jvsmed.api.enums.ECategoria;
 import br.com.jvsmed.api.enums.ENacionalidade;
 import br.com.jvsmed.api.enums.ESexo;
@@ -7,6 +8,7 @@ import br.com.jvsmed.api.enums.ESolicitacao;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.br.CPF;
 
 import java.sql.Time;
 
@@ -40,25 +42,11 @@ public record DadosAtualizacaoPaciente(
         String nomeMae,
         @NotBlank
         String nomePai,
-        @NotBlank
-        String logradouro,
-        @NotBlank
-        String numero,
-        @NotBlank
-        String bairro,
-        @NotBlank
-        String cidade,
-        @NotBlank
-        String ufCidade,
-        @NotBlank
-        @Size(min = 8, max = 8, message = "CEP deve ter exatamente 8 dígitos")
-        String cep,
-        String complemento,
+        @CPF
         @Size(min = 11, max = 14, message = "CPF deve ter exatamente 11 dígitos")
         String cpf,
-        @NotBlank
         String telefone,
-        Time hora
+        DadosEnderecoDTO endereco
 ) {
 
 }

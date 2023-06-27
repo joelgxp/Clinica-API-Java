@@ -9,6 +9,8 @@ import br.com.jvsmed.api.enums.ESolicitacao;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.br.CPF;
+
 public record DadosCadastroPaciente(
         @NotBlank
         String guia,
@@ -39,6 +41,7 @@ public record DadosCadastroPaciente(
         String nomeMae,
         @NotBlank
         String nomePai,
+        @CPF
         @Size(min = 11, max = 14, message = "CPF deve ter exatamente 11 dígitos")
         String cpf,
         String telefone,
