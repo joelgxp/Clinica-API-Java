@@ -1,6 +1,7 @@
 package br.com.jvsmed.api.controller;
 
 import br.com.jvsmed.api.entities.PacienteEntity;
+import br.com.jvsmed.api.registro.paciente.DadosAlteracaoAtendido;
 import br.com.jvsmed.api.registro.paciente.DadosAtualizacaoPaciente;
 import br.com.jvsmed.api.registro.paciente.DadosCadastroPaciente;
 import br.com.jvsmed.api.registro.paciente.DadosListagemPaciente;
@@ -47,7 +48,6 @@ public class PacienteController {
     @Transactional
     public ResponseEntity<PacienteEntity> cadastrar(@RequestBody @Valid DadosCadastroPaciente pacienteDto) {
         PacienteEntity paciente = new PacienteEntity(pacienteDto);
-//        BeanUtils.copyProperties(pacienteDto, paciente, "atendido", "hora");
         return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(paciente));
     }
 
@@ -60,28 +60,20 @@ public class PacienteController {
         }
         PacienteEntity paciente = pacienteOptional.get();
         paciente.atualizarInformacoes(pacienteDto);
-//        BeanUtils.copyProperties(pacienteDto, paciente);
         return ResponseEntity.status(HttpStatus.OK).body(repository.save(paciente));
     }
 
-//    @Transactional
-//    @PutMapping("/atendido/{cpf}")
-//    public ResponseEntity<?> atualizar(@PathVariable String cpf, @RequestBody @Valid DadosAlteracaoAtendido paciente, BindingResult bindingResult) {
-//        if (bindingResult.hasErrors()) {
-//            // Tratativa de erros de validação
-//            List<String> erros = new ArrayList<>();
-//            for (FieldError error : bindingResult.getFieldErrors()) {
-//                erros.add(error.getField() + " -> " + error.getDefaultMessage());
-//            }
-//            return ResponseEntity.badRequest().body("Erros de validação: \n" + erros);
-//        }
-//        try {
-//            service.atualizarAtendidoPorCpf(cpf, paciente);
-//            return ResponseEntity.status(200).build();
-//        } catch (InvalidRequestException e) {
-//            return ResponseEntity.badRequest().body(e.getMessage());
-//        }
-//    }
+    @Transactional
+    @PutMapping("/atendido/{cpf}")
+    public ResponseEntity<Object> encaminhaAtendimento(@PathVariable String cpf, @RequestBody @Valid DadosAlteracaoAtendido pacienteDto) {
+        Optional<PacienteEntity> pacienteOptional = repository.findByCpf(cpf);
+        if (pacienteOptional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Paciente não encontrado!");
+        }
+        PacienteEntity encaminhado = pacienteOptional.get();
+        encaminhado.atualizarAtendido(pacienteDto);
+        return ResponseEntity.status(HttpStatus.OK).body(repository.save(encaminhado));
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> remover(@PathVariable Long id) {
