@@ -1,7 +1,6 @@
 package br.com.jvsmed.api.registro.paciente;
 
 
-import br.com.jvsmed.api.dto.DadosEnderecoDTO;
 import br.com.jvsmed.api.enums.ECategoria;
 import br.com.jvsmed.api.enums.ENacionalidade;
 import br.com.jvsmed.api.enums.ESexo;
@@ -41,10 +40,18 @@ public record DadosCadastroPaciente(
         String nomeMae,
         @NotBlank
         String nomePai,
+
+        String logradouro,
+        String numero,
+        String bairro,
+        String cidade,
+        String ufCidade,
+        String cep,
+        String complemento,
+
         @CPF
         @Size(min = 11, max = 14, message = "CPF deve ter exatamente 11 dígitos")
         String cpf,
-        String telefone,
-        DadosEnderecoDTO endereco
+        String telefone
 ) {
 }

@@ -73,8 +73,20 @@ public class PacienteEntity {
 
     private String cpf;
 
-    @Embedded
-    private Endereco endereco;
+    private String logradouro;
+
+    private String numero;
+
+    private String bairro;
+
+    private String cidade;
+
+    private String cep;
+
+    private String complemento;
+
+    @Column(name = "uf_cidade")
+    private String ufCidade;
 
     private Boolean atendido;
 
@@ -98,9 +110,15 @@ public class PacienteEntity {
         this.nacionalidade = dados.nacionalidade();
         this.nomeMae = dados.nomeMae();
         this.nomePai = dados.nomePai();
+        this.logradouro = dados.logradouro();
+        this.numero = dados.numero();
+        this.bairro = dados.bairro();
+        this.cidade = dados.cidade();
+        this.ufCidade = dados.ufCidade();
+        this.cep = dados.cep();
+        this.complemento = dados.complemento();
         this.cpf = dados.cpf();
         this.telefone = dados.telefone();
-        this.endereco = new Endereco(dados.endereco());
     }
 
     public void atualizarInformacoes(DadosAtualizacaoPaciente dados) {
@@ -154,6 +172,27 @@ public class PacienteEntity {
         }
         if (dados.nomePai() != null) {
             this.nomePai = dados.nomePai();
+        }
+        if (dados.logradouro() != null) {
+            this.logradouro = dados.logradouro();
+        }
+        if (dados.numero() != null) {
+            this.numero = dados.numero();
+        }
+        if (dados.bairro() != null) {
+            this.bairro = dados.bairro();
+        }
+        if (dados.cidade() != null) {
+            this.cidade = dados.cidade();
+        }
+        if (dados.ufCidade() != null) {
+            this.ufCidade = dados.ufCidade();
+        }
+        if (dados.cep() != null) {
+            this.cep = dados.cep();
+        }
+        if (dados.complemento() != null) {
+            this.complemento = dados.complemento();
         }
         if (dados.cpf() != null) {
             this.cpf = dados.cpf();
