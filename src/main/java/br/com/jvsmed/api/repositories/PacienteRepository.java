@@ -11,4 +11,6 @@ public interface PacienteRepository extends JpaRepository<PacienteEntity, Long> 
     Optional<PacienteEntity> findByCpf(String cpf);
 
     List<PacienteEntity> findByNomeContaining(String nome);
+
+    Optional<PacienteEntity> findById(Long id);
 }

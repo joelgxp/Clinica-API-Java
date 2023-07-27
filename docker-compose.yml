@@ -15,7 +15,7 @@ services:
       - "9000:80"
 
   app:
-    image: joelgxp/clinica-api:0.0.3
+    image: joelgxp/clinica-api:0.0.4
     ports:
       - "9001:9001"
     environment:

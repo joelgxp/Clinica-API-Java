@@ -63,9 +63,9 @@ public class PacienteController {
     }
 
     @Transactional
-    @PutMapping("/atendido/{cpf}")
-    public ResponseEntity<Object> encaminhaAtendimento(@PathVariable String cpf, @RequestBody @Valid DadosAlteracaoAtendido pacienteDto) {
-        Optional<PacienteEntity> pacienteOptional = repository.findByCpf(cpf);
+    @PutMapping("/atendido/{id}")
+    public ResponseEntity<Object> encaminhaAtendimento(@PathVariable Long id, @RequestBody @Valid DadosAlteracaoAtendido pacienteDto) {
+        Optional<PacienteEntity> pacienteOptional = repository.findById(id);
         if (pacienteOptional.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Paciente não encontrado!");
         }
