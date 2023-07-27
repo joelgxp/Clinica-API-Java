@@ -12,5 +12,4 @@ public interface PacienteRepository extends JpaRepository<PacienteEntity, Long> 
 
     List<PacienteEntity> findByNomeContaining(String nome);
 
-    Optional<PacienteEntity> findById(Long id);
 }
