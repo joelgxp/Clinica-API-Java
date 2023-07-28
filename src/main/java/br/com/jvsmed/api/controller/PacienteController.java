@@ -33,54 +33,40 @@ public class PacienteController {
     public ResponseEntity<Object> buscarPorCPF(@PathVariable String cpf) {
         Optional<PacienteEntity> paciente = repository.findByCpf(cpf);
         if (paciente.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Paciente não encontrado!");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao buscar paciente pelo CPF");
         }
         return ResponseEntity.status(HttpStatus.OK).body(new DadosListagemPaciente(paciente.get()));
     }
 
-//    @GetMapping("/nome/{nome}")
-//    public ResponseEntity<?> buscarPorNome(@PathVariable String nome) {
-//        return repository.buscarPorNome(nome);
-//    }
-
-    @PostMapping
     @Transactional
+    @PostMapping
     public ResponseEntity<PacienteEntity> cadastrar(@RequestBody @Valid DadosCadastroPaciente pacienteDto) {
         PacienteEntity paciente = new PacienteEntity(pacienteDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(paciente));
     }
 
-    @Transactional
-    @PutMapping("/{cpf}")
-    public ResponseEntity<Object> atualizar(@PathVariable String cpf, @RequestBody @Valid DadosAtualizacaoPaciente pacienteDto) {
-        Optional<PacienteEntity> pacienteOptional = repository.findByCpf(cpf);
-        if (pacienteOptional.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Paciente não encontrado!");
-        }
-        PacienteEntity paciente = pacienteOptional.get();
-        paciente.atualizarInformacoes(pacienteDto);
-        return ResponseEntity.status(HttpStatus.OK).body(repository.save(paciente));
-    }
+//    @Transactional
+//    @PutMapping("/{cpf}")
+//    public ResponseEntity<Object> atualizar(@PathVariable String cpf, @RequestBody @Valid DadosAtualizacaoPaciente pacienteDto) {
+//        Optional<PacienteEntity> pacienteOptional = repository.findByCpf(cpf);
+//        if (pacienteOptional.isEmpty()) {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Paciente não encontrado!");
+//        }
+//        PacienteEntity paciente = pacienteOptional.get();
+//        paciente.atualizarInformacoes(pacienteDto);
+//        return ResponseEntity.status(HttpStatus.OK).body(repository.save(paciente));
+//    }
 
     @Transactional
     @PutMapping("/atendido/{id}")
-    public ResponseEntity<Object> encaminhaAtendimento(@PathVariable Long id, @RequestBody @Valid DadosAlteracaoAtendido pacienteDto) {
+    public ResponseEntity<PacienteEntity> encaminharAtendimento(@PathVariable Long id, @RequestBody DadosAlteracaoAtendido pacienteAtualizado) {
         Optional<PacienteEntity> pacienteOptional = repository.findById(id);
         if (pacienteOptional.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Paciente não encontrado!");
+            return ResponseEntity.notFound().build();
         }
         PacienteEntity encaminhado = pacienteOptional.get();
-        encaminhado.atualizarAtendido(pacienteDto);
+        encaminhado.atualizarAtendido(pacienteAtualizado);
         return ResponseEntity.status(HttpStatus.OK).body(repository.save(encaminhado));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Object> remover(@PathVariable Long id) {
-        Optional<PacienteEntity> paciente = repository.findById(id);
-        if (paciente.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Paciente não encontrado!");
-        }
-        repository.deleteById(id);
-        return ResponseEntity.status(HttpStatus.OK).body("Paciente deletado com sucesso!");
-    }
 }
